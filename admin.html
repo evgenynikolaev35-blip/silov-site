@@ -55,6 +55,19 @@ details.help code{font:500 13px var(--mono);color:var(--milk);background:var(--i
 .tg input:focus-visible + i{outline:2px solid var(--lime);outline-offset:3px}
 .tg.warn b::after{content:"нужен статус";font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--red);padding:2px 6px;margin-left:8px;vertical-align:middle}
 
+details.fg{border-top:1px solid var(--line)}
+details.fg summary{cursor:pointer;padding:16px 0;font-weight:600;display:flex;justify-content:space-between;gap:12px;list-style:none}
+details.fg summary::-webkit-details-marker{display:none}
+details.fg summary::after{content:"+";font:500 22px/1 var(--mono);color:var(--lime)}
+details.fg[open] summary::after{content:"−"}
+details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left:auto}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px;padding:0 0 20px}
+.fgrid .f{display:grid;gap:5px}
+.fgrid .f.wide{grid-column:1/-1}
+.fgrid label{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.fgrid input,.fgrid textarea{width:100%;background:var(--ink-2);border:1px solid var(--line);color:var(--milk);font:400 16px var(--body);padding:11px 12px;border-radius:2px;resize:vertical}
+.fgrid input:focus,.fgrid textarea:focus{outline:none;border-color:var(--lime)}
+@media (max-width:600px){.fgrid{grid-template-columns:1fr}}
 .photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
 .slot{border:1px solid var(--line);background:var(--ink-2);display:grid;grid-template-rows:auto 1fr auto}
 .slot .pv{aspect-ratio:4/3;background:repeating-linear-gradient(135deg,var(--ink-2) 0 10px,var(--ink-3) 10px 20px) center/cover;display:grid;place-items:center;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
@@ -113,6 +126,13 @@ details.help code{font:500 13px var(--mono);color:var(--milk);background:var(--i
 
   <section>
     <p class="eyebrow">Шаг 3</p>
+    <h2>Тексты и ссылки</h2>
+    <p class="sub">Заполненное поле заменяет текст на сайте и убирает пометку «Заглушка». Пустое поле — остаётся текст по умолчанию.</p>
+    <div id="fields"></div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Шаг 4</p>
     <h2>Фотографии</h2>
     <p class="sub">Выберите файл с телефона или компьютера — фото автоматически уменьшится до 1600 px и сожмётся. Подойдут JPG, PNG, HEIC (с iPhone).</p>
     <div class="photos" id="photos"></div>
@@ -174,8 +194,67 @@ details.help code{font:500 13px var(--mono);color:var(--milk);background:var(--i
     ['doc3','Награда','']
   ];
 
+  // [ключ, подпись, подсказка, тип: ''|'area'|'url'|'wide']
+  var FIELDS=[
+    ['Первый экран',[
+      ['hero.lead','Текст под заголовком','','area'],
+      ['offer.title','Предложение: название','Тренировка-знакомство'],
+      ['offer.text','Предложение: описание','Разбор техники и план за 60 минут · бесплатно']
+    ]],
+    ['Цифры доверия',[
+      ['trust.1.num','Цифра 1','12+'],['trust.1.label','Подпись 1','лет тренерской работы'],
+      ['trust.2.num','Цифра 2','300+'],['trust.2.label','Подпись 2','клиентов'],
+      ['trust.3.num','Цифра 3','40'],['trust.3.label','Подпись 3','выпускников-тренеров'],
+      ['trust.4.num','Цифра 4','5,0★'],['trust.4.label','Подпись 4','на Яндекс Картах']
+    ]],
+    ['Цены (видны, когда включён блок «Цены»)',[
+      ['price.trial','Тренировка-знакомство','0 ₽'],['price.trial.note','Пояснение','60 мин'],
+      ['price.solo','Персональная','1 500 ₽'],['price.solo.note','Пояснение','занятие'],
+      ['price.pack','Пакет занятий','от 10 000 ₽'],['price.pack.note','Пояснение','8 занятий'],
+      ['price.group','Групповые','500 ₽'],['price.group.note','Пояснение','разово'],
+      ['scarce.1','Ограничение 1','Беру 5 новых клиентов в месяц','wide'],
+      ['scarce.2','Ограничение 2','В группе осталось 3 места','wide']
+    ]],
+    ['Расписание групп (пусто — нет занятия)',[
+      ['sched.mon','Понедельник','19:00'],['sched.tue','Вторник',''],['sched.wed','Среда','19:00'],['sched.thu','Четверг',''],
+      ['sched.fri','Пятница','19:00'],['sched.sat','Суббота',''],['sched.sun','Воскресенье','']
+    ]],
+    ['Отзывы',[
+      ['rating.num','Рейтинг','5,0'],['rating.label','Подпись рейтинга','27 отзывов на Яндекс Картах'],
+      ['review.1.text','Отзыв 1 (видео)','','area'],['review.1.who','Кто','Анна · 6 месяцев · персональные','wide'],
+      ['review.2.text','Отзыв 2','','area'],['review.2.who','Кто','','wide'],
+      ['review.3.text','Отзыв 3','','area'],['review.3.who','Кто','','wide']
+    ]],
+    ['Обо мне и зал',[
+      ['about.story','Личная история','','area'],
+      ['place.name','Название зала','CardioZone'],['place.addr','Адрес','Вологда, ул. Мира, 82'],
+      ['place.how1','Как добраться: заголовок','Остановка «…», парковка у входа'],['place.how2','Как добраться: детали','2 этаж, вход со двора'],
+      ['link.map','Ссылка на Яндекс Карты','https://yandex.ru/maps/…','url']
+    ]],
+    ['Контакты',[
+      ['link.telegram','Telegram','https://t.me/username','url'],
+      ['link.whatsapp','WhatsApp','https://wa.me/79000000000','url'],
+      ['contact.phone','Телефон (строка целиком)','Телефон: +7 900 000-00-00','wide'],
+      ['contact.reply','Время ответа','Отвечаю в течение 2 часов с 9:00 до 21:00','wide'],
+      ['footer.requisites','Реквизиты в подвале','Самозанятый, ИНН 000000000000','wide']
+    ]],
+    ['Курс и события',[
+      ['course.ad','Маркировка рекламы','ЧОУ ДПО «Национальный Университет Фитнеса» · ИНН … · erid: …','wide'],
+      ['link.course','Ссылка на курс (с erid)','https://iva.nuf.fitness/…','url'],
+      ['event.date','Событие: дата','15.12'],['event.type','Событие: тип','Семинар'],
+      ['event.text','Событие: описание','','area']
+    ]],
+    ['Частые вопросы',[
+      ['faq.1.q','Вопрос 1','','wide'],['faq.1.a','Ответ 1','','area'],
+      ['faq.2.q','Вопрос 2','','wide'],['faq.2.a','Ответ 2','','area'],
+      ['faq.3.q','Вопрос 3','','wide'],['faq.3.a','Ответ 3','','area'],
+      ['faq.4.q','Вопрос 4','','wide'],['faq.4.a','Ответ 4','','area'],
+      ['faq.5.q','Вопрос 5','','wide'],['faq.5.a','Ответ 5','','area']
+    ]]
+  ];
+
   var $=function(id){return document.getElementById(id)};
-  var token='', sha=null, cfg={blocks:{},photos:{}}, pending={}, dirty=false, canWrite=false;
+  var token='', sha=null, cfg={blocks:{},photos:{},content:{}}, pending={}, dirty=false, canWrite=false;
   try{ token=localStorage.getItem('silov-admin-token')||''; }catch(e){}
 
   function msg(text,cls){ var m=$('msg'); m.textContent=text; m.className='msg'+(cls?' '+cls:''); }
@@ -201,6 +280,24 @@ details.help code{font:500 13px var(--mono);color:var(--milk);background:var(--i
         sw.appendChild(inp); sw.appendChild(document.createElement('i'));
         l.appendChild(t); l.appendChild(sw); l.appendChild(d); box.appendChild(l);
       });
+    });
+    var fb=$('fields'), openIdx=[]; fb.querySelectorAll('details').forEach(function(d,i){ if(d.open) openIdx.push(i); }); fb.innerHTML='';
+    FIELDS.forEach(function(g,gi){
+      var det=document.createElement('details'); det.className='fg'; det.open=openIdx.indexOf(gi)>=0;
+      var filled=g[1].filter(function(f){ return (cfg.content[f[0]]||'').trim(); }).length;
+      var sm=document.createElement('summary'); sm.textContent=g[0]; var c=document.createElement('small'); c.textContent=filled+' / '+g[1].length; sm.appendChild(c); det.appendChild(sm);
+      var grid=document.createElement('div'); grid.className='fgrid';
+      g[1].forEach(function(f){
+        var w=document.createElement('div'); w.className='f'+(f[3]?' wide':'');
+        var l=document.createElement('label'); l.htmlFor='c-'+f[0]; l.textContent=f[1];
+        var inp=document.createElement(f[3]==='area'?'textarea':'input'); inp.id='c-'+f[0];
+        if(f[3]==='area') inp.rows=3; else inp.type=f[3]==='url'?'url':'text';
+        if(f[3]==='url') inp.inputMode='url';
+        inp.placeholder=f[2]||'Текст по умолчанию'; inp.value=cfg.content[f[0]]||'';
+        inp.addEventListener('input',function(){ var v=inp.value; if(f[0].indexOf('sched.')===0) cfg.content[f[0]]=v.trim(); else if(v.trim()) cfg.content[f[0]]=v; else delete cfg.content[f[0]]; c.textContent=g[1].filter(function(x){ return (cfg.content[x[0]]||'').trim(); }).length+' / '+g[1].length; setDirty(); });
+        w.appendChild(l); w.appendChild(inp); grid.appendChild(w);
+      });
+      det.appendChild(grid); fb.appendChild(det);
     });
     var ph=$('photos'); ph.innerHTML='';
     SLOTS.forEach(function(s){
@@ -240,7 +337,7 @@ details.help code{font:500 13px var(--mono);color:var(--milk);background:var(--i
     var p = token
       ? gh('site.json?ref='+GH.branch+'&t='+Date.now()).then(function(j){ sha=j.sha; return JSON.parse(unb64(j.content)); })
       : fetch('site.json?t='+Date.now()).then(function(r){ return r.json(); });
-    return p.then(function(c){ cfg={blocks:c.blocks||{},photos:c.photos||{}}; pending={}; dirty=false; render(); });
+    return p.then(function(c){ cfg={blocks:c.blocks||{},photos:c.photos||{},content:c.content||{}}; pending={}; dirty=false; render(); });
   }
 
   function login(){

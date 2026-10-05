@@ -348,6 +348,14 @@ footer .wrap{display:grid;grid-template-columns:1fr auto;gap:20px 32px}
 .f-notes{grid-column:1/-1;display:grid;gap:6px;font-size:12px;border-top:1px solid var(--line);padding-top:16px}
 @media (max-width:620px){footer .wrap{grid-template-columns:1fr}}
 
+/* motion */
+.anim .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.anim .rv.in{opacity:1;transform:none}
+.btn{transition:background .15s,color .15s,border-color .15s,transform .15s}
+.btn:active{transform:scale(.98)}
+.goal,.fmt,.review{transition:background .15s,transform .25s,border-color .25s}
+@media (hover:hover){.fmt:hover,.review:hover{transform:translateY(-4px)}}
+
 /* config-driven visibility */
 [hidden]{display:none!important}
 .cfg-loading .proto,.cfg-loading main,.cfg-loading footer{visibility:hidden}
@@ -372,7 +380,7 @@ body:not(.show-ph) .ph-chip{display:none}
 
 <div class="proto" data-block="proto">
   <div class="wrap">
-    <span>ПРОТОТИП v3 · 23.09.2026 · пунктир — данные, которые нужно прислать</span>
+    <span>ПРОТОТИП v5 · 05.10.2026 · пунктир — данные, которые нужно прислать</span>
     <label for="ph-toggle"><input type="checkbox" id="ph-toggle" checked> Показывать заглушки</label>
   </div>
 </div>
@@ -404,11 +412,11 @@ body:not(.show-ph) .ph-chip{display:none}
       <div class="hero-copy">
         <h1>Персональный тренер в Вологде</h1>
         <p class="slogan">Форма&nbsp;— <span>это система</span></p>
-        <p class="lead">Индивидуальные и групповые тренировки с упором на технику. Объясняю, что и зачем мы делаем, — без травм и хаоса в зале.</p>
+        <p class="lead" data-edit="hero.lead">Индивидуальные и групповые тренировки с упором на технику. Объясняю, что и зачем мы делаем, — без травм и хаоса в зале.</p>
         <div class="offer ph" data-block="offer">
           <span class="badge">01</span>
-          <b>Тренировка-знакомство</b>
-          <span>Разбор техники и план на месяц за 60 минут <span class="ph-chip">условия пробной</span></span>
+          <b data-edit="offer.title">Тренировка-знакомство</b>
+          <span data-edit="offer.text">Разбор техники и план на месяц за 60 минут <span class="ph-chip">условия пробной</span></span>
         </div>
         <div class="ctas">
           <a class="btn btn-lime" href="#contact" data-goal="trial">Записаться на пробную</a>
@@ -425,10 +433,10 @@ body:not(.show-ph) .ph-chip{display:none}
   <!-- 2. TRUST -->
   <section class="trust" aria-label="Цифры" data-block="trust">
     <div class="wrap trust-grid">
-      <div class="tr ph"><b>[__]<em>+</em></b><span>лет тренерской работы</span></div>
-      <div class="tr ph"><b>[___]</b><span>клиентов</span></div>
-      <div class="tr ph"><b>[__]</b><span>выпускников-тренеров</span></div>
-      <div class="tr ph"><b>[5,0]<em>★</em></b><span>на Яндекс Картах</span></div>
+      <div class="tr ph"><b data-edit="trust.1.num" data-count>[__]<em>+</em></b><span data-edit="trust.1.label">лет тренерской работы</span></div>
+      <div class="tr ph"><b data-edit="trust.2.num" data-count>[___]</b><span data-edit="trust.2.label">клиентов</span></div>
+      <div class="tr ph"><b data-edit="trust.3.num" data-count>[__]</b><span data-edit="trust.3.label">выпускников-тренеров</span></div>
+      <div class="tr ph"><b data-edit="trust.4.num" data-count>[5,0]<em>★</em></b><span data-edit="trust.4.label">на Яндекс Картах</span></div>
     </div>
   </section>
 
@@ -508,25 +516,25 @@ body:not(.show-ph) .ph-chip{display:none}
             <p class="eyebrow">Результаты</p>
             <h2>Отзывы клиентов</h2>
           </div>
-          <div class="rating ph"><b>[5,0]</b><span>[__] отзывов<br>на Яндекс Картах</span></div>
+          <div class="rating ph"><b data-edit="rating.num">[5,0]</b><span data-edit="rating.label">[__] отзывов<br>на Яндекс Картах</span></div>
         </div>
         <p class="lead">Публикуем только с письменного согласия клиента. <span class="ph-chip">отзывы, фото и согласия</span></p>
       </div>
       <div class="reviews">
         <article class="review">
           <div class="ph-img video"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></span></div>
-          <p>«[Видеоотзыв клиента, 30–60 секунд: с чем пришёл и что изменилось.]»</p>
-          <span class="who">[Имя] · [срок] · персональные</span>
+          <p data-edit="review.1.text">«[Видеоотзыв клиента, 30–60 секунд: с чем пришёл и что изменилось.]»</p>
+          <span class="who" data-edit="review.1.who">[Имя] · [срок] · персональные</span>
         </article>
         <article class="review">
           <div class="ba"><div class="ph-img">До</div><div class="ph-img">После</div></div>
-          <p>«[Отзыв: цель, срок, результат в цифрах — кг, см, рабочие веса.]»</p>
-          <span class="who">[Имя] · [срок] · персональные</span>
+          <p data-edit="review.2.text">«[Отзыв: цель, срок, результат в цифрах — кг, см, рабочие веса.]»</p>
+          <span class="who" data-edit="review.2.who">[Имя] · [срок] · персональные</span>
         </article>
         <article class="review">
           <div class="ba"><div class="ph-img">Фото</div><div class="ph-img">Группа</div></div>
-          <p>«[Отзыв участника групповых тренировок.]»</p>
-          <span class="who">[Имя] · [срок] · группа</span>
+          <p data-edit="review.3.text">«[Отзыв участника групповых тренировок.]»</p>
+          <span class="who" data-edit="review.3.who">[Имя] · [срок] · группа</span>
         </article>
       </div>
       <p class="swipe-hint">Листайте вбок →</p>
@@ -546,34 +554,34 @@ body:not(.show-ph) .ph-chip{display:none}
           <div class="kind"><span>Первый шаг</span><b>Старт</b></div>
           <h3>Тренировка-знакомство</h3>
           <ul><li>Разбор цели и опыта</li><li>Проверка техники</li><li>План на первый месяц</li></ul>
-          <div class="price ph">[0 / ___] ₽ <small>60 мин</small></div>
+          <div class="price ph"><span data-edit="price.trial">[0 / ___] ₽</span> <small data-edit="price.trial.note">60 мин</small></div>
           <a class="btn btn-lime" href="#contact" data-goal="trial">Записаться</a>
         </article>
         <article class="fmt">
           <div class="kind"><span>Индивидуально</span><span class="ph">[60] мин</span></div>
           <h3>Персональная</h3>
           <ul><li>Всё внимание — вам</li><li>Работа над конкретной задачей</li><li>Задание на самостоятельные</li></ul>
-          <div class="price ph">[____] ₽ <small>занятие</small></div>
+          <div class="price ph"><span data-edit="price.solo">[____] ₽</span> <small data-edit="price.solo.note">занятие</small></div>
           <a class="btn" href="#contact" data-goal="solo">Выбрать</a>
         </article>
         <article class="fmt">
           <div class="kind"><span>Индивидуально</span><span>Выгоднее</span></div>
           <h3>Пакет занятий</h3>
           <ul><li class="ph">[8 или 12] тренировок</li><li>Программа под цель</li><li>Связь между занятиями</li></ul>
-          <div class="price ph">от [____] ₽ <small>пакет</small></div>
+          <div class="price ph"><span data-edit="price.pack">от [____] ₽</span> <small data-edit="price.pack.note">пакет</small></div>
           <a class="btn" href="#contact" data-goal="solo">Выбрать</a>
         </article>
         <article class="fmt">
           <div class="kind"><span>В группе</span><span class="ph">до [__] чел.</span></div>
           <h3>Групповые</h3>
           <ul><li>Контроль техники каждого</li><li>Регулярность и поддержка</li><li>Доступнее персональных</li></ul>
-          <div class="price ph">[____] ₽ <small>разово / абонемент</small></div>
+          <div class="price ph"><span data-edit="price.group">[____] ₽</span> <small data-edit="price.group.note">разово / абонемент</small></div>
           <a class="btn" href="#contact" data-goal="group">Выбрать</a>
         </article>
       </div>
       <div class="scarce ph">
-        <span>Беру <b>[N]</b> новых персональных клиентов в месяц</span>
-        <span>В группе осталось <b>[N]</b> мест</span>
+        <span data-edit="scarce.1">Беру <b>[N]</b> новых персональных клиентов в месяц</span>
+        <span data-edit="scarce.2">В группе осталось <b>[N]</b> мест</span>
       </div>
       <div class="sched ph" data-block="schedule" aria-label="Расписание групповых тренировок">
         <div class="sched-h">
@@ -582,13 +590,13 @@ body:not(.show-ph) .ph-chip{display:none}
           <p>Время условное. <span class="ph-chip">прислать расписание</span></p>
         </div>
         <div class="days">
-          <div class="day"><b>ПН</b><span class="slot">19:00</span></div>
-          <div class="day"><b>ВТ</b><span class="none">—</span></div>
-          <div class="day"><b>СР</b><span class="slot">19:00</span></div>
-          <div class="day"><b>ЧТ</b><span class="none">—</span></div>
-          <div class="day"><b>ПТ</b><span class="slot">19:00</span></div>
-          <div class="day"><b>СБ</b><span class="none">—</span></div>
-          <div class="day"><b>ВС</b><span class="none">—</span></div>
+          <div class="day" data-sched="mon"><b>ПН</b><span class="slot">19:00</span></div>
+          <div class="day" data-sched="tue"><b>ВТ</b><span class="none">—</span></div>
+          <div class="day" data-sched="wed"><b>СР</b><span class="slot">19:00</span></div>
+          <div class="day" data-sched="thu"><b>ЧТ</b><span class="none">—</span></div>
+          <div class="day" data-sched="fri"><b>ПТ</b><span class="slot">19:00</span></div>
+          <div class="day" data-sched="sat"><b>СБ</b><span class="none">—</span></div>
+          <div class="day" data-sched="sun"><b>ВС</b><span class="none">—</span></div>
         </div>
       </div>
     </div>
@@ -609,7 +617,7 @@ body:not(.show-ph) .ph-chip{display:none}
           <span>Практика курса тренеров</span>
         </div>
         <p><strong>Персональный тренер в Вологде.</strong> Для меня тренировка начинается с понимания движения. Я объясняю, что и зачем мы делаем, чтобы клиент тренировался осознанно, а будущий тренер уверенно работал с людьми.</p>
-        <p class="ph">[Личная история: как пришёл в спорт, почему стал тренером, спортивные достижения.] <span class="ph-chip">текст от Семёна</span></p>
+        <p class="ph" data-edit="about.story">[Личная история: как пришёл в спорт, почему стал тренером, спортивные достижения.] <span class="ph-chip">текст от Семёна</span></p>
         <div class="docs" data-block="docs">
           <div class="ph-img" data-photo="doc1">Диплом</div>
           <div class="ph-img" data-photo="doc2">Сертификат</div>
@@ -632,7 +640,7 @@ body:not(.show-ph) .ph-chip{display:none}
           <div class="course-date"><b>05.11</b><span>2026 · четверг</span><span id="countdown">до старта —</span></div>
         </div>
         <div class="course-body">
-          <div class="ad-mark ph"><b>РЕКЛАМА</b><span>ЧОУ ДПО «Национальный Университет Фитнеса» · ИНН [__________] · erid: [__________]</span> <span class="ph-chip">маркировка рекламы</span></div>
+          <div class="ad-mark ph"><b>РЕКЛАМА</b><span data-edit="course.ad">ЧОУ ДПО «Национальный Университет Фитнеса» · ИНН [__________] · erid: [__________]</span> <span class="ph-chip">маркировка рекламы</span></div>
           <h3>Фитнес-тренер тренажёрного зала</h3>
           <p>Очно-дистанционный курс. Теория — дистанционно по будням, практика — очно в зале по выходным. Практику в Вологде ведёт Семён Силов: разбирает технику, исправляет ошибки, отвечает на вопросы.</p>
           <div class="facts4">
@@ -646,14 +654,14 @@ body:not(.show-ph) .ph-chip{display:none}
           </div>
           <p class="org">CardioZone, ул. Мира, 82, ТЦ «Оазис» · стоимость и рассрочка — на странице курса</p>
           <div class="ctas">
-            <a class="btn btn-ink" href="https://iva.nuf.fitness/courses/vologda.-fitnes-trener-trenazhernogo-zala.-ochnyj-kurs" target="_blank" rel="noopener">Программа и запись ↗</a>
+            <a class="btn btn-ink" data-edit-href="link.course" href="https://iva.nuf.fitness/courses/vologda.-fitnes-trener-trenazhernogo-zala.-ochnyj-kurs" target="_blank" rel="noopener">Программа и запись ↗</a>
             <a class="btn btn-ghost" style="color:var(--ink);border-color:var(--ink)" href="#contact" data-goal="course">Спросить Семёна</a>
           </div>
         </div>
       </article>
       <div class="event-ph ph" data-block="events">
-        <div class="d">[__.__]</div>
-        <div class="b"><span>Семинар · мастер-класс · открытая тренировка</span><p>[Место для будущих событий. Блок скрывается, если событий нет.] <span class="ph-chip">пример</span></p></div>
+        <div class="d" data-edit="event.date">[__.__]</div>
+        <div class="b"><span data-edit="event.type">Семинар · мастер-класс · открытая тренировка</span><p data-edit="event.text">[Место для будущих событий. Блок скрывается, если событий нет.] <span class="ph-chip">пример</span></p></div>
       </div>
     </div>
   </section>
@@ -667,12 +675,12 @@ body:not(.show-ph) .ph-chip{display:none}
           <h2>Зал и адрес</h2>
         </div>
         <div class="place-list">
-          <div class="ph"><span class="k">Персональные и группы</span><b>[Название зала]</b><span>[Вологда, улица, дом] <span class="ph-chip">адрес</span></span></div>
-          <div class="ph"><span class="k">Как добраться</span><b>[Остановка / парковка]</b><span>[Ориентиры, вход, этаж]</span></div>
+          <div class="ph"><span class="k">Персональные и группы</span><b data-edit="place.name">[Название зала]</b><span data-edit="place.addr">[Вологда, улица, дом] <span class="ph-chip">адрес</span></span></div>
+          <div class="ph"><span class="k">Как добраться</span><b data-edit="place.how1">[Остановка / парковка]</b><span data-edit="place.how2">[Ориентиры, вход, этаж]</span></div>
           <div><span class="k">Практика курса</span><b>CardioZone</b><span>ул. Мира, 82, ТЦ «Оазис»</span></div>
         </div>
         <div class="ctas" style="margin-top:20px">
-          <a class="btn btn-ghost" href="https://yandex.ru/maps/21/vologda/" target="_blank" rel="noopener">Открыть в Яндекс Картах ↗</a>
+          <a class="btn btn-ghost" data-edit-href="link.map" href="https://yandex.ru/maps/21/vologda/" target="_blank" rel="noopener">Открыть в Яндекс Картах ↗</a>
         </div>
       </div>
       <div class="gym">
@@ -721,24 +729,24 @@ body:not(.show-ph) .ph-chip{display:none}
       </div>
       <div class="faq">
         <details open>
-          <summary>Я никогда не занимался в зале. С чего начать?</summary>
-          <p>С тренировки-знакомства: разберём цель, проверим технику и составим план. Дальше можно продолжить индивидуально или перейти в группу.</p>
+          <summary data-edit="faq.1.q">Я никогда не занимался в зале. С чего начать?</summary>
+          <p data-edit="faq.1.a">С тренировки-знакомства: разберём цель, проверим технику и составим план. Дальше можно продолжить индивидуально или перейти в группу.</p>
         </details>
         <details>
-          <summary>Чем групповые тренировки отличаются от персональных?</summary>
-          <p>В группе тренер работает с несколькими людьми и следит за техникой каждого — это доступнее по цене. На персональной тренировке всё время посвящено только вам.</p>
+          <summary data-edit="faq.2.q">Чем групповые тренировки отличаются от персональных?</summary>
+          <p data-edit="faq.2.a">В группе тренер работает с несколькими людьми и следит за техникой каждого — это доступнее по цене. На персональной тренировке всё время посвящено только вам.</p>
         </details>
         <details>
-          <summary>Что взять на первую тренировку?</summary>
-          <p>Удобную спортивную форму, сменную обувь, воду и полотенце. <span class="ph-chip">уточнить</span></p>
+          <summary data-edit="faq.3.q">Что взять на первую тренировку?</summary>
+          <p data-edit="faq.3.a">Удобную спортивную форму, сменную обувь, воду и полотенце. <span class="ph-chip">уточнить</span></p>
         </details>
         <details>
-          <summary>Есть ли противопоказания?</summary>
-          <p>При заболеваниях сердца, суставов, позвоночника и после травм перед началом тренировок нужна консультация врача. Расскажите о них на первой встрече — учтём в программе.</p>
+          <summary data-edit="faq.4.q">Есть ли противопоказания?</summary>
+          <p data-edit="faq.4.a">При заболеваниях сердца, суставов, позвоночника и после травм перед началом тренировок нужна консультация врача. Расскажите о них на первой встрече — учтём в программе.</p>
         </details>
         <details>
-          <summary>Какой документ выдают после курса тренеров?</summary>
-          <p>Диплом о профессиональной переподготовке установленного образца. Национальный Университет Фитнеса вносит его в федеральный реестр (ФРДО).</p>
+          <summary data-edit="faq.5.q">Какой документ выдают после курса тренеров?</summary>
+          <p data-edit="faq.5.a">Диплом о профессиональной переподготовке установленного образца. Национальный Университет Фитнеса вносит его в федеральный реестр (ФРДО).</p>
         </details>
       </div>
     </div>
@@ -751,14 +759,14 @@ body:not(.show-ph) .ph-chip{display:none}
         <p class="eyebrow">Запись и вопросы</p>
         <h2>Начнём?</h2>
         <p>Напишите мне в удобный мессенджер: «ТРЕНИРОВКИ» — чтобы договориться о первой встрече, «КУРС» — чтобы узнать про обучение.</p>
-        <span class="reply ph">Отвечаю в течение [2 часов] с 9:00 до 21:00</span>
+        <span class="reply ph" data-edit="contact.reply">Отвечаю в течение [2 часов] с 9:00 до 21:00</span>
         <div class="soc-row">
           <a class="soc" href="https://vk.ru/id55027627" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.8 17.5c-5.5 0-8.6-3.8-8.8-10h2.8c.1 4.6 2.1 6.5 3.7 6.9V7.5h2.6v3.9c1.6-.2 3.3-2 3.9-3.9h2.6c-.4 2.4-2.2 4.2-3.5 4.9 1.3.6 3.3 2.2 4.1 5.1h-2.9c-.6-1.9-2.1-3.4-4.2-3.6v3.6h-.3z"/></svg>ВКонтакте</a>
           <a class="soc" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>@silov.sema*</a>
-          <a class="soc ph" href="#contact"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.3 2.9 11.4c-1 .4-1 1.6 0 1.9l4.7 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.4 4.9 3.6c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.5-1.3-1.2zM9.8 14.5l8.6-7.7-10.4 6.4"/></svg>Telegram</a>
-          <a class="soc ph" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1.3-4A8.5 8.5 0 1 1 8.4 19z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.8-2-1-1 1c-1-.4-2.3-1.7-2.7-2.7l1-1-1-2z" fill="currentColor" stroke="none"/></svg>WhatsApp</a>
+          <a class="soc ph" data-edit-href="link.telegram" href="#contact"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.3 2.9 11.4c-1 .4-1 1.6 0 1.9l4.7 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.4 4.9 3.6c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.5-1.3-1.2zM9.8 14.5l8.6-7.7-10.4 6.4"/></svg>Telegram</a>
+          <a class="soc ph" data-edit-href="link.whatsapp" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1.3-4A8.5 8.5 0 1 1 8.4 19z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.8-2-1-1 1c-1-.4-2.3-1.7-2.7-2.7l1-1-1-2z" fill="currentColor" stroke="none"/></svg>WhatsApp</a>
         </div>
-        <p class="ph" style="font:500 14px var(--mono)">Телефон: [+7 ___ ___-__-__] <span class="ph-chip">Telegram, WhatsApp, телефон</span></p>
+        <p class="ph" data-edit="contact.phone" style="font:500 14px var(--mono)">Телефон: [+7 ___ ___-__-__] <span class="ph-chip">Telegram, WhatsApp, телефон</span></p>
       </div>
       <form id="lead" novalidate data-block="form">
         <div class="field">
@@ -794,7 +802,7 @@ body:not(.show-ph) .ph-chip{display:none}
   <div class="wrap">
     <div class="f-links">
       <span>© 2026 Семён Силов · персональный тренер, Вологда</span>
-      <span class="ph" data-block="requisites">[Самозанятый / ИП, ИНН] <span class="ph-chip">реквизиты</span></span>
+      <span class="ph" data-block="requisites" data-edit="footer.requisites">[Самозанятый / ИП, ИНН] <span class="ph-chip">реквизиты</span></span>
       <span class="ph only-form">Политика конфиденциальности</span>
       <span class="ph only-form">Согласие на обработку данных</span>
     </div>
@@ -812,8 +820,8 @@ body:not(.show-ph) .ph-chip{display:none}
 
 <nav class="dock" aria-label="Быстрые действия">
   <a class="soc" href="https://vk.ru/id55027627" target="_blank" rel="noopener" aria-label="Написать ВКонтакте"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.8 17.5c-5.5 0-8.6-3.8-8.8-10h2.8c.1 4.6 2.1 6.5 3.7 6.9V7.5h2.6v3.9c1.6-.2 3.3-2 3.9-3.9h2.6c-.4 2.4-2.2 4.2-3.5 4.9 1.3.6 3.3 2.2 4.1 5.1h-2.9c-.6-1.9-2.1-3.4-4.2-3.6v3.6h-.3z"/></svg></a>
-  <a class="soc" href="#contact" aria-label="Написать в Telegram (контакт будет добавлен)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.3 2.9 11.4c-1 .4-1 1.6 0 1.9l4.7 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.4 4.9 3.6c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.5-1.3-1.2zM9.8 14.5l8.6-7.7-10.4 6.4"/></svg></a>
-  <a class="soc" href="#contact" aria-label="Написать в WhatsApp (контакт будет добавлен)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1.3-4A8.5 8.5 0 1 1 8.4 19z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.8-2-1-1 1c-1-.4-2.3-1.7-2.7-2.7l1-1-1-2z" fill="currentColor" stroke="none"/></svg></a>
+  <a class="soc" data-edit-href="link.telegram" href="#contact" aria-label="Написать в Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.3 2.9 11.4c-1 .4-1 1.6 0 1.9l4.7 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.4 4.9 3.6c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.5-1.3-1.2zM9.8 14.5l8.6-7.7-10.4 6.4"/></svg></a>
+  <a class="soc" data-edit-href="link.whatsapp" href="#contact" aria-label="Написать в WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1.3-4A8.5 8.5 0 1 1 8.4 19z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.8-2-1-1 1c-1-.4-2.3-1.7-2.7-2.7l1-1-1-2z" fill="currentColor" stroke="none"/></svg></a>
   <a class="btn btn-lime" href="#contact" data-goal="trial">Пробная тренировка</a>
 </nav>
 
@@ -834,10 +842,55 @@ body:not(.show-ph) .ph-chip{display:none}
       if(el.tagName==='IMG'){ if(el.getAttribute('src')!==src) el.src=src; }
       else { el.style.backgroundImage='url("'+src+'")'; el.classList.add('has-img'); }
     });
+    var ct=(c&&c.content)||{};
+    function unph(el){ var p=el.closest('.ph'); if(p){ p.classList.remove('ph'); p.querySelectorAll('.ph-chip').forEach(function(x){ x.remove(); }); } }
+    document.querySelectorAll('[data-edit]').forEach(function(el){
+      var v=ct[el.getAttribute('data-edit')]; if(typeof v!=='string'||!v.trim()) return;
+      el.textContent=v.trim(); unph(el);
+    });
+    document.querySelectorAll('[data-edit-href]').forEach(function(el){
+      var v=ct[el.getAttribute('data-edit-href')]; if(typeof v!=='string'||!/^https:\/\//.test(v.trim())) return;
+      el.href=v.trim(); el.target='_blank'; el.rel='noopener'; el.classList.remove('ph');
+    });
+    var anySched=false; document.querySelectorAll('[data-sched]').forEach(function(el){ if(typeof ct['sched.'+el.getAttribute('data-sched')]==='string') anySched=true; });
+    if(anySched) document.querySelectorAll('[data-sched]').forEach(function(el){
+      var v=(ct['sched.'+el.getAttribute('data-sched')]||'').trim(), old=el.querySelector('.slot,.none'), n=document.createElement('span');
+      n.className=v?'slot':'none'; n.textContent=v||'—'; if(old) old.replaceWith(n); else el.appendChild(n); unph(el);
+    });
     document.querySelectorAll('.nav a[href^="#"]').forEach(function(a){
       var sec=document.getElementById(a.getAttribute('href').slice(1)); a.hidden = !sec || sec.hidden;
     });
     root.classList.remove('cfg-loading');
+    motion();
+  }
+  function motion(){
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var els=[].slice.call(document.querySelectorAll('.sec-head,.goal,.step,.review,.fmt,.sched,.course-card,.about-grid > *,.place-grid > *,.reel,.magnet,.faq details,.contact-grid > *'));
+    var nums=[].slice.call(document.querySelectorAll('[data-count]')), vh=window.innerHeight;
+    els=els.filter(function(el){
+      if(el.getBoundingClientRect().top < vh) return false;
+      var i=Array.prototype.indexOf.call(el.parentNode.children, el);
+      el.classList.add('rv'); el.style.transitionDelay=Math.min(i,5)*70+'ms'; return true;
+    });
+    root.classList.add('anim');
+    function count(el){
+      var m=/^(\d{1,5})(\D.*)?$/.exec(el.textContent.trim()); if(!m) return;
+      var n=+m[1], suf=m[2]||'', t0=performance.now();
+      (function tick(t){ var k=Math.min(1,(t-t0)/900), v=Math.round(n*(1-Math.pow(1-k,3))); el.textContent=v+suf; if(k<1) requestAnimationFrame(tick); })(t0);
+    }
+    var busy=false;
+    function check(){
+      busy=false; var h=window.innerHeight;
+      els=els.filter(function(el){
+        if(el.getBoundingClientRect().top > h*.92) return true;
+        el.classList.add('in'); setTimeout(function(){ el.classList.remove('rv','in'); el.style.transitionDelay=''; },1300); return false;
+      });
+      nums=nums.filter(function(el){ var r=el.getBoundingClientRect(); if(r.top > h*.9 || r.bottom < 0) return true; count(el); return false; });
+      if(!els.length && !nums.length){ window.removeEventListener('scroll',onScroll); window.removeEventListener('resize',onScroll); }
+    }
+    function onScroll(){ if(!busy){ busy=true; requestAnimationFrame(check); } }
+    window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll);
+    check();
   }
   var cfgDone=false;
   function finish(c){ if(cfgDone) return; cfgDone=true; applyCfg(c); }
