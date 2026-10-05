@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" class="cfg-loading">
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
@@ -7,6 +7,12 @@
 <title>Семён Силов — сайт</title>
 <meta name="description" content="Персональный тренер в Вологде Семён Силов: индивидуальные и групповые тренировки, постановка техники, пробная тренировка-знакомство.">
 <meta name="theme-color" content="#101418">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Семён Силов — персональный тренер в Вологде">
+<meta property="og:description" content="Индивидуальные и групповые тренировки с упором на технику. Тренировка-знакомство: разбор техники и план.">
+<meta property="og:image" content="https://evgenynikolaev35-blip.github.io/silov-site/img/silov-15.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23101418'/%3E%3Ctext x='32' y='47' font-family='Arial Narrow,Arial,sans-serif' font-weight='800' font-size='44' text-anchor='middle' fill='%23D0FF32'%3EС%3C/text%3E%3C/svg%3E">
 <meta name="format-detection" content="telephone=no">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,7 +65,7 @@ section{padding-block:clamp(56px,9vw,112px)}
 .logo b{color:var(--lime);font-weight:800}
 .logo small{font:500 10px/1 var(--mono);letter-spacing:.12em;color:var(--mute)}
 .nav{display:flex;gap:20px;margin-left:auto;font-size:15px}
-.nav a{text-decoration:none;color:var(--mute);transition:color .15s}
+.nav a{text-decoration:none;color:var(--mute);transition:color .15s;white-space:nowrap}
 .nav a:hover{color:var(--milk)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:2px;font:600 16px/1.2 var(--body);text-decoration:none;border:1.5px solid var(--lime);cursor:pointer;transition:background .15s,color .15s,border-color .15s;text-align:center}
 .btn-lime{background:var(--lime);color:var(--lime-ink)}
@@ -72,7 +78,7 @@ section{padding-block:clamp(56px,9vw,112px)}
 .light .btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
 .top .btn{min-height:40px;padding:0 18px;font-size:14px}
 .menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--line);color:var(--milk);font:500 13px var(--mono);min-height:44px;padding:0 14px;cursor:pointer}
-@media (max-width:980px){
+@media (max-width:1100px){
   .menu-btn{display:block}
   .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:var(--ink-2);border-bottom:1px solid var(--line);margin:0;max-height:calc(100dvh - 120px);overflow-y:auto}
   .nav.open{display:flex}
@@ -342,6 +348,16 @@ footer .wrap{display:grid;grid-template-columns:1fr auto;gap:20px 32px}
 .f-notes{grid-column:1/-1;display:grid;gap:6px;font-size:12px;border-top:1px solid var(--line);padding-top:16px}
 @media (max-width:620px){footer .wrap{grid-template-columns:1fr}}
 
+/* config-driven visibility */
+[hidden]{display:none!important}
+.cfg-loading .proto,.cfg-loading main,.cfg-loading footer{visibility:hidden}
+.no-prices .price,.no-prices .scarce{display:none}
+.no-form .contact-grid{grid-template-columns:1fr}
+.no-form .contact .side{max-width:720px}
+.no-form .soc-row .soc{height:56px;font-size:16px;padding:0 20px 0 14px}
+.no-form .only-form{display:none}
+.ph-img.has-img{background-size:cover;background-position:center;color:transparent;font-size:0}
+
 /* placeholders */
 .ph-chip{display:inline-flex;align-items:center;gap:6px;font:500 11px/1.2 var(--mono);letter-spacing:.04em;text-transform:none;color:var(--lime);border:1px dashed var(--lime);padding:4px 8px;vertical-align:middle;border-radius:2px;background:rgba(16,20,24,.6)}
 .ph-chip::before{content:"ЗАГЛУШКА";letter-spacing:.1em;opacity:.8}
@@ -354,7 +370,7 @@ body:not(.show-ph) .ph-chip{display:none}
 </head>
 <body>
 
-<div class="proto">
+<div class="proto" data-block="proto">
   <div class="wrap">
     <span>ПРОТОТИП v3 · 23.09.2026 · пунктир — данные, которые нужно прислать</span>
     <label for="ph-toggle"><input type="checkbox" id="ph-toggle" checked> Показывать заглушки</label>
@@ -368,7 +384,7 @@ body:not(.show-ph) .ph-chip{display:none}
     <nav class="nav" id="nav">
       <a href="#for">Для кого</a>
       <a href="#reviews">Отзывы</a>
-      <a href="#prices">Цены</a>
+      <a href="#prices">Форматы</a>
       <a href="#about">Обо мне</a>
       <a href="#place">Где</a>
       <a href="#course">Курс</a>
@@ -389,25 +405,25 @@ body:not(.show-ph) .ph-chip{display:none}
         <h1>Персональный тренер в Вологде</h1>
         <p class="slogan">Форма&nbsp;— <span>это система</span></p>
         <p class="lead">Индивидуальные и групповые тренировки с упором на технику. Объясняю, что и зачем мы делаем, — без травм и хаоса в зале.</p>
-        <div class="offer ph">
+        <div class="offer ph" data-block="offer">
           <span class="badge">01</span>
           <b>Тренировка-знакомство</b>
-          <span>Разбор техники и план на месяц за 60 минут · [бесплатно / ___ ₽] <span class="ph-chip">условия пробной</span></span>
+          <span>Разбор техники и план на месяц за 60 минут <span class="ph-chip">условия пробной</span></span>
         </div>
         <div class="ctas">
           <a class="btn btn-lime" href="#contact" data-goal="trial">Записаться на пробную</a>
-          <a class="btn btn-ghost" href="#prices">Цены</a>
+          <a class="btn btn-ghost" href="#prices">Форматы тренировок</a>
         </div>
       </div>
       <div class="hero-photo">
-        <img src="img/silov-15.jpg" alt="Семён Силов, персональный тренер в Вологде" width="933" height="1400" fetchpriority="high">
+        <img data-photo="hero" src="img/silov-15.jpg" alt="Семён Силов, персональный тренер в Вологде" width="933" height="1400" fetchpriority="high">
         <span class="photo-note ph-chip">заменить на фото в работе с клиентом</span>
       </div>
     </div>
   </section>
 
   <!-- 2. TRUST -->
-  <section class="trust" aria-label="Цифры">
+  <section class="trust" aria-label="Цифры" data-block="trust">
     <div class="wrap trust-grid">
       <div class="tr ph"><b>[__]<em>+</em></b><span>лет тренерской работы</span></div>
       <div class="tr ph"><b>[___]</b><span>клиентов</span></div>
@@ -417,12 +433,12 @@ body:not(.show-ph) .ph-chip{display:none}
   </section>
 
   <!-- 3. FOR WHOM -->
-  <section id="for">
+  <section id="for" data-block="for">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Для кого</p>
         <h2>С какой целью приходят</h2>
-        <p class="lead">Выберите свою — заявка заполнится автоматически. <span class="ph-chip">подтвердить список целей</span></p>
+        <p class="lead">Выберите свою и напишите мне — подберём формат. <span class="ph-chip">подтвердить список целей</span></p>
       </div>
       <div class="goals">
         <button class="goal" type="button" data-msg="Хочу похудеть и подтянуть тело">
@@ -467,7 +483,7 @@ body:not(.show-ph) .ph-chip{display:none}
   </section>
 
   <!-- 4. METHOD -->
-  <section class="light" id="method">
+  <section class="light" id="method" data-block="method">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Как проходит работа</p>
@@ -484,7 +500,7 @@ body:not(.show-ph) .ph-chip{display:none}
   </section>
 
   <!-- 5. REVIEWS -->
-  <section id="reviews">
+  <section id="reviews" data-block="reviews">
     <div class="wrap">
       <div class="sec-head">
         <div class="rev-head">
@@ -518,12 +534,12 @@ body:not(.show-ph) .ph-chip{display:none}
   </section>
 
   <!-- 6. PRICES -->
-  <section class="light" id="prices">
+  <section class="light" id="prices" data-block="formats">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">Форматы и цены</p>
+        <p class="eyebrow">Форматы</p>
         <h2>Как можно заниматься</h2>
-        <p class="lead">Начните с пробной тренировки — после неё подберём формат под вашу цель и график. <span class="ph-chip">цены, длительность, зал</span></p>
+        <p class="lead">Начните с пробной тренировки — после неё подберём формат под вашу цель и график. <span class="ph-chip">длительность, зал</span></p>
       </div>
       <div class="formats">
         <article class="fmt hot">
@@ -559,7 +575,7 @@ body:not(.show-ph) .ph-chip{display:none}
         <span>Беру <b>[N]</b> новых персональных клиентов в месяц</span>
         <span>В группе осталось <b>[N]</b> мест</span>
       </div>
-      <div class="sched ph" aria-label="Расписание групповых тренировок">
+      <div class="sched ph" data-block="schedule" aria-label="Расписание групповых тренировок">
         <div class="sched-h">
           <p class="eyebrow">Группы</p>
           <h3>Расписание</h3>
@@ -579,10 +595,10 @@ body:not(.show-ph) .ph-chip{display:none}
   </section>
 
   <!-- 7. ABOUT -->
-  <section id="about">
+  <section id="about" data-block="about">
     <div class="wrap about-grid">
       <div class="about-photo">
-        <img src="img/silov-18.jpg" alt="Портрет Семёна Силова" width="933" height="1400" loading="lazy">
+        <img data-photo="about" src="img/silov-18.jpg" alt="Портрет Семёна Силова" width="933" height="1400" loading="lazy">
       </div>
       <div class="about-body">
         <p class="eyebrow">Обо мне</p>
@@ -594,17 +610,17 @@ body:not(.show-ph) .ph-chip{display:none}
         </div>
         <p><strong>Персональный тренер в Вологде.</strong> Для меня тренировка начинается с понимания движения. Я объясняю, что и зачем мы делаем, чтобы клиент тренировался осознанно, а будущий тренер уверенно работал с людьми.</p>
         <p class="ph">[Личная история: как пришёл в спорт, почему стал тренером, спортивные достижения.] <span class="ph-chip">текст от Семёна</span></p>
-        <div class="docs">
-          <div class="ph-img">Диплом</div>
-          <div class="ph-img">Сертификат</div>
-          <div class="ph-img">Награда</div>
+        <div class="docs" data-block="docs">
+          <div class="ph-img" data-photo="doc1">Диплом</div>
+          <div class="ph-img" data-photo="doc2">Сертификат</div>
+          <div class="ph-img" data-photo="doc3">Награда</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 8. COURSE (ADVERTISING) -->
-  <section id="course" style="padding-top:0">
+  <section id="course" data-block="course">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Обучение и события</p>
@@ -612,7 +628,7 @@ body:not(.show-ph) .ph-chip{display:none}
       </div>
       <article class="course-card">
         <div class="course-photo">
-          <img src="img/silov-09.jpg" alt="Семён Силов в силовой раме" width="1400" height="1400" loading="lazy">
+          <img data-photo="course" src="img/silov-09.jpg" alt="Семён Силов в силовой раме" width="1400" height="1400" loading="lazy">
           <div class="course-date"><b>05.11</b><span>2026 · четверг</span><span id="countdown">до старта —</span></div>
         </div>
         <div class="course-body">
@@ -635,7 +651,7 @@ body:not(.show-ph) .ph-chip{display:none}
           </div>
         </div>
       </article>
-      <div class="event-ph ph">
+      <div class="event-ph ph" data-block="events">
         <div class="d">[__.__]</div>
         <div class="b"><span>Семинар · мастер-класс · открытая тренировка</span><p>[Место для будущих событий. Блок скрывается, если событий нет.] <span class="ph-chip">пример</span></p></div>
       </div>
@@ -643,7 +659,7 @@ body:not(.show-ph) .ph-chip{display:none}
   </section>
 
   <!-- 9. PLACE -->
-  <section class="light" id="place">
+  <section class="light" id="place" data-block="place">
     <div class="wrap place-grid">
       <div>
         <div class="sec-head">
@@ -660,15 +676,15 @@ body:not(.show-ph) .ph-chip{display:none}
         </div>
       </div>
       <div class="gym">
-        <div class="ph-img">Фото зала<br>общий план</div>
-        <div class="ph-img">Зона<br>свободных весов</div>
-        <div class="ph-img">Раздевалка<br>/ вход</div>
+        <div class="ph-img" data-photo="gym1">Фото зала<br>общий план</div>
+        <div class="ph-img" data-photo="gym2">Зона<br>свободных весов</div>
+        <div class="ph-img" data-photo="gym3">Раздевалка<br>/ вход</div>
       </div>
     </div>
   </section>
 
   <!-- 10. CONTENT -->
-  <section id="posts">
+  <section id="posts" data-block="posts">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Полезное</p>
@@ -676,7 +692,7 @@ body:not(.show-ph) .ph-chip{display:none}
         <p class="lead">Короткие видео о технике и логике тренировок — в Instagram и ВКонтакте.</p>
       </div>
       <div class="feed">
-        <a class="reel" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener"><img src="img/silov-17.jpg" alt="" loading="lazy" width="933" height="1400"><span class="cap"><span>Разбор техники</span>Техника решает</span></a>
+        <a class="reel" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener"><img data-photo="feed1" src="img/silov-17.jpg" alt="" loading="lazy" width="933" height="1400"><span class="cap"><span>Разбор техники</span>Техника решает</span></a>
         <a class="reel ph-img" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener">Превью<br>Reels</a>
         <a class="reel ph-img" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener">Превью<br>Reels</a>
         <a class="reel ph-img" href="https://vk.ru/id55027627" target="_blank" rel="noopener">Превью<br>клипа ВК</a>
@@ -685,7 +701,7 @@ body:not(.show-ph) .ph-chip{display:none}
         <a class="btn btn-ghost" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener">Instagram* @silov.sema ↗</a>
         <a class="btn btn-ghost" href="https://vk.ru/id55027627" target="_blank" rel="noopener">ВКонтакте ↗</a>
       </div>
-      <div class="magnet ph">
+      <div class="magnet ph" data-block="magnet">
         <svg class="ico" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="10" y="6" width="36" height="44"/><path d="M18 18l3 3 6-6M18 30l3 3 6-6M18 42l3 3 6-6M31 19h8M31 31h8M31 43h8"/></svg>
         <div>
           <h3>Чек-лист: 5 ошибок в приседе</h3>
@@ -697,7 +713,7 @@ body:not(.show-ph) .ph-chip{display:none}
   </section>
 
   <!-- 11. FAQ -->
-  <section id="faq" style="padding-top:0">
+  <section id="faq" data-block="faq">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Вопросы</p>
@@ -734,7 +750,7 @@ body:not(.show-ph) .ph-chip{display:none}
       <div class="side">
         <p class="eyebrow">Запись и вопросы</p>
         <h2>Начнём?</h2>
-        <p>Оставьте заявку или напишите в удобный мессенджер: «ТРЕНИРОВКИ» — чтобы записаться, «КУРС» — чтобы узнать про обучение.</p>
+        <p>Напишите мне в удобный мессенджер: «ТРЕНИРОВКИ» — чтобы договориться о первой встрече, «КУРС» — чтобы узнать про обучение.</p>
         <span class="reply ph">Отвечаю в течение [2 часов] с 9:00 до 21:00</span>
         <div class="soc-row">
           <a class="soc" href="https://vk.ru/id55027627" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.8 17.5c-5.5 0-8.6-3.8-8.8-10h2.8c.1 4.6 2.1 6.5 3.7 6.9V7.5h2.6v3.9c1.6-.2 3.3-2 3.9-3.9h2.6c-.4 2.4-2.2 4.2-3.5 4.9 1.3.6 3.3 2.2 4.1 5.1h-2.9c-.6-1.9-2.1-3.4-4.2-3.6v3.6h-.3z"/></svg>ВКонтакте</a>
@@ -744,7 +760,7 @@ body:not(.show-ph) .ph-chip{display:none}
         </div>
         <p class="ph" style="font:500 14px var(--mono)">Телефон: [+7 ___ ___-__-__] <span class="ph-chip">Telegram, WhatsApp, телефон</span></p>
       </div>
-      <form id="lead" novalidate>
+      <form id="lead" novalidate data-block="form">
         <div class="field">
           <span class="lbl" id="goal-lbl">Что вас интересует</span>
           <div class="seg" role="radiogroup" aria-labelledby="goal-lbl">
@@ -778,9 +794,9 @@ body:not(.show-ph) .ph-chip{display:none}
   <div class="wrap">
     <div class="f-links">
       <span>© 2026 Семён Силов · персональный тренер, Вологда</span>
-      <span class="ph">[Самозанятый / ИП, ИНН] <span class="ph-chip">реквизиты</span></span>
-      <span class="ph">Политика конфиденциальности</span>
-      <span class="ph">Согласие на обработку данных</span>
+      <span class="ph" data-block="requisites">[Самозанятый / ИП, ИНН] <span class="ph-chip">реквизиты</span></span>
+      <span class="ph only-form">Политика конфиденциальности</span>
+      <span class="ph only-form">Согласие на обработку данных</span>
     </div>
     <div class="social">
       <a class="soc" href="https://vk.ru/id55027627" target="_blank" rel="noopener" aria-label="ВКонтакте"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.8 17.5c-5.5 0-8.6-3.8-8.8-10h2.8c.1 4.6 2.1 6.5 3.7 6.9V7.5h2.6v3.9c1.6-.2 3.3-2 3.9-3.9h2.6c-.4 2.4-2.2 4.2-3.5 4.9 1.3.6 3.3 2.2 4.1 5.1h-2.9c-.6-1.9-2.1-3.4-4.2-3.6v3.6h-.3z"/></svg></a>
@@ -803,7 +819,31 @@ body:not(.show-ph) .ph-chip{display:none}
 
 <script>
 (function(){
-  var body=document.body, t=document.getElementById('ph-toggle');
+  var body=document.body, t=document.getElementById('ph-toggle'), root=document.documentElement;
+
+  // --- настройки сайта: site.json (меняются в admin.html) ---
+  var CFG={blocks:{prices:false,form:false,requisites:false},photos:{}};
+  function applyCfg(c){
+    var b=(c&&c.blocks)||{}, ph=(c&&c.photos)||{};
+    document.querySelectorAll('[data-block]').forEach(function(el){ el.hidden = b[el.getAttribute('data-block')]===false; });
+    body.classList.toggle('no-prices', b.prices===false);
+    body.classList.toggle('no-form', b.form===false);
+    if(b.placeholders===false){ t.checked=false; body.classList.remove('show-ph'); }
+    document.querySelectorAll('[data-photo]').forEach(function(el){
+      var src=ph[el.getAttribute('data-photo')]; if(!src) return;
+      if(el.tagName==='IMG'){ if(el.getAttribute('src')!==src) el.src=src; }
+      else { el.style.backgroundImage='url("'+src+'")'; el.classList.add('has-img'); }
+    });
+    document.querySelectorAll('.nav a[href^="#"]').forEach(function(a){
+      var sec=document.getElementById(a.getAttribute('href').slice(1)); a.hidden = !sec || sec.hidden;
+    });
+    root.classList.remove('cfg-loading');
+  }
+  var cfgDone=false;
+  function finish(c){ if(cfgDone) return; cfgDone=true; applyCfg(c); }
+  setTimeout(function(){ finish(CFG); }, 1500);
+  fetch('site.json?t='+Date.now()).then(function(r){ return r.ok ? r.json() : CFG; }).then(finish, function(){ finish(CFG); });
+
   function sync(){ body.classList.toggle('show-ph', t.checked); }
   try{ var s=localStorage.getItem('silov-ph'); if(s!==null) t.checked = s==='1'; }catch(e){}
   sync();

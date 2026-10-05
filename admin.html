@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Управление сайтом — Семён Силов</title>
+<meta name="theme-color" content="#101418">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@800&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{color-scheme:dark;--ink:#101418;--ink-2:#171C21;--ink-3:#20262C;--milk:#F4F4EF;--mute:#A4AA9C;--line:rgba(244,244,239,.13);--lime:#D0FF32;--red:#FF7A66;
+  --display:"Fira Sans Extra Condensed","Arial Narrow",sans-serif;--body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--ink);color:var(--milk);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased;padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+a{color:var(--lime)}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.wrap{max-width:860px;margin-inline:auto;padding-inline:clamp(16px,4vw,32px)}
+header{border-bottom:1px solid var(--line);padding-block:18px;position:sticky;top:0;background:rgba(16,20,24,.95);z-index:5;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{font:800 28px/1 var(--display);text-transform:uppercase;margin:0;letter-spacing:.02em}
+h1 b{color:var(--lime)}
+h2{font:800 30px/1 var(--display);text-transform:uppercase;margin:0 0 6px}
+.sub{color:var(--mute);font-size:14px;margin:0 0 18px}
+section{padding-block:28px;border-bottom:1px solid var(--line)}
+.eyebrow{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin:0 0 10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border:1.5px solid var(--lime);background:var(--lime);color:var(--ink);font:600 15px var(--body);cursor:pointer;border-radius:2px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--milk);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--lime);color:var(--lime)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.small{min-height:40px;padding:0 14px;font-size:14px}
+input[type=password],input[type=text]{width:100%;background:var(--ink-2);border:1px solid var(--line);color:var(--milk);font:400 16px var(--mono);padding:13px;border-radius:2px}
+input:focus{outline:none;border-color:var(--lime)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row > input{flex:1 1 240px}
+.state{font:500 13px/1.5 var(--mono);margin-top:12px;color:var(--mute)}
+.state.ok{color:var(--lime)} .state.err{color:var(--red)}
+details.help{margin-top:14px;border:1px solid var(--line);padding:0 16px}
+details.help summary{cursor:pointer;padding:14px 0;font-weight:600}
+details.help ol{margin:0 0 16px;padding-left:20px;color:var(--mute);display:grid;gap:6px}
+details.help code{font:500 13px var(--mono);color:var(--milk);background:var(--ink-3);padding:1px 5px}
+
+.group{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:22px 0 8px}
+.tg{display:grid;grid-template-columns:1fr auto;gap:4px 16px;align-items:center;padding:14px 0;border-top:1px solid var(--line);cursor:pointer}
+.tg b{font-weight:600}
+.tg span{grid-column:1;font-size:14px;color:var(--mute)}
+.tg .sw{grid-row:1 / span 2;grid-column:2;position:relative;width:54px;height:32px}
+.tg input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;width:100%;height:100%}
+.tg .sw i{position:absolute;inset:0;background:var(--ink-3);border:1px solid var(--line);border-radius:16px;transition:background .15s;pointer-events:none}
+.tg .sw i::after{content:"";position:absolute;left:3px;top:3px;width:24px;height:24px;border-radius:50%;background:var(--mute);transition:transform .15s,background .15s}
+.tg input:checked + i{background:var(--lime);border-color:var(--lime)}
+.tg input:checked + i::after{transform:translateX(22px);background:var(--ink)}
+.tg input:focus-visible + i{outline:2px solid var(--lime);outline-offset:3px}
+.tg.warn b::after{content:"нужен статус";font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--red);padding:2px 6px;margin-left:8px;vertical-align:middle}
+
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.slot{border:1px solid var(--line);background:var(--ink-2);display:grid;grid-template-rows:auto 1fr auto}
+.slot .pv{aspect-ratio:4/3;background:repeating-linear-gradient(135deg,var(--ink-2) 0 10px,var(--ink-3) 10px 20px) center/cover;display:grid;place-items:center;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.slot .pv.has{color:transparent}
+.slot .meta{padding:12px 14px 4px}
+.slot .meta b{display:block;font-weight:600}
+.slot .meta span{font-size:13px;color:var(--mute)}
+.slot .acts{padding:10px 14px 14px;display:flex;gap:8px;flex-wrap:wrap}
+.slot .new{font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--lime);padding:2px 6px;margin-left:6px}
+.slot input[type=file]{position:absolute;width:1px;height:1px;opacity:0}
+
+.bar{position:fixed;left:0;right:0;bottom:0;background:rgba(16,20,24,.97);border-top:1px solid var(--line);padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px));z-index:10}
+.bar .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.bar .msg{font:500 13px/1.4 var(--mono);color:var(--mute);flex:1 1 220px}
+.bar .msg.ok{color:var(--lime)} .bar .msg.err{color:var(--red)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Управление <b>сайтом</b></h1>
+    <a class="btn ghost small" href="./" target="_blank" rel="noopener">Открыть сайт ↗</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="login">
+    <p class="eyebrow">Шаг 1</p>
+    <h2>Вход</h2>
+    <p class="sub">Чтобы сохранять изменения, нужен ключ доступа GitHub. Он хранится только в этом браузере и никуда, кроме GitHub, не отправляется.</p>
+    <div class="row">
+      <input type="password" id="token" autocomplete="off" placeholder="Ключ доступа (github_pat_…)" aria-label="Ключ доступа GitHub">
+      <button class="btn" id="btn-login" type="button">Войти</button>
+      <button class="btn ghost" id="btn-logout" type="button" hidden>Выйти</button>
+    </div>
+    <p class="state" id="login-state">Без ключа доступен только просмотр настроек.</p>
+    <details class="help">
+      <summary>Как получить ключ доступа (один раз, 2 минуты)</summary>
+      <ol>
+        <li>Войдите на github.com под аккаунтом владельца сайта.</li>
+        <li>Откройте <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Settings → Developer settings → Fine-grained tokens → Generate new token</a>.</li>
+        <li>Название: <code>silov-site admin</code>. Срок действия: 1 год.</li>
+        <li>Repository access → <code>Only select repositories</code> → выберите <code>silov-site</code>.</li>
+        <li>Permissions → Repository permissions → <code>Contents</code> → <code>Read and write</code>.</li>
+        <li>Нажмите Generate token, скопируйте ключ и вставьте сюда. Ключ даёт доступ только к файлам этого сайта.</li>
+      </ol>
+    </details>
+  </section>
+
+  <section>
+    <p class="eyebrow">Шаг 2</p>
+    <h2>Блоки сайта</h2>
+    <p class="sub">Включайте и выключайте разделы. Пункты меню скрываются вместе с блоками.</p>
+    <div id="blocks"></div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Шаг 3</p>
+    <h2>Фотографии</h2>
+    <p class="sub">Выберите файл с телефона или компьютера — фото автоматически уменьшится до 1600 px и сожмётся. Подойдут JPG, PNG, HEIC (с iPhone).</p>
+    <div class="photos" id="photos"></div>
+  </section>
+</main>
+
+<div class="bar">
+  <div class="wrap">
+    <span class="msg" id="msg">Изменений нет.</span>
+    <button class="btn" id="btn-save" type="button" disabled>Сохранить и опубликовать</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var GH={owner:'evgenynikolaev35-blip',repo:'silov-site',branch:'main'};
+  var API='https://api.github.com/repos/'+GH.owner+'/'+GH.repo+'/contents/';
+
+  var BLOCKS=[
+    ['Продажи и статус',[
+      ['prices','Цены','Показывать стоимость тренировок и «осталось мест». Включайте после оформления самозанятости или ИП.',1],
+      ['form','Форма заявки','Сбор имени и телефона на сайте. Нужны политика и согласие по 152-ФЗ. Без формы — только кнопки мессенджеров.',1],
+      ['requisites','Реквизиты в подвале','Статус и ИНН внизу страницы.',1]
+    ]],
+    ['Основные разделы',[
+      ['offer','Предложение на первом экране','Плашка «Тренировка-знакомство».'],
+      ['trust','Цифры доверия','Стаж, клиенты, выпускники, рейтинг.'],
+      ['for','Для кого','Шесть целей клиентов.'],
+      ['method','Метод Силова','Четыре шага работы.'],
+      ['reviews','Отзывы','Видео, до/после, рейтинг.'],
+      ['formats','Форматы тренировок','Пробная, персональная, пакет, группа.'],
+      ['schedule','Расписание групп','Таблица по дням недели.'],
+      ['about','Обо мне','Портрет и история.'],
+      ['docs','Дипломы и сертификаты','Три изображения в блоке «Обо мне».'],
+      ['place','Где тренируемся','Адрес, как добраться, фото зала.'],
+      ['faq','Частые вопросы','']
+    ]],
+    ['Курс и контент',[
+      ['course','Курс фитнес-тренеров (реклама НУФ)','Карточка курса с пометкой «Реклама». Выключайте, когда набор закрыт.'],
+      ['events','Будущие события','Шаблон семинара или мастер-класса.'],
+      ['posts','Разборы техники','Лента видео и ссылки на соцсети.'],
+      ['magnet','Чек-лист','Блок «5 ошибок в приседе».']
+    ]],
+    ['Служебное',[
+      ['proto','Плашка «Прототип»','Жёлтая полоса вверху страницы.'],
+      ['placeholders','Пометки «Заглушка»','Пунктир и подписи у незаполненных данных.']
+    ]]
+  ];
+  var SLOTS=[
+    ['hero','Первый экран','Вертикальное фото, лицо в верхней трети'],
+    ['about','Обо мне','Портрет, вертикальное или квадрат'],
+    ['course','Курс','Квадратное или горизонтальное'],
+    ['feed1','Разборы: видео 1','Вертикальное превью 9:16'],
+    ['gym1','Зал: общий план','Горизонтальное'],
+    ['gym2','Зал: свободные веса',''],
+    ['gym3','Зал: вход / раздевалка',''],
+    ['doc1','Диплом','Скан или фото'],
+    ['doc2','Сертификат',''],
+    ['doc3','Награда','']
+  ];
+
+  var $=function(id){return document.getElementById(id)};
+  var token='', sha=null, cfg={blocks:{},photos:{}}, pending={}, dirty=false, canWrite=false;
+  try{ token=localStorage.getItem('silov-admin-token')||''; }catch(e){}
+
+  function msg(text,cls){ var m=$('msg'); m.textContent=text; m.className='msg'+(cls?' '+cls:''); }
+  function setDirty(){ dirty=true; $('btn-save').disabled=!canWrite; msg(canWrite?'Есть несохранённые изменения.':'Войдите, чтобы сохранить изменения.'); }
+  function b64(str){ var bytes=new TextEncoder().encode(str), bin=''; bytes.forEach(function(x){bin+=String.fromCharCode(x)}); return btoa(bin); }
+  function unb64(s){ var bin=atob(s.replace(/\n/g,'')), bytes=new Uint8Array(bin.length); for(var i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i); return new TextDecoder().decode(bytes); }
+  function gh(path,opts){
+    opts=opts||{}; opts.headers=Object.assign({'Accept':'application/vnd.github+json','Authorization':'Bearer '+token},opts.headers||{});
+    return fetch(API+path,opts).then(function(r){ return r.json().then(function(j){ if(!r.ok){ var e=new Error(j.message||('Ошибка '+r.status)); e.status=r.status; throw e; } return j; }); });
+  }
+
+  function render(){
+    var box=$('blocks'); box.innerHTML='';
+    BLOCKS.forEach(function(g){
+      var h=document.createElement('p'); h.className='group'; h.textContent=g[0]; box.appendChild(h);
+      g[1].forEach(function(b){
+        var l=document.createElement('label'); l.className='tg'+(b[3]?' warn':''); l.htmlFor='b-'+b[0];
+        var t=document.createElement('b'); t.textContent=b[1];
+        var d=document.createElement('span'); d.textContent=b[2];
+        var sw=document.createElement('span'); sw.className='sw';
+        var inp=document.createElement('input'); inp.type='checkbox'; inp.id='b-'+b[0]; inp.checked=cfg.blocks[b[0]]!==false;
+        inp.addEventListener('change',function(){ cfg.blocks[b[0]]=inp.checked; setDirty(); });
+        sw.appendChild(inp); sw.appendChild(document.createElement('i'));
+        l.appendChild(t); l.appendChild(sw); l.appendChild(d); box.appendChild(l);
+      });
+    });
+    var ph=$('photos'); ph.innerHTML='';
+    SLOTS.forEach(function(s){
+      var id=s[0], card=document.createElement('div'); card.className='slot';
+      var pv=document.createElement('div'); pv.className='pv'; pv.textContent='нет фото';
+      var cur=pending[id]?pending[id].url:cfg.photos[id];
+      if(cur){ pv.style.backgroundImage='url("'+cur+'")'; pv.classList.add('has'); }
+      var meta=document.createElement('div'); meta.className='meta';
+      var t=document.createElement('b'); t.textContent=s[1];
+      if(pending[id]){ var n=document.createElement('span'); n.className='new'; n.textContent='новое'; t.appendChild(n); }
+      var d=document.createElement('span'); d.textContent=s[2]; meta.appendChild(t); meta.appendChild(d);
+      var acts=document.createElement('div'); acts.className='acts';
+      var file=document.createElement('input'); file.type='file'; file.accept='image/*'; file.id='f-'+id;
+      var pick=document.createElement('label'); pick.className='btn small'; pick.htmlFor='f-'+id; pick.textContent=cur?'Заменить':'Загрузить'; pick.tabIndex=0;
+      file.addEventListener('change',function(){ if(file.files[0]) addPhoto(id,file.files[0]); });
+      acts.appendChild(file); acts.appendChild(pick);
+      if(cur){ var rm=document.createElement('button'); rm.type='button'; rm.className='btn ghost small'; rm.textContent='Убрать';
+        rm.addEventListener('click',function(){ delete pending[id]; delete cfg.photos[id]; setDirty(); render(); }); acts.appendChild(rm); }
+      card.appendChild(pv); card.appendChild(meta); card.appendChild(acts); ph.appendChild(card);
+    });
+  }
+
+  function addPhoto(id,file){
+    msg('Обрабатываю фото…');
+    var url=URL.createObjectURL(file), img=new Image();
+    img.onload=function(){
+      var k=Math.min(1,1600/Math.max(img.naturalWidth,img.naturalHeight)), w=Math.round(img.naturalWidth*k), h=Math.round(img.naturalHeight*k);
+      var c=document.createElement('canvas'); c.width=w; c.height=h; c.getContext('2d').drawImage(img,0,0,w,h);
+      var data=c.toDataURL('image/jpeg',.82); URL.revokeObjectURL(url);
+      pending[id]={url:data,b64:data.split(',')[1]}; setDirty(); render();
+    };
+    img.onerror=function(){ URL.revokeObjectURL(url); msg('Не удалось открыть файл. Попробуйте JPG или PNG.','err'); };
+    img.src=url;
+  }
+
+  function load(){
+    var p = token
+      ? gh('site.json?ref='+GH.branch+'&t='+Date.now()).then(function(j){ sha=j.sha; return JSON.parse(unb64(j.content)); })
+      : fetch('site.json?t='+Date.now()).then(function(r){ return r.json(); });
+    return p.then(function(c){ cfg={blocks:c.blocks||{},photos:c.photos||{}}; pending={}; dirty=false; render(); });
+  }
+
+  function login(){
+    var st=$('login-state');
+    if(!token){ canWrite=false; st.textContent='Без ключа доступен только просмотр настроек.'; st.className='state'; $('btn-logout').hidden=true; return load().catch(function(){ render(); }); }
+    st.textContent='Проверяю ключ…'; st.className='state';
+    return load().then(function(){
+      canWrite=true; st.textContent='Вход выполнен. Можно менять блоки и фото.'; st.className='state ok';
+      $('btn-logout').hidden=false; $('token').value=''; $('token').placeholder='Ключ сохранён в этом браузере';
+      try{ localStorage.setItem('silov-admin-token',token); }catch(e){}
+      msg('Изменений нет.');
+    }).catch(function(e){
+      canWrite=false; token=''; try{ localStorage.removeItem('silov-admin-token'); }catch(x){}
+      st.textContent=(e.status===401?'Ключ не подошёл или истёк.':e.status===404?'У ключа нет доступа к репозиторию silov-site.':'Не удалось войти: '+e.message)+' Проверьте шаги в инструкции ниже.'; st.className='state err';
+      $('btn-logout').hidden=true;
+      return load().catch(function(){ render(); });
+    });
+  }
+
+  function save(){
+    var btn=$('btn-save'); btn.disabled=true;
+    var ids=Object.keys(pending), stamp=Date.now(), chain=Promise.resolve();
+    ids.forEach(function(id,i){
+      chain=chain.then(function(){
+        msg('Загружаю фото '+(i+1)+' из '+ids.length+'…');
+        var path='img/'+id+'-'+stamp+'.jpg';
+        return gh(path,{method:'PUT',body:JSON.stringify({message:'Админка: фото '+id,content:pending[id].b64,branch:GH.branch})}).then(function(){ cfg.photos[id]=path; delete pending[id]; });
+      });
+    });
+    chain.then(function(){
+      msg('Сохраняю настройки…');
+      return gh('site.json',{method:'PUT',body:JSON.stringify({message:'Админка: настройки сайта',content:b64(JSON.stringify(cfg,null,2)+'\n'),sha:sha,branch:GH.branch})});
+    }).then(function(j){
+      sha=j.content.sha; dirty=false; render(); msg('Сохранено. Сайт обновится через 1–2 минуты.','ok');
+    }).catch(function(e){
+      btn.disabled=false;
+      msg(e.status===409?'Настройки изменились в другом окне. Обновите страницу и повторите.':e.status===403||e.status===404?'У ключа нет права на запись (нужно Contents: Read and write).':'Не сохранено: '+e.message,'err');
+    });
+  }
+
+  $('btn-login').addEventListener('click',function(){ var v=$('token').value.trim(); if(!v){ $('token').focus(); return; } token=v; login(); });
+  $('token').addEventListener('keydown',function(e){ if(e.key==='Enter') $('btn-login').click(); });
+  $('btn-logout').addEventListener('click',function(){ token=''; canWrite=false; try{ localStorage.removeItem('silov-admin-token'); }catch(e){} $('token').placeholder='Ключ доступа (github_pat_…)'; $('btn-save').disabled=true; login(); });
+  $('btn-save').addEventListener('click',save);
+  window.addEventListener('beforeunload',function(e){ if(dirty&&canWrite){ e.preventDefault(); e.returnValue=''; } });
+  render(); login();
+})();
+</script>
+</body>
+</html>

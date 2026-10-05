@@ -1,0 +1,30 @@
+{
+  "blocks": {
+    "proto": true,
+    "placeholders": true,
+    "offer": true,
+    "trust": true,
+    "for": true,
+    "method": true,
+    "reviews": true,
+    "formats": true,
+    "prices": false,
+    "schedule": true,
+    "about": true,
+    "docs": true,
+    "course": true,
+    "events": true,
+    "place": true,
+    "posts": true,
+    "magnet": true,
+    "faq": true,
+    "form": false,
+    "requisites": false
+  },
+  "photos": {
+    "hero": "img/silov-15.jpg",
+    "about": "img/silov-18.jpg",
+    "course": "img/silov-09.jpg",
+    "feed1": "img/silov-17.jpg"
+  }
+}
