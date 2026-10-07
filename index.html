@@ -348,22 +348,23 @@ footer .wrap{display:grid;grid-template-columns:1fr auto;gap:20px 32px}
 .f-notes{grid-column:1/-1;display:grid;gap:6px;font-size:12px;border-top:1px solid var(--line);padding-top:16px}
 @media (max-width:620px){footer .wrap{grid-template-columns:1fr}}
 
-/* tip video */
-.tip{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(18px,3vw,36px);align-items:start;margin-bottom:clamp(28px,5vw,48px)}
-.tv-frame{position:relative;background:#000;border:1px solid var(--line)}
-.tv-frame video{display:block;width:100%;aspect-ratio:636/358;background:#000}
-.tv-over{position:absolute;left:0;right:0;top:0;padding:12px 12px 36px;display:grid;gap:8px;justify-items:start;pointer-events:none;background:linear-gradient(180deg,rgba(16,20,24,.85),transparent)}
-.tv-tag{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;background:var(--lime);color:var(--ink);padding:5px 7px}
-.tv-line{font:800 clamp(18px,2.6vw,28px)/1.05 var(--display);text-transform:uppercase;text-wrap:balance;max-width:20ch;text-shadow:0 1px 8px rgba(0,0,0,.7)}
-.tip-body{display:grid;gap:14px}
-.tip-body h3{font-size:clamp(26px,3vw,36px)}
-.tip-body ol{margin:0;padding:0;list-style:none;display:grid;counter-reset:tp;border-top:1px solid var(--line)}
-.tip-body li{counter-increment:tp;display:grid;grid-template-columns:28px 1fr;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);color:var(--mute);font-size:15px;transition:color .2s}
-.tip-body li::before{content:counter(tp);font:500 13px/1.6 var(--mono);color:var(--mute)}
-.tip-body li.on{color:var(--milk)}
-.tip-body li.on::before{color:var(--ink);background:var(--lime);text-align:center;align-self:start}
-.tip-src{font:500 12px var(--mono);color:var(--mute)}
-@media (max-width:860px){.tip{grid-template-columns:1fr}}
+/* technique videos */
+.vfeed{grid-template-columns:repeat(5,1fr)}
+.vcard{position:relative;margin:0;aspect-ratio:9/16;overflow:hidden;background:#000}
+.vcard video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vcard figcaption{position:absolute;inset:0;display:grid;grid-template-rows:auto auto 1fr;justify-items:start;gap:8px;padding:12px;pointer-events:none;background:linear-gradient(180deg,rgba(16,20,24,.82) 0%,rgba(16,20,24,0) 30%,rgba(16,20,24,0) 58%,rgba(16,20,24,.92) 100%)}
+.vc-tag{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;background:var(--lime);color:var(--ink);padding:5px 6px}
+.vc-title{font:800 clamp(20px,1.9vw,26px)/1 var(--display);text-transform:uppercase;text-wrap:balance;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.vc-cue{align-self:end;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;font:600 15px/1.25 var(--body);width:100%}
+.vc-cue b{font:500 12px/1 var(--mono);background:var(--lime);color:var(--ink);padding:5px 7px;margin-top:1px}
+.vc-cue.pop{animation:cue .35s ease}
+@keyframes cue{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.vc-play{position:absolute;inset:0;width:100%;height:100%;background:none;border:0;cursor:pointer;padding:0}
+.vc-play::after{content:"";position:absolute;left:50%;top:50%;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 5l12 7-12 7z' fill='%23101418'/%3E%3C/svg%3E") center/22px no-repeat;transition:opacity .2s}
+.vcard.playing .vc-play::after{opacity:0}
+.vc-play:focus-visible{outline:2px solid var(--lime);outline-offset:-4px}
+.vnote{margin-top:12px}
+@media (max-width:1000px){.vfeed{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);scroll-padding-inline:var(--gut);-webkit-overflow-scrolling:touch;padding-bottom:8px}.vcard{scroll-snap-align:start}}
 
 /* motion */
 .anim .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -397,7 +398,7 @@ body:not(.show-ph) .ph-chip{display:none}
 
 <div class="proto" data-block="proto">
   <div class="wrap">
-    <span>ПРОТОТИП v6 · 07.10.2026 · пунктир — данные, которые нужно прислать</span>
+    <span>ПРОТОТИП v7 · 07.10.2026 · пунктир — данные, которые нужно прислать</span>
     <label for="ph-toggle"><input type="checkbox" id="ph-toggle" checked> Показывать заглушки</label>
   </div>
 </div>
@@ -713,35 +714,58 @@ body:not(.show-ph) .ph-chip{display:none}
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Полезное</p>
-        <h2>Советы тренера</h2>
-        <p class="lead">Короткие видео из зала: как тренироваться осознанно и не повторять чужих ошибок.</p>
+        <h2>Разборы техники</h2>
+        <p class="lead">Упражнения в исполнении Семёна и три главных момента в технике каждого.</p>
       </div>
-      <div class="tip">
-        <div class="tv-frame">
-          <video id="tip1" controls playsinline preload="metadata" poster="video/tip-zapis.jpg">
-            <source src="video/tip-zapis.mp4" type="video/mp4">
-          </video>
-          <div class="tv-over"><span class="tv-tag">Совет тренера</span><p class="tv-line" id="tip1-line">Снимай тяжёлый подход на видео</p></div>
-        </div>
-        <div class="tip-body">
-          <p class="eyebrow">Видео · 32 секунды</p>
-          <h3>Зачем снимать свои подходы</h3>
-          <ol id="tip1-list">
-            <li data-t="0">Снимаем на видео последний, самый тяжёлый подход</li>
-            <li data-t="7.5">Лёгкие первые подходы записывать нет смысла</li>
-            <li data-t="11.5">Каждое повторение делаем максимально концентрированно</li>
-            <li data-t="17.7">На тяжёлом подходе видны ошибки в технике</li>
-            <li data-t="25.7">Смотрим запись и исправляем в следующем подходе</li>
-          </ol>
-          <span class="tip-src">Семён Силов, CardioZone · из Instagram*</span>
-        </div>
+      <div class="feed vfeed ph" data-block="feed">
+        <figure class="vcard">
+          <video muted loop playsinline preload="none" poster="video/prised.jpg" data-src="video/prised.mp4" aria-label="Присед в тренажёре"></video>
+          <figcaption>
+            <span class="vc-tag">Ноги</span>
+            <strong class="vc-title">Присед в тренажёре</strong>
+            <span class="vc-cue" data-cues="Спина прижата к опоре|Колени смотрят по носкам|Вниз плавно, вверх мощно"><b>1</b><span>Спина прижата к опоре</span></span>
+          </figcaption>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard">
+          <video muted loop playsinline preload="none" poster="video/tyaga-rychag.jpg" data-src="video/tyaga-rychag.mp4" aria-label="Рычажная тяга с упором в грудь"></video>
+          <figcaption>
+            <span class="vc-tag">Спина</span>
+            <strong class="vc-title">Рычажная тяга с упором в грудь</strong>
+            <span class="vc-cue" data-cues="Грудь плотно на опоре|Тяни локтем, а не кистью|В конце своди лопатки"><b>1</b><span>Грудь плотно на опоре</span></span>
+          </figcaption>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard">
+          <video muted loop playsinline preload="none" poster="video/tyaga-sidya.jpg" data-src="video/tyaga-sidya.mp4" aria-label="Тяга сидя в тренажёре"></video>
+          <figcaption>
+            <span class="vc-tag">Спина</span>
+            <strong class="vc-title">Тяга сидя в тренажёре</strong>
+            <span class="vc-cue" data-cues="Корпус неподвижен, без рывков|Локти идут вдоль корпуса|Возвращай вес под контролем"><b>1</b><span>Корпус неподвижен, без рывков</span></span>
+          </figcaption>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard">
+          <video muted loop playsinline preload="none" poster="video/zhim-plechi.jpg" data-src="video/zhim-plechi.mp4" aria-label="Жим в тренажёре сидя"></video>
+          <figcaption>
+            <span class="vc-tag">Плечи</span>
+            <strong class="vc-title">Жим в тренажёре сидя</strong>
+            <span class="vc-cue" data-cues="Поясница прижата к спинке|Локти под кистями|Не блокируй локти вверху"><b>1</b><span>Поясница прижата к спинке</span></span>
+          </figcaption>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard">
+          <video muted loop playsinline preload="none" poster="video/pozirovanie.jpg" data-src="video/pozirovanie.mp4" aria-label="Позирование: спина"></video>
+          <figcaption>
+            <span class="vc-tag">Сцена</span>
+            <strong class="vc-title">Позирование: спина</strong>
+            <span class="vc-cue" data-cues="Лопатки разводи в стороны|Плечи вниз, локти вперёд|Держи позу 5–10 секунд"><b>1</b><span>Лопатки разводи в стороны</span></span>
+          </figcaption>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
       </div>
-      <div class="feed" data-block="feed">
-        <a class="reel" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener"><img data-photo="feed1" src="img/silov-17.jpg" alt="" loading="lazy" width="933" height="1400"><span class="cap"><span>Разбор техники</span>Техника решает</span></a>
-        <a class="reel ph-img" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener">Превью<br>Reels</a>
-        <a class="reel ph-img" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener">Превью<br>Reels</a>
-        <a class="reel ph-img" href="https://vk.ru/id55027627" target="_blank" rel="noopener">Превью<br>клипа ВК</a>
-      </div>
+      <p class="vnote"><span class="ph-chip">подписи к упражнениям подтвердить с Семёном</span></p>
+      <p class="swipe-hint">Листайте вбок →</p>
       <div class="feed-cta">
         <a class="btn btn-ghost" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener">Instagram* @silov.sema ↗</a>
         <a class="btn btn-ghost" href="https://vk.ru/id55027627" target="_blank" rel="noopener">ВКонтакте ↗</a>
@@ -960,14 +984,35 @@ body:not(.show-ph) .ph-chip{display:none}
   });
 
   (function(){
-    var v=document.getElementById('tip1'); if(!v) return;
-    var line=document.getElementById('tip1-line'), items=[].slice.call(document.querySelectorAll('#tip1-list li'));
-    v.addEventListener('timeupdate',function(){
-      var cur=0; items.forEach(function(li,i){ if(v.currentTime>=parseFloat(li.getAttribute('data-t'))) cur=i; });
-      items.forEach(function(li,i){ li.classList.toggle('on', i===cur); });
-      var tx=items[cur].textContent; if(line.textContent!==tx) line.textContent=tx;
+    var cards=[].slice.call(document.querySelectorAll('.vcard')); if(!cards.length) return;
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    cards.forEach(function(c){
+      var v=c.querySelector('video'), cue=c.querySelector('.vc-cue'), list=cue.getAttribute('data-cues').split('|'), n=cue.querySelector('b'), t=cue.querySelector('span'), cur=0;
+      c._v=v; c._user=false;
+      function load(){ if(!v.getAttribute('src')){ v.src=v.getAttribute('data-src'); } }
+      c._play=function(){ load(); var p=v.play(); if(p&&p.catch) p.catch(function(){}); };
+      v.addEventListener('timeupdate',function(){
+        if(!v.duration) return; var k=Math.min(list.length-1, Math.floor(v.currentTime/v.duration*list.length));
+        if(k!==cur){ cur=k; n.textContent=k+1; t.textContent=list[k]; cue.classList.remove('pop'); void cue.offsetWidth; cue.classList.add('pop'); }
+      });
+      v.addEventListener('play',function(){ c.classList.add('playing'); });
+      v.addEventListener('pause',function(){ c.classList.remove('playing'); });
+      c.querySelector('.vc-play').addEventListener('click',function(){ c._user=true; if(v.paused) c._play(); else v.pause(); });
     });
-    v.addEventListener('ended',function(){ items.forEach(function(li){ li.classList.remove('on'); }); line.textContent='Снимай тяжёлый подход на видео'; });
+    if(reduce) return;
+    var busy=false;
+    function check(){
+      busy=false; var h=window.innerHeight, w=window.innerWidth;
+      cards.forEach(function(c){
+        if(c._user) return; var r=c.getBoundingClientRect();
+        var vis=r.top < h*.8 && r.bottom > h*.2 && r.left < w*.9 && r.right > w*.1;
+        if(vis){ if(c._v.paused) c._play(); } else if(!c._v.paused) c._v.pause();
+      });
+    }
+    function on(){ if(!busy){ busy=true; requestAnimationFrame(check); } }
+    window.addEventListener('scroll',on,{passive:true}); window.addEventListener('resize',on);
+    var f=document.querySelector('.vfeed'); if(f) f.addEventListener('scroll',on,{passive:true});
+    setTimeout(check,1800);
   })();
 
   var form=document.getElementById('lead'), note=document.getElementById('form-note');
