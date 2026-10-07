@@ -348,6 +348,23 @@ footer .wrap{display:grid;grid-template-columns:1fr auto;gap:20px 32px}
 .f-notes{grid-column:1/-1;display:grid;gap:6px;font-size:12px;border-top:1px solid var(--line);padding-top:16px}
 @media (max-width:620px){footer .wrap{grid-template-columns:1fr}}
 
+/* tip video */
+.tip{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(18px,3vw,36px);align-items:start;margin-bottom:clamp(28px,5vw,48px)}
+.tv-frame{position:relative;background:#000;border:1px solid var(--line)}
+.tv-frame video{display:block;width:100%;aspect-ratio:636/358;background:#000}
+.tv-over{position:absolute;left:0;right:0;top:0;padding:12px 12px 36px;display:grid;gap:8px;justify-items:start;pointer-events:none;background:linear-gradient(180deg,rgba(16,20,24,.85),transparent)}
+.tv-tag{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;background:var(--lime);color:var(--ink);padding:5px 7px}
+.tv-line{font:800 clamp(18px,2.6vw,28px)/1.05 var(--display);text-transform:uppercase;text-wrap:balance;max-width:20ch;text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.tip-body{display:grid;gap:14px}
+.tip-body h3{font-size:clamp(26px,3vw,36px)}
+.tip-body ol{margin:0;padding:0;list-style:none;display:grid;counter-reset:tp;border-top:1px solid var(--line)}
+.tip-body li{counter-increment:tp;display:grid;grid-template-columns:28px 1fr;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);color:var(--mute);font-size:15px;transition:color .2s}
+.tip-body li::before{content:counter(tp);font:500 13px/1.6 var(--mono);color:var(--mute)}
+.tip-body li.on{color:var(--milk)}
+.tip-body li.on::before{color:var(--ink);background:var(--lime);text-align:center;align-self:start}
+.tip-src{font:500 12px var(--mono);color:var(--mute)}
+@media (max-width:860px){.tip{grid-template-columns:1fr}}
+
 /* motion */
 .anim .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
 .anim .rv.in{opacity:1;transform:none}
@@ -380,7 +397,7 @@ body:not(.show-ph) .ph-chip{display:none}
 
 <div class="proto" data-block="proto">
   <div class="wrap">
-    <span>ПРОТОТИП v5 · 05.10.2026 · пунктир — данные, которые нужно прислать</span>
+    <span>ПРОТОТИП v6 · 07.10.2026 · пунктир — данные, которые нужно прислать</span>
     <label for="ph-toggle"><input type="checkbox" id="ph-toggle" checked> Показывать заглушки</label>
   </div>
 </div>
@@ -696,10 +713,30 @@ body:not(.show-ph) .ph-chip{display:none}
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Полезное</p>
-        <h2>Разборы техники</h2>
-        <p class="lead">Короткие видео о технике и логике тренировок — в Instagram и ВКонтакте.</p>
+        <h2>Советы тренера</h2>
+        <p class="lead">Короткие видео из зала: как тренироваться осознанно и не повторять чужих ошибок.</p>
       </div>
-      <div class="feed">
+      <div class="tip">
+        <div class="tv-frame">
+          <video id="tip1" controls playsinline preload="metadata" poster="video/tip-zapis.jpg">
+            <source src="video/tip-zapis.mp4" type="video/mp4">
+          </video>
+          <div class="tv-over"><span class="tv-tag">Совет тренера</span><p class="tv-line" id="tip1-line">Снимай тяжёлый подход на видео</p></div>
+        </div>
+        <div class="tip-body">
+          <p class="eyebrow">Видео · 32 секунды</p>
+          <h3>Зачем снимать свои подходы</h3>
+          <ol id="tip1-list">
+            <li data-t="0">Снимаем на видео последний, самый тяжёлый подход</li>
+            <li data-t="7.5">Лёгкие первые подходы записывать нет смысла</li>
+            <li data-t="11.5">Каждое повторение делаем максимально концентрированно</li>
+            <li data-t="17.7">На тяжёлом подходе видны ошибки в технике</li>
+            <li data-t="25.7">Смотрим запись и исправляем в следующем подходе</li>
+          </ol>
+          <span class="tip-src">Семён Силов, CardioZone · из Instagram*</span>
+        </div>
+      </div>
+      <div class="feed" data-block="feed">
         <a class="reel" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener"><img data-photo="feed1" src="img/silov-17.jpg" alt="" loading="lazy" width="933" height="1400"><span class="cap"><span>Разбор техники</span>Техника решает</span></a>
         <a class="reel ph-img" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener">Превью<br>Reels</a>
         <a class="reel ph-img" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener">Превью<br>Reels</a>
@@ -921,6 +958,17 @@ body:not(.show-ph) .ph-chip{display:none}
       document.getElementById('contact').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
     });
   });
+
+  (function(){
+    var v=document.getElementById('tip1'); if(!v) return;
+    var line=document.getElementById('tip1-line'), items=[].slice.call(document.querySelectorAll('#tip1-list li'));
+    v.addEventListener('timeupdate',function(){
+      var cur=0; items.forEach(function(li,i){ if(v.currentTime>=parseFloat(li.getAttribute('data-t'))) cur=i; });
+      items.forEach(function(li,i){ li.classList.toggle('on', i===cur); });
+      var tx=items[cur].textContent; if(line.textContent!==tx) line.textContent=tx;
+    });
+    v.addEventListener('ended',function(){ items.forEach(function(li){ li.classList.remove('on'); }); line.textContent='Снимай тяжёлый подход на видео'; });
+  })();
 
   var form=document.getElementById('lead'), note=document.getElementById('form-note');
   form.addEventListener('submit', function(e){
