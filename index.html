@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@600;800&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Семён Силов","jobTitle":"Персональный тренер","address":{"@type":"PostalAddress","addressLocality":"Вологда","addressCountry":"RU"},"sameAs":["https://vk.ru/id55027627","https://www.instagram.com/silov.sema/"]}
+{"@context":"https://schema.org","@type":"Person","name":"Семён Силов","jobTitle":"Персональный тренер","worksFor":{"@type":"ExerciseGym","name":"CardioZone"},"address":{"@type":"PostalAddress","streetAddress":"ул. Мира, 82","addressLocality":"Вологда","addressCountry":"RU"},"sameAs":["https://vk.ru/id55027627","https://www.instagram.com/silov.sema/"]}
 </script>
 <style>
 :root{
@@ -349,7 +349,7 @@ footer .wrap{display:grid;grid-template-columns:1fr auto;gap:20px 32px}
 @media (max-width:620px){footer .wrap{grid-template-columns:1fr}}
 
 /* technique videos */
-.vfeed{grid-template-columns:repeat(5,1fr)}
+.vfeed{grid-template-columns:repeat(5,1fr);row-gap:10px}
 .vcard{position:relative;margin:0;aspect-ratio:9/16;overflow:hidden;background:#000}
 .vcard video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .vcard figcaption{position:absolute;inset:0;display:grid;grid-template-rows:auto auto 1fr;justify-items:start;gap:8px;padding:12px;pointer-events:none;background:linear-gradient(180deg,rgba(16,20,24,.82) 0%,rgba(16,20,24,0) 30%,rgba(16,20,24,0) 58%,rgba(16,20,24,.92) 100%)}
@@ -398,7 +398,7 @@ body:not(.show-ph) .ph-chip{display:none}
 
 <div class="proto" data-block="proto">
   <div class="wrap">
-    <span>ПРОТОТИП v7 · 07.10.2026 · пунктир — данные, которые нужно прислать</span>
+    <span>ПРОТОТИП v8 · 12.10.2026 · пунктир — данные, которые нужно прислать</span>
     <label for="ph-toggle"><input type="checkbox" id="ph-toggle" checked> Показывать заглушки</label>
   </div>
 </div>
@@ -633,6 +633,9 @@ body:not(.show-ph) .ph-chip{display:none}
           <span>Индивидуальные тренировки</span>
           <span>Групповые тренировки</span>
           <span>Практика курса тренеров</span>
+          <span>Подготовка к соревнованиям</span>
+          <span>Онлайн-ведение</span>
+          <span>Питание и спортивные добавки</span>
         </div>
         <p><strong>Персональный тренер в Вологде.</strong> Для меня тренировка начинается с понимания движения. Я объясняю, что и зачем мы делаем, чтобы клиент тренировался осознанно, а будущий тренер уверенно работал с людьми.</p>
         <p class="ph" data-edit="about.story">[Личная история: как пришёл в спорт, почему стал тренером, спортивные достижения.] <span class="ph-chip">текст от Семёна</span></p>
@@ -670,7 +673,7 @@ body:not(.show-ph) .ph-chip{display:none}
           <div class="prog" aria-label="Программа курса">
             <span>Анатомия</span><span>Физиология</span><span>Биомеханика</span><span>Биохимия</span><span>Спортмедицина</span><span>Нутрициология</span><span>Методика</span><span>Программы</span><span>Соцсети</span><span>Продажи</span>
           </div>
-          <p class="org">CardioZone, ул. Мира, 82, ТЦ «Оазис» · стоимость и рассрочка — на странице курса</p>
+          <p class="org">На платформе — видеоразбор 100 упражнений и методическое пособие<br>CardioZone, ул. Мира, 82, ТЦ «Оазис», 3 этаж · стоимость и рассрочка — на странице курса</p>
           <div class="ctas">
             <a class="btn btn-ink" data-edit-href="link.course" href="https://iva.nuf.fitness/courses/vologda.-fitnes-trener-trenazhernogo-zala.-ochnyj-kurs" target="_blank" rel="noopener">Программа и запись ↗</a>
             <a class="btn btn-ghost" style="color:var(--ink);border-color:var(--ink)" href="#contact" data-goal="course">Спросить Семёна</a>
@@ -695,7 +698,7 @@ body:not(.show-ph) .ph-chip{display:none}
         <div class="place-list">
           <div class="ph"><span class="k">Персональные и группы</span><b data-edit="place.name">[Название зала]</b><span data-edit="place.addr">[Вологда, улица, дом] <span class="ph-chip">адрес</span></span></div>
           <div class="ph"><span class="k">Как добраться</span><b data-edit="place.how1">[Остановка / парковка]</b><span data-edit="place.how2">[Ориентиры, вход, этаж]</span></div>
-          <div><span class="k">Практика курса</span><b>CardioZone</b><span>ул. Мира, 82, ТЦ «Оазис»</span></div>
+          <div><span class="k">Практика курса тренеров</span><b>Там же, в CardioZone</b><span>очные занятия по выходным</span></div>
         </div>
         <div class="ctas" style="margin-top:20px">
           <a class="btn btn-ghost" data-edit-href="link.map" href="https://yandex.ru/maps/21/vologda/" target="_blank" rel="noopener">Открыть в Яндекс Картах ↗</a>
@@ -715,7 +718,7 @@ body:not(.show-ph) .ph-chip{display:none}
       <div class="sec-head">
         <p class="eyebrow">Полезное</p>
         <h2>Разборы техники</h2>
-        <p class="lead">Упражнения в исполнении Семёна и три главных момента в технике каждого.</p>
+        <p class="lead">Десять упражнений в исполнении Семёна и три главных момента в технике каждого.</p>
       </div>
       <div class="feed vfeed ph" data-block="feed">
         <figure class="vcard">
@@ -760,6 +763,51 @@ body:not(.show-ph) .ph-chip{display:none}
             <span class="vc-tag">Сцена</span>
             <strong class="vc-title">Позирование: спина</strong>
             <span class="vc-cue" data-cues="Лопатки разводи в стороны|Плечи вниз, локти вперёд|Держи позу 5–10 секунд"><b>1</b><span>Лопатки разводи в стороны</span></span>
+          </figcaption>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard">
+          <video muted loop playsinline preload="none" poster="video/biceps.jpg" data-src="video/biceps.mp4" aria-label="Сгибание рук с гантелями"></video>
+          <figcaption>
+            <span class="vc-tag">Руки</span>
+            <strong class="vc-title">Сгибание рук с гантелями</strong>
+            <span class="vc-cue" data-cues="Локти прижаты к корпусу|Поднимай без раскачки|Опускай медленно, до конца"><b>1</b><span>Локти прижаты к корпусу</span></span>
+          </figcaption>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard">
+          <video muted loop playsinline preload="none" poster="video/tyaga-blok.jpg" data-src="video/tyaga-blok.mp4" aria-label="Тяга верхнего блока узким хватом"></video>
+          <figcaption>
+            <span class="vc-tag">Спина</span>
+            <strong class="vc-title">Тяга верхнего блока узким хватом</strong>
+            <span class="vc-cue" data-cues="Грудь вверх, плечи вниз|Тяни локтями к рёбрам|Вверху тянись, но не бросай вес"><b>1</b><span>Грудь вверх, плечи вниз</span></span>
+          </figcaption>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard">
+          <video muted loop playsinline preload="none" poster="video/prised-sboku.jpg" data-src="video/prised-sboku.mp4" aria-label="Присед в тренажёре: вид сбоку"></video>
+          <figcaption>
+            <span class="vc-tag">Ноги</span>
+            <strong class="vc-title">Присед в тренажёре: вид сбоку</strong>
+            <span class="vc-cue" data-cues="Пятки на подставке — присед глубже|Спина ровная, корпус в напряжении|Колени не сводить внутрь"><b>1</b><span>Пятки на подставке — присед глубже</span></span>
+          </figcaption>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard">
+          <video muted loop playsinline preload="none" poster="video/zhim-nogami.jpg" data-src="video/zhim-nogami.mp4" aria-label="Жим ногами сидя"></video>
+          <figcaption>
+            <span class="vc-tag">Ноги</span>
+            <strong class="vc-title">Жим ногами сидя</strong>
+            <span class="vc-cue" data-cues="Поясница прижата к спинке|Стопы на ширине плеч|Не выпрямляй колени до упора"><b>1</b><span>Поясница прижата к спинке</span></span>
+          </figcaption>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard">
+          <video muted loop playsinline preload="none" poster="video/poza-speredi.jpg" data-src="video/poza-speredi.mp4" aria-label="Позирование: широчайшие спереди"></video>
+          <figcaption>
+            <span class="vc-tag">Сцена</span>
+            <strong class="vc-title">Позирование: широчайшие спереди</strong>
+            <span class="vc-cue" data-cues="Широчайшие развёрнуты в стороны|Ноги напряжены всю позу|Держи позу 5–10 секунд"><b>1</b><span>Широчайшие развёрнуты в стороны</span></span>
           </figcaption>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
         </figure>
