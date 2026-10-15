@@ -342,6 +342,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--lime)}
 .form-note{font:500 13px/1.5 var(--mono);color:var(--lime);min-height:1.5em}
 @media (max-width:820px){.contact-grid{grid-template-columns:1fr}form{margin-inline:calc(var(--gut) * -1)}}
 
+.f-admin{font:500 12px var(--mono);color:var(--mute);text-decoration:none;border:1px solid var(--line);padding:8px 12px;justify-self:start;grid-column:1/-1}
+.f-admin:hover{color:var(--lime);border-color:var(--lime)}
 footer{padding-block:36px;border-top:1px solid var(--line);font-size:13px;color:var(--mute)}
 footer .wrap{display:grid;grid-template-columns:1fr auto;gap:20px 32px}
 .f-links{display:flex;flex-wrap:wrap;gap:8px 24px}
@@ -349,14 +351,31 @@ footer .wrap{display:grid;grid-template-columns:1fr auto;gap:20px 32px}
 @media (max-width:620px){footer .wrap{grid-template-columns:1fr}}
 
 /* technique videos */
-.vfeed{grid-template-columns:repeat(5,1fr);row-gap:10px}
+.vfilter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.vfilter button{font:600 14px/1 var(--body);color:var(--milk);background:transparent;border:1px solid var(--line);padding:11px 16px;border-radius:2px;cursor:pointer;display:inline-flex;gap:8px;align-items:center;min-height:42px;transition:border-color .15s,background .15s,color .15s}
+.vfilter button small{font:500 11px var(--mono);color:var(--mute)}
+.vfilter button:hover{border-color:var(--lime)}
+.vfilter button.on{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+.vfilter button.on small{color:var(--ink)}
+@media (max-width:1100px){.vfilter{flex-wrap:nowrap;overflow-x:auto;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);-webkit-overflow-scrolling:touch}.vfilter button{flex:none}}
+.vfeed{grid-template-columns:repeat(4,1fr);row-gap:12px}
 .vcard{position:relative;margin:0;aspect-ratio:9/16;overflow:hidden;background:#000}
 .vcard video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.vcard figcaption{position:absolute;inset:0;display:grid;grid-template-rows:auto auto 1fr;justify-items:start;gap:8px;padding:12px;pointer-events:none;background:linear-gradient(180deg,rgba(16,20,24,.82) 0%,rgba(16,20,24,0) 30%,rgba(16,20,24,0) 58%,rgba(16,20,24,.92) 100%)}
+.vcard figcaption{position:absolute;inset:0;display:grid;grid-template-rows:auto auto auto 1fr;justify-items:start;gap:8px;padding:12px;pointer-events:none;background:linear-gradient(180deg,rgba(16,20,24,.9) 0%,rgba(16,20,24,.35) 34%,rgba(16,20,24,0) 52%,rgba(16,20,24,.92) 100%)}
 .vc-tag{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;background:var(--lime);color:var(--ink);padding:5px 6px}
-.vc-title{font:800 clamp(20px,1.9vw,26px)/1 var(--display);text-transform:uppercase;text-wrap:balance;text-shadow:0 1px 8px rgba(0,0,0,.6)}
-.vc-cue{align-self:end;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;font:600 15px/1.25 var(--body);width:100%}
-.vc-cue b{font:500 12px/1 var(--mono);background:var(--lime);color:var(--ink);padding:5px 7px;margin-top:1px}
+.vc-title{font:800 clamp(20px,1.9vw,26px)/1 var(--display);text-transform:uppercase;text-wrap:balance;text-shadow:0 1px 8px rgba(0,0,0,.6);max-width:68%}
+.vc-mus{font:500 11px/1.3 var(--mono);color:var(--lime);max-width:68%;text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.vc-map{position:absolute;right:8px;top:8px;width:66px;height:64px;background:rgba(16,20,24,.72);border:1px solid var(--line);padding:3px;pointer-events:none}
+.vc-map svg{width:100%;height:100%;display:block}
+.vc-map .m{fill:rgba(244,244,239,.16);transition:fill .3s}
+.vc-map .m.on{fill:var(--lime);animation:mpulse 1.6s ease-in-out infinite}
+.vc-map .hd{fill:rgba(244,244,239,.3)}
+@keyframes mpulse{50%{opacity:.55}}
+.vc-cue{align-self:end;display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:start;font:700 clamp(16px,1.3vw,18px)/1.22 var(--body);width:100%;background:rgba(16,20,24,.86);border-left:3px solid var(--lime);padding:10px 10px 9px;color:#fff}
+.vc-dots{grid-column:1/-1;display:flex;gap:4px;font-style:normal}
+.vc-dots i{flex:1;height:3px;background:rgba(244,244,239,.25)}
+.vc-dots i.on{background:var(--lime)}
+.vc-cue b{font:600 13px/1 var(--mono);background:var(--lime);color:var(--ink);padding:5px 7px;margin-top:1px}
 .vc-cue.pop{animation:cue .35s ease}
 @keyframes cue{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .vc-play{position:absolute;inset:0;width:100%;height:100%;background:none;border:0;cursor:pointer;padding:0}
@@ -364,7 +383,9 @@ footer .wrap{display:grid;grid-template-columns:1fr auto;gap:20px 32px}
 .vcard.playing .vc-play::after{opacity:0}
 .vc-play:focus-visible{outline:2px solid var(--lime);outline-offset:-4px}
 .vnote{margin-top:12px}
-@media (max-width:1000px){.vfeed{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);scroll-padding-inline:var(--gut);-webkit-overflow-scrolling:touch;padding-bottom:8px}.vcard{scroll-snap-align:start}}
+.vc-cue span{overflow-wrap:break-word}
+@media (max-width:1100px){.vfeed{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:40%;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);scroll-padding-inline:var(--gut);-webkit-overflow-scrolling:touch;padding-bottom:8px}.vcard{scroll-snap-align:start}}
+@media (max-width:700px){.vfeed{grid-auto-columns:76%}}
 
 /* motion */
 .anim .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -398,7 +419,7 @@ body:not(.show-ph) .ph-chip{display:none}
 
 <div class="proto" data-block="proto">
   <div class="wrap">
-    <span>ПРОТОТИП v8 · 12.10.2026 · пунктир — данные, которые нужно прислать</span>
+    <span>ПРОТОТИП v9 · 15.10.2026 · пунктир — данные, которые нужно прислать</span>
     <label for="ph-toggle"><input type="checkbox" id="ph-toggle" checked> Показывать заглушки</label>
   </div>
 </div>
@@ -698,6 +719,7 @@ body:not(.show-ph) .ph-chip{display:none}
         <div class="place-list">
           <div class="ph"><span class="k">Персональные и группы</span><b data-edit="place.name">[Название зала]</b><span data-edit="place.addr">[Вологда, улица, дом] <span class="ph-chip">адрес</span></span></div>
           <div class="ph"><span class="k">Как добраться</span><b data-edit="place.how1">[Остановка / парковка]</b><span data-edit="place.how2">[Ориентиры, вход, этаж]</span></div>
+          <div><span class="k">Режим работы клуба</span><b data-edit="place.hours">Пн–Пт 6:00–23:00 · Сб–Вс 9:00–21:00</b><span data-edit="place.extra">В абонементе: сауна, солярий, массажные кресла. Душевые, раздевалки, фитнес-бар, зона кроссфита</span></div>
           <div><span class="k">Практика курса тренеров</span><b>Там же, в CardioZone</b><span>очные занятия по выходным</span></div>
         </div>
         <div class="ctas" style="margin-top:20px">
@@ -705,7 +727,7 @@ body:not(.show-ph) .ph-chip{display:none}
         </div>
       </div>
       <div class="gym">
-        <div class="ph-img" data-photo="gym1">Фото зала<br>общий план</div>
+        <div class="ph-img" data-photo="gym1" role="img" aria-label="Тренажёрный зал CardioZone">Фото зала<br>общий план</div>
         <div class="ph-img" data-photo="gym2">Зона<br>свободных весов</div>
         <div class="ph-img" data-photo="gym3">Раздевалка<br>/ вход</div>
       </div>
@@ -718,113 +740,195 @@ body:not(.show-ph) .ph-chip{display:none}
       <div class="sec-head">
         <p class="eyebrow">Полезное</p>
         <h2>Разборы техники</h2>
-        <p class="lead">Десять упражнений в исполнении Семёна и три главных момента в технике каждого.</p>
+        <p class="lead">Упражнения в исполнении Семёна: какие мышцы работают и три главных момента в технике. Выберите группу мышц.</p>
       </div>
-      <div class="feed vfeed ph" data-block="feed">
-        <figure class="vcard">
+      <div class="vfilter" role="toolbar" aria-label="Фильтр по группам мышц">
+        <button type="button" class="on" data-f="all">Все</button>
+        <button type="button" data-f="legs">Ноги</button>
+        <button type="button" data-f="back">Спина</button>
+        <button type="button" data-f="shoulders">Плечи</button>
+        <button type="button" data-f="arms">Руки</button>
+        <button type="button" data-f="stage">Позирование</button>
+      </div>
+      <div class="feed vfeed" data-block="feed">
+        <figure class="vcard" data-group="legs" data-muscles="quads glutes">
           <video muted loop playsinline preload="none" poster="video/prised.jpg" data-src="video/prised.mp4" aria-label="Присед в тренажёре"></video>
           <figcaption>
             <span class="vc-tag">Ноги</span>
             <strong class="vc-title">Присед в тренажёре</strong>
-            <span class="vc-cue" data-cues="Спина прижата к опоре|Колени смотрят по носкам|Вниз плавно, вверх мощно"><b>1</b><span>Спина прижата к опоре</span></span>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Спина прижата к опоре|Колени смотрят по носкам|Вниз плавно, вверх мощно"><b>1</b><span>Спина прижата к опоре</span><i class="vc-dots"></i></span>
           </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
         </figure>
-        <figure class="vcard">
-          <video muted loop playsinline preload="none" poster="video/tyaga-rychag.jpg" data-src="video/tyaga-rychag.mp4" aria-label="Рычажная тяга с упором в грудь"></video>
-          <figcaption>
-            <span class="vc-tag">Спина</span>
-            <strong class="vc-title">Рычажная тяга с упором в грудь</strong>
-            <span class="vc-cue" data-cues="Грудь плотно на опоре|Тяни локтем, а не кистью|В конце своди лопатки"><b>1</b><span>Грудь плотно на опоре</span></span>
-          </figcaption>
-          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
-        </figure>
-        <figure class="vcard">
-          <video muted loop playsinline preload="none" poster="video/tyaga-sidya.jpg" data-src="video/tyaga-sidya.mp4" aria-label="Тяга сидя в тренажёре"></video>
-          <figcaption>
-            <span class="vc-tag">Спина</span>
-            <strong class="vc-title">Тяга сидя в тренажёре</strong>
-            <span class="vc-cue" data-cues="Корпус неподвижен, без рывков|Локти идут вдоль корпуса|Возвращай вес под контролем"><b>1</b><span>Корпус неподвижен, без рывков</span></span>
-          </figcaption>
-          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
-        </figure>
-        <figure class="vcard">
-          <video muted loop playsinline preload="none" poster="video/zhim-plechi.jpg" data-src="video/zhim-plechi.mp4" aria-label="Жим в тренажёре сидя"></video>
-          <figcaption>
-            <span class="vc-tag">Плечи</span>
-            <strong class="vc-title">Жим в тренажёре сидя</strong>
-            <span class="vc-cue" data-cues="Поясница прижата к спинке|Локти под кистями|Не блокируй локти вверху"><b>1</b><span>Поясница прижата к спинке</span></span>
-          </figcaption>
-          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
-        </figure>
-        <figure class="vcard">
-          <video muted loop playsinline preload="none" poster="video/pozirovanie.jpg" data-src="video/pozirovanie.mp4" aria-label="Позирование: спина"></video>
-          <figcaption>
-            <span class="vc-tag">Сцена</span>
-            <strong class="vc-title">Позирование: спина</strong>
-            <span class="vc-cue" data-cues="Лопатки разводи в стороны|Плечи вниз, локти вперёд|Держи позу 5–10 секунд"><b>1</b><span>Лопатки разводи в стороны</span></span>
-          </figcaption>
-          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
-        </figure>
-        <figure class="vcard">
-          <video muted loop playsinline preload="none" poster="video/biceps.jpg" data-src="video/biceps.mp4" aria-label="Сгибание рук с гантелями"></video>
-          <figcaption>
-            <span class="vc-tag">Руки</span>
-            <strong class="vc-title">Сгибание рук с гантелями</strong>
-            <span class="vc-cue" data-cues="Локти прижаты к корпусу|Поднимай без раскачки|Опускай медленно, до конца"><b>1</b><span>Локти прижаты к корпусу</span></span>
-          </figcaption>
-          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
-        </figure>
-        <figure class="vcard">
-          <video muted loop playsinline preload="none" poster="video/tyaga-blok.jpg" data-src="video/tyaga-blok.mp4" aria-label="Тяга верхнего блока узким хватом"></video>
-          <figcaption>
-            <span class="vc-tag">Спина</span>
-            <strong class="vc-title">Тяга верхнего блока узким хватом</strong>
-            <span class="vc-cue" data-cues="Грудь вверх, плечи вниз|Тяни локтями к рёбрам|Вверху тянись, но не бросай вес"><b>1</b><span>Грудь вверх, плечи вниз</span></span>
-          </figcaption>
-          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
-        </figure>
-        <figure class="vcard">
+        <figure class="vcard" data-group="legs" data-muscles="quads glutes">
           <video muted loop playsinline preload="none" poster="video/prised-sboku.jpg" data-src="video/prised-sboku.mp4" aria-label="Присед в тренажёре: вид сбоку"></video>
           <figcaption>
             <span class="vc-tag">Ноги</span>
             <strong class="vc-title">Присед в тренажёре: вид сбоку</strong>
-            <span class="vc-cue" data-cues="Пятки на подставке — присед глубже|Спина ровная, корпус в напряжении|Колени не сводить внутрь"><b>1</b><span>Пятки на подставке — присед глубже</span></span>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Пятки на подставке — присед глубже|Спина ровная, корпус в напряжении|Колени не сводить внутрь"><b>1</b><span>Пятки на подставке — присед глубже</span><i class="vc-dots"></i></span>
           </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
         </figure>
-        <figure class="vcard">
+        <figure class="vcard" data-group="legs" data-muscles="quads glutes hams">
           <video muted loop playsinline preload="none" poster="video/zhim-nogami.jpg" data-src="video/zhim-nogami.mp4" aria-label="Жим ногами сидя"></video>
           <figcaption>
             <span class="vc-tag">Ноги</span>
             <strong class="vc-title">Жим ногами сидя</strong>
-            <span class="vc-cue" data-cues="Поясница прижата к спинке|Стопы на ширине плеч|Не выпрямляй колени до упора"><b>1</b><span>Поясница прижата к спинке</span></span>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Поясница прижата к спинке|Стопы на ширине плеч|Не выпрямляй колени до упора"><b>1</b><span>Поясница прижата к спинке</span><i class="vc-dots"></i></span>
           </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
         </figure>
-        <figure class="vcard">
+        <figure class="vcard" data-group="legs" data-muscles="quads">
+          <video muted loop playsinline preload="none" poster="video/razgibanie.jpg" data-src="video/razgibanie.mp4" aria-label="Разгибание ног сидя"></video>
+          <figcaption>
+            <span class="vc-tag">Ноги</span>
+            <strong class="vc-title">Разгибание ног сидя</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Спина прижата к спинке|Валик на уровне щиколоток|Вверху задержка на секунду"><b>1</b><span>Спина прижата к спинке</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="legs" data-muscles="hams calves">
+          <video muted loop playsinline preload="none" poster="video/sgibanie-lezha.jpg" data-src="video/sgibanie-lezha.mp4" aria-label="Сгибание ног лёжа"></video>
+          <figcaption>
+            <span class="vc-tag">Ноги</span>
+            <strong class="vc-title">Сгибание ног лёжа</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Таз прижат к скамье|Сгибай до конца, пауза вверху|Не бросай вес вниз"><b>1</b><span>Таз прижат к скамье</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="legs" data-muscles="hams glutes">
+          <video muted loop playsinline preload="none" poster="video/sgibanie-krossover.jpg" data-src="video/sgibanie-krossover.mp4" aria-label="Сгибание ноги в кроссовере стоя"></video>
+          <figcaption>
+            <span class="vc-tag">Ноги</span>
+            <strong class="vc-title">Сгибание ноги в кроссовере стоя</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Корпус неподвижен, держись за стойку|Тяни пятку к ягодице|Возвращай ногу медленно"><b>1</b><span>Корпус неподвижен, держись за стойку</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="back" data-muscles="lats midback rdelts">
+          <video muted loop playsinline preload="none" poster="video/tyaga-rychag.jpg" data-src="video/tyaga-rychag.mp4" aria-label="Рычажная тяга с упором в грудь"></video>
+          <figcaption>
+            <span class="vc-tag">Спина</span>
+            <strong class="vc-title">Рычажная тяга с упором в грудь</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Грудь плотно на опоре|Тяни локтем, а не кистью|В конце своди лопатки"><b>1</b><span>Грудь плотно на опоре</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="back" data-muscles="lats midback biceps">
+          <video muted loop playsinline preload="none" poster="video/tyaga-sidya.jpg" data-src="video/tyaga-sidya.mp4" aria-label="Тяга сидя в тренажёре"></video>
+          <figcaption>
+            <span class="vc-tag">Спина</span>
+            <strong class="vc-title">Тяга сидя в тренажёре</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Корпус неподвижен, без рывков|Локти идут вдоль корпуса|Возвращай вес под контролем"><b>1</b><span>Корпус неподвижен, без рывков</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="back" data-muscles="lats biceps rdelts">
+          <video muted loop playsinline preload="none" poster="video/tyaga-sverhu.jpg" data-src="video/tyaga-sverhu.mp4" aria-label="Тяга сверху в рычажном тренажёре"></video>
+          <figcaption>
+            <span class="vc-tag">Спина</span>
+            <strong class="vc-title">Тяга сверху в рычажном тренажёре</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Бёдра зафиксированы под валиками|Тяни локти вниз к корпусу|Вверху — полное растяжение"><b>1</b><span>Бёдра зафиксированы под валиками</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="back" data-muscles="lats midback rdelts">
+          <video muted loop playsinline preload="none" poster="video/tyaga-ganteley.jpg" data-src="video/tyaga-ganteley.mp4" aria-label="Тяга гантелей лёжа на наклонной скамье"></video>
+          <figcaption>
+            <span class="vc-tag">Спина</span>
+            <strong class="vc-title">Тяга гантелей лёжа на наклонной скамье</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Грудь плотно на скамье|Тяни гантели к поясу|Своди лопатки в верхней точке"><b>1</b><span>Грудь плотно на скамье</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="back" data-muscles="lats midback biceps">
+          <video muted loop playsinline preload="none" poster="video/tyaga-ganteley-sboku.jpg" data-src="video/tyaga-ganteley-sboku.mp4" aria-label="Тяга гантелей с упором: вид сбоку"></video>
+          <figcaption>
+            <span class="vc-tag">Спина</span>
+            <strong class="vc-title">Тяга гантелей с упором: вид сбоку</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Корпус наклонён, спина ровная|Локти идут вдоль корпуса|Опускай гантели под контролем"><b>1</b><span>Корпус наклонён, спина ровная</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="shoulders" data-muscles="delts triceps">
+          <video muted loop playsinline preload="none" poster="video/zhim-plechi.jpg" data-src="video/zhim-plechi.mp4" aria-label="Жим в тренажёре сидя"></video>
+          <figcaption>
+            <span class="vc-tag">Плечи</span>
+            <strong class="vc-title">Жим в тренажёре сидя</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Поясница прижата к спинке|Локти под кистями|Не блокируй локти вверху"><b>1</b><span>Поясница прижата к спинке</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="arms" data-muscles="biceps forearms">
+          <video muted loop playsinline preload="none" poster="video/biceps.jpg" data-src="video/biceps.mp4" aria-label="Сгибание рук с гантелями"></video>
+          <figcaption>
+            <span class="vc-tag">Руки</span>
+            <strong class="vc-title">Сгибание рук с гантелями</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Локти прижаты к корпусу|Поднимай без раскачки|Опускай медленно, до конца"><b>1</b><span>Локти прижаты к корпусу</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="stage" data-muscles="lats traps midback">
+          <video muted loop playsinline preload="none" poster="video/pozirovanie.jpg" data-src="video/pozirovanie.mp4" aria-label="Позирование: спина"></video>
+          <figcaption>
+            <span class="vc-tag">Позирование</span>
+            <strong class="vc-title">Позирование: спина</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Лопатки разводи в стороны|Плечи вниз, локти вперёд|Держи позу 5–10 секунд"><b>1</b><span>Лопатки разводи в стороны</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="stage" data-muscles="lats chest quads">
           <video muted loop playsinline preload="none" poster="video/poza-speredi.jpg" data-src="video/poza-speredi.mp4" aria-label="Позирование: широчайшие спереди"></video>
           <figcaption>
-            <span class="vc-tag">Сцена</span>
+            <span class="vc-tag">Позирование</span>
             <strong class="vc-title">Позирование: широчайшие спереди</strong>
-            <span class="vc-cue" data-cues="Широчайшие развёрнуты в стороны|Ноги напряжены всю позу|Держи позу 5–10 секунд"><b>1</b><span>Широчайшие развёрнуты в стороны</span></span>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Широчайшие развёрнуты в стороны|Ноги напряжены всю позу|Держи позу 5–10 секунд"><b>1</b><span>Широчайшие развёрнуты в стороны</span><i class="vc-dots"></i></span>
           </figcaption>
+          <span class="vc-map" aria-hidden="true"></span>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
         </figure>
       </div>
-      <p class="vnote"><span class="ph-chip">подписи к упражнениям подтвердить с Семёном</span></p>
       <p class="swipe-hint">Листайте вбок →</p>
       <div class="feed-cta">
         <a class="btn btn-ghost" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener">Instagram* @silov.sema ↗</a>
         <a class="btn btn-ghost" href="https://vk.ru/id55027627" target="_blank" rel="noopener">ВКонтакте ↗</a>
       </div>
-      <div class="magnet ph" data-block="magnet">
+      <div class="magnet" data-block="magnet">
         <svg class="ico" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="10" y="6" width="36" height="44"/><path d="M18 18l3 3 6-6M18 30l3 3 6-6M18 42l3 3 6-6M31 19h8M31 31h8M31 43h8"/></svg>
         <div>
           <h3>Чек-лист: 5 ошибок в приседе</h3>
-          <p>Проверьте свою технику за 5 минут. Отправлю бесплатно в Telegram. <span class="ph-chip">материал и канал</span></p>
+          <p>Проверьте свою технику за 5 минут. Напишите Семёну «ЧЕК-ЛИСТ» во ВКонтакте — пришлёт бесплатно.</p>
         </div>
-        <a class="btn btn-lime" href="#contact">Получить чек-лист</a>
+        <a class="btn btn-lime" href="https://vk.ru/id55027627" target="_blank" rel="noopener">Получить во ВКонтакте ↗</a>
       </div>
     </div>
   </section>
@@ -919,6 +1023,7 @@ body:not(.show-ph) .ph-chip{display:none}
       <a class="soc" href="https://vk.ru/id55027627" target="_blank" rel="noopener" aria-label="ВКонтакте"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.8 17.5c-5.5 0-8.6-3.8-8.8-10h2.8c.1 4.6 2.1 6.5 3.7 6.9V7.5h2.6v3.9c1.6-.2 3.3-2 3.9-3.9h2.6c-.4 2.4-2.2 4.2-3.5 4.9 1.3.6 3.3 2.2 4.1 5.1h-2.9c-.6-1.9-2.1-3.4-4.2-3.6v3.6h-.3z"/></svg></a>
       <a class="soc" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
     </div>
+    <a class="f-admin" href="admin.html" rel="nofollow">Вход для администратора</a>
     <div class="f-notes">
       <span>Информация на сайте не является медицинской рекомендацией. При наличии заболеваний проконсультируйтесь с врачом.</span>
       <span>* Instagram принадлежит компании Meta, признанной экстремистской и запрещённой на территории РФ.</span>
@@ -1033,15 +1138,37 @@ body:not(.show-ph) .ph-chip{display:none}
 
   (function(){
     var cards=[].slice.call(document.querySelectorAll('.vcard')); if(!cards.length) return;
+    var MN={quads:'Квадрицепс',glutes:'Ягодицы',hams:'Бицепс бедра',calves:'Икры',lats:'Широчайшие',midback:'Середина спины',traps:'Трапеции',rdelts:'Задние дельты',delts:'Дельты',chest:'Грудь',biceps:'Бицепс',triceps:'Трицепс',forearms:'Предплечья',abs:'Пресс'};
+    var F='<g transform="translate(0,0)"><circle class="hd" cx="25" cy="8" r="5.5"/><ellipse class="m m-delts" cx="14.5" cy="21" rx="5" ry="4"/><ellipse class="m m-delts" cx="35.5" cy="21" rx="5" ry="4"/><ellipse class="m m-chest" cx="20.5" cy="26.5" rx="5.6" ry="4.4"/><ellipse class="m m-chest" cx="29.5" cy="26.5" rx="5.6" ry="4.4"/><ellipse class="m m-biceps" cx="11" cy="32" rx="3" ry="6"/><ellipse class="m m-biceps" cx="39" cy="32" rx="3" ry="6"/><ellipse class="m m-forearms" cx="9" cy="45" rx="2.6" ry="6"/><ellipse class="m m-forearms" cx="41" cy="45" rx="2.6" ry="6"/><rect class="m m-abs" x="19.5" y="32" width="11" height="15" rx="3"/><ellipse class="m m-quads" cx="20" cy="61" rx="4.6" ry="10.5"/><ellipse class="m m-quads" cx="30" cy="61" rx="4.6" ry="10.5"/><ellipse class="m" cx="20" cy="84" rx="3" ry="8"/><ellipse class="m" cx="30" cy="84" rx="3" ry="8"/></g>';
+    var B='<g transform="translate(50,0)"><circle class="hd" cx="25" cy="8" r="5.5"/><ellipse class="m m-traps" cx="25" cy="18" rx="8" ry="3.4"/><ellipse class="m m-rdelts" cx="14.5" cy="22" rx="4.6" ry="3.8"/><ellipse class="m m-rdelts" cx="35.5" cy="22" rx="4.6" ry="3.8"/><ellipse class="m m-triceps" cx="11" cy="32" rx="3" ry="6"/><ellipse class="m m-triceps" cx="39" cy="32" rx="3" ry="6"/><ellipse class="m m-forearms" cx="9" cy="45" rx="2.6" ry="6"/><ellipse class="m m-forearms" cx="41" cy="45" rx="2.6" ry="6"/><ellipse class="m m-lats" cx="18.5" cy="34" rx="4.8" ry="9"/><ellipse class="m m-lats" cx="31.5" cy="34" rx="4.8" ry="9"/><ellipse class="m m-midback" cx="25" cy="29" rx="3.6" ry="6"/><rect class="m" x="21" y="41" width="8" height="6" rx="2"/><ellipse class="m m-glutes" cx="20" cy="53" rx="5" ry="5"/><ellipse class="m m-glutes" cx="30" cy="53" rx="5" ry="5"/><ellipse class="m m-hams" cx="20" cy="66" rx="4.2" ry="8.5"/><ellipse class="m m-hams" cx="30" cy="66" rx="4.2" ry="8.5"/><ellipse class="m m-calves" cx="20" cy="84" rx="3.4" ry="8"/><ellipse class="m m-calves" cx="30" cy="84" rx="3.4" ry="8"/></g>';
+    cards.forEach(function(c){
+      var ms=(c.getAttribute('data-muscles')||'').split(' ').filter(Boolean);
+      var map=c.querySelector('.vc-map'); map.innerHTML='<svg viewBox="0 0 100 94">'+F+B+'</svg>';
+      ms.forEach(function(m){ [].forEach.call(map.querySelectorAll('.m-'+m),function(e){ e.classList.add('on'); }); });
+      c.querySelector('.vc-mus').textContent=ms.map(function(m){ return MN[m]||m; }).join(' · ');
+    });
+    var fb=[].slice.call(document.querySelectorAll('.vfilter button'));
+    fb.forEach(function(b){
+      var f=b.getAttribute('data-f'), n=f==='all'?cards.length:cards.filter(function(c){ return c.getAttribute('data-group')===f; }).length;
+      var sm=document.createElement('small'); sm.textContent=n; b.appendChild(sm); if(!n) b.hidden=true;
+      b.addEventListener('click',function(){
+        fb.forEach(function(x){ x.classList.toggle('on', x===b); x.setAttribute('aria-pressed', x===b); });
+        cards.forEach(function(c){ var show=f==='all'||c.getAttribute('data-group')===f; c.hidden=!show; if(!show && c._v && !c._v.paused) c._v.pause(); });
+        var feed=document.querySelector('.vfeed'); if(feed) feed.scrollLeft=0;
+        setTimeout(function(){ window.dispatchEvent(new Event('scroll')); },60);
+      });
+    });
     var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
     cards.forEach(function(c){
       var v=c.querySelector('video'), cue=c.querySelector('.vc-cue'), list=cue.getAttribute('data-cues').split('|'), n=cue.querySelector('b'), t=cue.querySelector('span'), cur=0;
+      var dots=cue.querySelector('.vc-dots'); list.forEach(function(_,i){ var d=document.createElement('i'); if(!i) d.className='on'; dots.appendChild(d); });
+      function setDots(k){ [].forEach.call(dots.children,function(d,i){ d.classList.toggle('on', i<=k); }); }
       c._v=v; c._user=false;
       function load(){ if(!v.getAttribute('src')){ v.src=v.getAttribute('data-src'); } }
       c._play=function(){ load(); var p=v.play(); if(p&&p.catch) p.catch(function(){}); };
       v.addEventListener('timeupdate',function(){
         if(!v.duration) return; var k=Math.min(list.length-1, Math.floor(v.currentTime/v.duration*list.length));
-        if(k!==cur){ cur=k; n.textContent=k+1; t.textContent=list[k]; cue.classList.remove('pop'); void cue.offsetWidth; cue.classList.add('pop'); }
+        if(k!==cur){ cur=k; n.textContent=k+1; t.textContent=list[k]; setDots(k); cue.classList.remove('pop'); void cue.offsetWidth; cue.classList.add('pop'); }
       });
       v.addEventListener('play',function(){ c.classList.add('playing'); });
       v.addEventListener('pause',function(){ c.classList.remove('playing'); });
@@ -1052,7 +1179,7 @@ body:not(.show-ph) .ph-chip{display:none}
     function check(){
       busy=false; var h=window.innerHeight, w=window.innerWidth;
       cards.forEach(function(c){
-        if(c._user) return; var r=c.getBoundingClientRect();
+        if(c._user||c.hidden) return; var r=c.getBoundingClientRect();
         var vis=r.top < h*.8 && r.bottom > h*.2 && r.left < w*.9 && r.right > w*.1;
         if(vis){ if(c._v.paused) c._play(); } else if(!c._v.paused) c._v.pause();
       });
