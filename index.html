@@ -405,6 +405,30 @@ footer .wrap{display:grid;grid-template-columns:1fr auto;gap:20px 32px}
 .no-form .only-form{display:none}
 .ph-img.has-img{background-size:cover;background-position:center;color:transparent;font-size:0}
 
+
+/* v10: video carousel */
+.vwrap{position:relative}
+.feed.vfeed{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;margin-inline:calc(var(--gut) * -1);padding:0 var(--gut) 12px;scroll-padding-inline:var(--gut);-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--lime) transparent;cursor:grab}
+.feed.vfeed.drag{cursor:grabbing;scroll-snap-type:none}
+.feed.vfeed .vcard{flex:0 0 clamp(250px,24vw,300px);scroll-snap-align:start}
+.feed.vfeed .vcard[hidden]{display:none}
+.vnav{position:absolute;top:calc(50% - 30px);z-index:3;width:48px;height:48px;border-radius:50%;border:0;background:var(--lime);color:var(--ink);font:700 20px/1 var(--body);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.45)}
+.vprev{left:-6px}.vnext{right:-6px}
+.vnav[disabled]{opacity:0;pointer-events:none}
+@media (hover:none),(max-width:700px){.vnav{display:none}}
+.vhint{font:500 12px var(--mono);color:var(--mute);margin-top:8px}
+.vcard.active{outline:2px solid var(--lime);outline-offset:-2px}
+.vcard .vc-load{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px;border-radius:50%;border:3px solid rgba(244,244,239,.25);border-top-color:var(--lime);animation:spin .8s linear infinite;opacity:0;pointer-events:none}
+.vcard.loading .vc-load{opacity:1}
+.vcard.loading .vc-play::after{opacity:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.vc-map{width:96px;height:96px;right:8px;top:8px;padding:4px 2px 2px}
+.vc-title,.vc-mus{max-width:calc(100% - 104px)}
+.vc-map .hd{fill:rgba(244,244,239,.28)}
+.vc-map .m{fill:rgba(244,244,239,.13);stroke:rgba(16,20,24,.9);stroke-width:.6}
+.vc-map .m.on{fill:var(--lime);stroke:rgba(16,20,24,.9)}
+.vc-map text{font:600 6px var(--mono);fill:var(--mute);letter-spacing:.06em}
+
 /* placeholders */
 .ph-chip{display:inline-flex;align-items:center;gap:6px;font:500 11px/1.2 var(--mono);letter-spacing:.04em;text-transform:none;color:var(--lime);border:1px dashed var(--lime);padding:4px 8px;vertical-align:middle;border-radius:2px;background:rgba(16,20,24,.6)}
 .ph-chip::before{content:"ЗАГЛУШКА";letter-spacing:.1em;opacity:.8}
@@ -419,7 +443,7 @@ body:not(.show-ph) .ph-chip{display:none}
 
 <div class="proto" data-block="proto">
   <div class="wrap">
-    <span>ПРОТОТИП v9 · 15.10.2026 · пунктир — данные, которые нужно прислать</span>
+    <span>ПРОТОТИП v10 · 15.10.2026 · пунктир — данные, которые нужно прислать</span>
     <label for="ph-toggle"><input type="checkbox" id="ph-toggle" checked> Показывать заглушки</label>
   </div>
 </div>
@@ -464,7 +488,6 @@ body:not(.show-ph) .ph-chip{display:none}
       </div>
       <div class="hero-photo">
         <img data-photo="hero" src="img/silov-15.jpg" alt="Семён Силов, персональный тренер в Вологде" width="933" height="1400" fetchpriority="high">
-        <span class="photo-note ph-chip">заменить на фото в работе с клиентом</span>
       </div>
     </div>
   </section>
@@ -485,7 +508,7 @@ body:not(.show-ph) .ph-chip{display:none}
       <div class="sec-head">
         <p class="eyebrow">Для кого</p>
         <h2>С какой целью приходят</h2>
-        <p class="lead">Выберите свою и напишите мне — подберём формат. <span class="ph-chip">подтвердить список целей</span></p>
+        <p class="lead">Выберите свою и напишите мне — подберём формат.</p>
       </div>
       <div class="goals">
         <button class="goal" type="button" data-msg="Хочу похудеть и подтянуть тело">
@@ -535,7 +558,7 @@ body:not(.show-ph) .ph-chip{display:none}
       <div class="sec-head">
         <p class="eyebrow">Как проходит работа</p>
         <h2>Метод Силова</h2>
-        <p class="lead">Сначала движение, потом нагрузка. Каждый этап решает свою задачу, и вы понимаете, зачем делаете каждое упражнение. <span class="ph-chip">подтвердить шаги</span></p>
+        <p class="lead">Сначала движение, потом нагрузка. Каждый этап решает свою задачу, и вы понимаете, зачем делаете каждое упражнение.</p>
       </div>
       <div class="steps">
         <div class="step"><span class="n"><i>1</i></span><h3>Разбор цели</h3><p>Обсуждаем задачу, опыт, ограничения и режим. Смотрим, как вы двигаетесь сейчас.</p></div>
@@ -750,6 +773,9 @@ body:not(.show-ph) .ph-chip{display:none}
         <button type="button" data-f="arms">Руки</button>
         <button type="button" data-f="stage">Позирование</button>
       </div>
+      <div class="vwrap">
+        <button class="vnav vprev" type="button" aria-label="Предыдущие видео">←</button>
+        <button class="vnav vnext" type="button" aria-label="Следующие видео">→</button>
       <div class="feed vfeed" data-block="feed">
         <figure class="vcard" data-group="legs" data-muscles="quads glutes">
           <video muted loop playsinline preload="none" poster="video/prised.jpg" data-src="video/prised.mp4" aria-label="Присед в тренажёре"></video>
@@ -917,7 +943,8 @@ body:not(.show-ph) .ph-chip{display:none}
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
         </figure>
       </div>
-      <p class="swipe-hint">Листайте вбок →</p>
+      </div>
+      <p class="vhint">Листайте ленту пальцем или стрелками · нажмите на видео, чтобы запустить</p>
       <div class="feed-cta">
         <a class="btn btn-ghost" href="https://www.instagram.com/silov.sema/" target="_blank" rel="noopener">Instagram* @silov.sema ↗</a>
         <a class="btn btn-ghost" href="https://vk.ru/id55027627" target="_blank" rel="noopener">ВКонтакте ↗</a>
@@ -979,7 +1006,7 @@ body:not(.show-ph) .ph-chip{display:none}
           <a class="soc ph" data-edit-href="link.telegram" href="#contact"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.3 2.9 11.4c-1 .4-1 1.6 0 1.9l4.7 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.4 4.9 3.6c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.5-1.3-1.2zM9.8 14.5l8.6-7.7-10.4 6.4"/></svg>Telegram</a>
           <a class="soc ph" data-edit-href="link.whatsapp" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1.3-4A8.5 8.5 0 1 1 8.4 19z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.8-2-1-1 1c-1-.4-2.3-1.7-2.7-2.7l1-1-1-2z" fill="currentColor" stroke="none"/></svg>WhatsApp</a>
         </div>
-        <p class="ph" data-edit="contact.phone" style="font:500 14px var(--mono)">Телефон: [+7 ___ ___-__-__] <span class="ph-chip">Telegram, WhatsApp, телефон</span></p>
+        <p class="ph" style="font:500 14px var(--mono)"><a href="tel:+79215340350" data-edit="contact.phone" style="color:inherit">Телефон: [+7 ___ ___-__-__]</a> <span class="ph-chip">Telegram, WhatsApp, телефон</span></p>
       </div>
       <form id="lead" novalidate data-block="form">
         <div class="field">
@@ -1039,12 +1066,14 @@ body:not(.show-ph) .ph-chip{display:none}
   <a class="btn btn-lime" href="#contact" data-goal="trial">Пробная тренировка</a>
 </nav>
 
+<script type="application/json" id="site-cfg">{"blocks": {"proto": true, "placeholders": true, "offer": true, "trust": true, "for": true, "method": true, "reviews": true, "formats": true, "prices": false, "schedule": false, "about": true, "docs": true, "course": true, "events": true, "place": true, "posts": true, "magnet": true, "faq": true, "form": false, "requisites": false}, "photos": {"hero": "img/silov-15.jpg", "about": "img/silov-18.jpg", "course": "img/silov-09.jpg", "feed1": "img/silov-17.jpg", "gym1": "img/gym-zal.jpg", "gym2": "img/gym-ganteli.jpg", "gym3": "img/gym-otdyh.jpg"}, "content": {"hero.lead": "Инструктор и персональный тренер фитнес-клуба CardioZone, действующий спортсмен в бодибилдинге. Подбираю упражнения и питание под вашу цель: снижение веса, набор мышечной массы, коррекция фигуры.", "trust.1.num": "12+", "trust.1.label": "лет тренерской работы", "trust.2.num": "300+", "trust.2.label": "клиентов", "trust.3.num": "50+", "trust.3.label": "выпускников-тренеров", "trust.4.num": "5,0★", "trust.4.label": "средняя оценка клиентов", "about.story": "В зал я пришёл подростком: хотел стать сильнее и увереннее в себе. Очень быстро тренировки стали образом жизни, а потом и профессией — получил профильное образование в РГУФКСМиТ по специальности «Физическая культура и спорт». За плечами более 15 лет собственных тренировок и выступления на соревнованиях: абсолютный чемпион Ярославской и Вологодской областей по бодибилдингу (до 90 кг), участник чемпионата России, победитель Кубка Европы WPC/AWPC/WAA. Тренером работаю больше 12 лет. Для меня главное — чтобы человек понимал, что и зачем делает в зале, и получал результат без травм.", "place.name": "Фитнес-клуб CardioZone", "place.addr": "Вологда, ул. Мира, 82, ТЦ «Оазис», 5 этаж", "link.map": "https://yandex.ru/maps/?text=CardioZone%20%D0%92%D0%BE%D0%BB%D0%BE%D0%B3%D0%B4%D0%B0%20%D1%83%D0%BB.%20%D0%9C%D0%B8%D1%80%D0%B0%2082", "contact.phone": "Телефон: +7 921 534-03-50", "place.how1": "ТЦ «Оазис», ул. Мира, 82", "place.how2": "Поднимитесь на 5 этаж — вход в фитнес-клуб CardioZone"}}</script>
 <script>
 (function(){
   var body=document.body, t=document.getElementById('ph-toggle'), root=document.documentElement;
 
   // --- настройки сайта: site.json (меняются в admin.html) ---
   var CFG={blocks:{prices:false,form:false,requisites:false},photos:{}};
+  try{ var inl=document.getElementById('site-cfg'); if(inl) CFG=JSON.parse(inl.textContent); }catch(e){}
   function applyCfg(c){
     var b=(c&&c.blocks)||{}, ph=(c&&c.photos)||{};
     document.querySelectorAll('[data-block]').forEach(function(el){ el.hidden = b[el.getAttribute('data-block')]===false; });
@@ -1077,7 +1106,9 @@ body:not(.show-ph) .ph-chip{display:none}
     root.classList.remove('cfg-loading');
     motion();
   }
+  var motionDone=false;
   function motion(){
+    if(motionDone) return; motionDone=true;
     if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var els=[].slice.call(document.querySelectorAll('.sec-head,.goal,.step,.review,.fmt,.sched,.course-card,.about-grid > *,.place-grid > *,.reel,.magnet,.faq details,.contact-grid > *'));
     var nums=[].slice.call(document.querySelectorAll('[data-count]')), vh=window.innerHeight;
@@ -1106,10 +1137,9 @@ body:not(.show-ph) .ph-chip{display:none}
     window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll);
     check();
   }
-  var cfgDone=false;
-  function finish(c){ if(cfgDone) return; cfgDone=true; applyCfg(c); }
-  setTimeout(function(){ finish(CFG); }, 1500);
-  fetch('site.json?t='+Date.now()).then(function(r){ return r.ok ? r.json() : CFG; }).then(finish, function(){ finish(CFG); });
+  var lastCfg=JSON.stringify(CFG);
+  applyCfg(CFG);
+  fetch('site.json?t='+Date.now()).then(function(r){ return r.ok ? r.json() : null; }).then(function(c){ if(c && JSON.stringify(c)!==lastCfg){ lastCfg=JSON.stringify(c); applyCfg(c); } }, function(){});
 
   function sync(){ body.classList.toggle('show-ph', t.checked); }
   try{ var s=localStorage.getItem('silov-ph'); if(s!==null) t.checked = s==='1'; }catch(e){}
@@ -1137,57 +1167,74 @@ body:not(.show-ph) .ph-chip{display:none}
   });
 
   (function(){
-    var cards=[].slice.call(document.querySelectorAll('.vcard')); if(!cards.length) return;
-    var MN={quads:'Квадрицепс',glutes:'Ягодицы',hams:'Бицепс бедра',calves:'Икры',lats:'Широчайшие',midback:'Середина спины',traps:'Трапеции',rdelts:'Задние дельты',delts:'Дельты',chest:'Грудь',biceps:'Бицепс',triceps:'Трицепс',forearms:'Предплечья',abs:'Пресс'};
-    var F='<g transform="translate(0,0)"><circle class="hd" cx="25" cy="8" r="5.5"/><ellipse class="m m-delts" cx="14.5" cy="21" rx="5" ry="4"/><ellipse class="m m-delts" cx="35.5" cy="21" rx="5" ry="4"/><ellipse class="m m-chest" cx="20.5" cy="26.5" rx="5.6" ry="4.4"/><ellipse class="m m-chest" cx="29.5" cy="26.5" rx="5.6" ry="4.4"/><ellipse class="m m-biceps" cx="11" cy="32" rx="3" ry="6"/><ellipse class="m m-biceps" cx="39" cy="32" rx="3" ry="6"/><ellipse class="m m-forearms" cx="9" cy="45" rx="2.6" ry="6"/><ellipse class="m m-forearms" cx="41" cy="45" rx="2.6" ry="6"/><rect class="m m-abs" x="19.5" y="32" width="11" height="15" rx="3"/><ellipse class="m m-quads" cx="20" cy="61" rx="4.6" ry="10.5"/><ellipse class="m m-quads" cx="30" cy="61" rx="4.6" ry="10.5"/><ellipse class="m" cx="20" cy="84" rx="3" ry="8"/><ellipse class="m" cx="30" cy="84" rx="3" ry="8"/></g>';
-    var B='<g transform="translate(50,0)"><circle class="hd" cx="25" cy="8" r="5.5"/><ellipse class="m m-traps" cx="25" cy="18" rx="8" ry="3.4"/><ellipse class="m m-rdelts" cx="14.5" cy="22" rx="4.6" ry="3.8"/><ellipse class="m m-rdelts" cx="35.5" cy="22" rx="4.6" ry="3.8"/><ellipse class="m m-triceps" cx="11" cy="32" rx="3" ry="6"/><ellipse class="m m-triceps" cx="39" cy="32" rx="3" ry="6"/><ellipse class="m m-forearms" cx="9" cy="45" rx="2.6" ry="6"/><ellipse class="m m-forearms" cx="41" cy="45" rx="2.6" ry="6"/><ellipse class="m m-lats" cx="18.5" cy="34" rx="4.8" ry="9"/><ellipse class="m m-lats" cx="31.5" cy="34" rx="4.8" ry="9"/><ellipse class="m m-midback" cx="25" cy="29" rx="3.6" ry="6"/><rect class="m" x="21" y="41" width="8" height="6" rx="2"/><ellipse class="m m-glutes" cx="20" cy="53" rx="5" ry="5"/><ellipse class="m m-glutes" cx="30" cy="53" rx="5" ry="5"/><ellipse class="m m-hams" cx="20" cy="66" rx="4.2" ry="8.5"/><ellipse class="m m-hams" cx="30" cy="66" rx="4.2" ry="8.5"/><ellipse class="m m-calves" cx="20" cy="84" rx="3.4" ry="8"/><ellipse class="m m-calves" cx="30" cy="84" rx="3.4" ry="8"/></g>';
+    var feed=document.querySelector('.vfeed'); if(!feed) return;
+    var cards=[].slice.call(feed.querySelectorAll('.vcard')); if(!cards.length) return;
+    var MN={quads:'Квадрицепс',adductors:'Приводящие',glutes:'Ягодицы',hams:'Бицепс бедра',calves:'Икры',tibialis:'Голень',lats:'Широчайшие',midback:'Середина спины',traps:'Трапеции',rdelts:'Задние дельты',delts:'Дельты',chest:'Грудь',biceps:'Бицепс',triceps:'Трицепс',forearms:'Предплечья',abs:'Пресс',obliques:'Косые мышцы',lowback:'Поясница'};
+    var SVG='<svg viewBox="0 0 120 124"><g transform="translate(0,0)"><circle class="hd" cx="30" cy="8.5" r="6"/><rect class="hd" x="27.3" y="14" width="5.4" height="5" rx="1.5"/><ellipse class="hd" cx="10" cy="63.5" rx="2" ry="2.6"/><ellipse class="hd" cx="22.5" cy="90" rx="2.4" ry="2"/><ellipse class="hd" cx="21.5" cy="112.5" rx="3" ry="1.6"/><path class="m m-traps" d="M24 19Q27 17 30 18L30 21Q26 21 22 22Z"/><path class="m m-delts" d="M22 21Q15 21 14 28Q15 33 18 33Q20 27 24 24Z"/><path class="m m-chest" d="M30 22L30 33Q24 35 19.5 32Q18.5 27 23 23.5Q27 22 30 22Z"/><path class="m m-biceps" d="M18 33Q14 34 13 41Q13 46 15 47Q18 44 19 38Z"/><path class="m m-forearms" d="M13 47Q10 52 9 60L11 61Q15 55 16 48Z"/><path class="m m-abs" d="M30 34L30 54Q27 55 25.5 53L25.5 36Q27.5 35 30 34Z"/><path class="m m-obliques" d="M25.5 36L25.5 53Q22 52 21 47Q20 40 21 35Z"/><path class="m m-quads" d="M20.5 57Q17 66 18 80Q20 87 24 88Q27 80 27 68Q27 61 24 59Z"/><path class="m m-adductors" d="M27.2 61Q29.5 64 29.6 72Q28.5 78 26.4 80Q27.4 70 27.2 61Z"/><path class="m m-tibialis" d="M20 92Q18 100 20 110L23 110Q25 100 24 92Z"/><g transform="translate(60,0) scale(-1,1)"><circle class="hd" cx="30" cy="8.5" r="6"/><rect class="hd" x="27.3" y="14" width="5.4" height="5" rx="1.5"/><ellipse class="hd" cx="10" cy="63.5" rx="2" ry="2.6"/><ellipse class="hd" cx="22.5" cy="90" rx="2.4" ry="2"/><ellipse class="hd" cx="21.5" cy="112.5" rx="3" ry="1.6"/><path class="m m-traps" d="M24 19Q27 17 30 18L30 21Q26 21 22 22Z"/><path class="m m-delts" d="M22 21Q15 21 14 28Q15 33 18 33Q20 27 24 24Z"/><path class="m m-chest" d="M30 22L30 33Q24 35 19.5 32Q18.5 27 23 23.5Q27 22 30 22Z"/><path class="m m-biceps" d="M18 33Q14 34 13 41Q13 46 15 47Q18 44 19 38Z"/><path class="m m-forearms" d="M13 47Q10 52 9 60L11 61Q15 55 16 48Z"/><path class="m m-abs" d="M30 34L30 54Q27 55 25.5 53L25.5 36Q27.5 35 30 34Z"/><path class="m m-obliques" d="M25.5 36L25.5 53Q22 52 21 47Q20 40 21 35Z"/><path class="m m-quads" d="M20.5 57Q17 66 18 80Q20 87 24 88Q27 80 27 68Q27 61 24 59Z"/><path class="m m-adductors" d="M27.2 61Q29.5 64 29.6 72Q28.5 78 26.4 80Q27.4 70 27.2 61Z"/><path class="m m-tibialis" d="M20 92Q18 100 20 110L23 110Q25 100 24 92Z"/></g><text x="30" y="121" text-anchor="middle">СПЕРЕДИ</text></g><g transform="translate(60,0)"><circle class="hd" cx="30" cy="8.5" r="6"/><rect class="hd" x="27.3" y="14" width="5.4" height="5" rx="1.5"/><ellipse class="hd" cx="10" cy="63.5" rx="2" ry="2.6"/><ellipse class="hd" cx="22.5" cy="90" rx="2.4" ry="2"/><ellipse class="hd" cx="21.5" cy="112.5" rx="3" ry="1.6"/><path class="m m-traps" d="M30 15L30 38Q27 30 21.5 22.5Q26 19.5 30 15Z"/><path class="m m-rdelts" d="M21.5 22.5Q15 22 14 29Q16 32 19 31Q21 26 24 25Z"/><path class="m m-triceps" d="M18.5 32Q14 34 13 41Q14 46 16 46Q19 41 19.5 35Z"/><path class="m m-forearms" d="M13 47Q10 52 9 60L11 61Q15 55 16 48Z"/><path class="m m-lats" d="M21.5 27Q19 34 21 44Q24 50 28 50Q29 42 28 36Q25 30 21.5 27Z"/><path class="m m-midback" d="M23.5 26.5Q22.5 31 26 34.5L29.6 35L29.6 27Q26.5 25.5 23.5 26.5Z"/><path class="m m-lowback" d="M27 40.5L27 52Q28.6 53 29.7 53L29.7 40.5Z"/><path class="m m-glutes" d="M21 53.5Q19 58 21 63Q25 66 29.7 64L29.7 54.5Q25 52.5 21 53.5Z"/><path class="m m-hams" d="M20 65Q18 72 19 82Q21 88 24 88Q27 80 28 72Q28 66.5 26 65.5Z"/><path class="m m-calves" d="M19 92Q16 99 19 106Q22 108 24 104Q25 97 23 92Z"/><g transform="translate(60,0) scale(-1,1)"><circle class="hd" cx="30" cy="8.5" r="6"/><rect class="hd" x="27.3" y="14" width="5.4" height="5" rx="1.5"/><ellipse class="hd" cx="10" cy="63.5" rx="2" ry="2.6"/><ellipse class="hd" cx="22.5" cy="90" rx="2.4" ry="2"/><ellipse class="hd" cx="21.5" cy="112.5" rx="3" ry="1.6"/><path class="m m-traps" d="M30 15L30 38Q27 30 21.5 22.5Q26 19.5 30 15Z"/><path class="m m-rdelts" d="M21.5 22.5Q15 22 14 29Q16 32 19 31Q21 26 24 25Z"/><path class="m m-triceps" d="M18.5 32Q14 34 13 41Q14 46 16 46Q19 41 19.5 35Z"/><path class="m m-forearms" d="M13 47Q10 52 9 60L11 61Q15 55 16 48Z"/><path class="m m-lats" d="M21.5 27Q19 34 21 44Q24 50 28 50Q29 42 28 36Q25 30 21.5 27Z"/><path class="m m-midback" d="M23.5 26.5Q22.5 31 26 34.5L29.6 35L29.6 27Q26.5 25.5 23.5 26.5Z"/><path class="m m-lowback" d="M27 40.5L27 52Q28.6 53 29.7 53L29.7 40.5Z"/><path class="m m-glutes" d="M21 53.5Q19 58 21 63Q25 66 29.7 64L29.7 54.5Q25 52.5 21 53.5Z"/><path class="m m-hams" d="M20 65Q18 72 19 82Q21 88 24 88Q27 80 28 72Q28 66.5 26 65.5Z"/><path class="m m-calves" d="M19 92Q16 99 19 106Q22 108 24 104Q25 97 23 92Z"/></g><text x="30" y="121" text-anchor="middle">СЗАДИ</text></g></svg>';
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, active=null, userPaused=false;
     cards.forEach(function(c){
-      var ms=(c.getAttribute('data-muscles')||'').split(' ').filter(Boolean);
-      var map=c.querySelector('.vc-map'); map.innerHTML='<svg viewBox="0 0 100 94">'+F+B+'</svg>';
-      ms.forEach(function(m){ [].forEach.call(map.querySelectorAll('.m-'+m),function(e){ e.classList.add('on'); }); });
+      var ms=(c.getAttribute('data-muscles')||'').split(' ').filter(Boolean), map=c.querySelector('.vc-map');
+      map.innerHTML=SVG; ms.forEach(function(m){ [].forEach.call(map.querySelectorAll('.m-'+m),function(e){ e.classList.add('on'); }); });
       c.querySelector('.vc-mus').textContent=ms.map(function(m){ return MN[m]||m; }).join(' · ');
+      var v=c.querySelector('video'), cue=c.querySelector('.vc-cue'), list=cue.getAttribute('data-cues').split('|'), n=cue.querySelector('b'), t=cue.querySelector('span'), cur=0, dots=cue.querySelector('.vc-dots');
+      var ld=document.createElement('span'); ld.className='vc-load'; c.appendChild(ld);
+      list.forEach(function(_,i){ var d=document.createElement('i'); if(!i) d.className='on'; dots.appendChild(d); });
+      c._v=v;
+      v.addEventListener('timeupdate',function(){
+        if(!v.duration) return; var k=Math.min(list.length-1, Math.floor(v.currentTime/v.duration*list.length));
+        if(k!==cur){ cur=k; n.textContent=k+1; t.textContent=list[k]; [].forEach.call(dots.children,function(d,i){ d.classList.toggle('on', i<=k); }); cue.classList.remove('pop'); void cue.offsetWidth; cue.classList.add('pop'); }
+      });
+      v.addEventListener('playing',function(){ c.classList.add('playing'); c.classList.remove('loading'); });
+      v.addEventListener('waiting',function(){ c.classList.add('loading'); });
+      v.addEventListener('pause',function(){ c.classList.remove('playing','loading'); });
+      c.querySelector('.vc-play').addEventListener('click',function(){
+        if(dragMoved) return;
+        if(active===c && !v.paused){ v.pause(); userPaused=true; } else { userPaused=false; play(c); }
+      });
     });
+    function prime(c){ if(c && !c._v.getAttribute('src')){ c._v.preload='auto'; c._v.src=c._v.getAttribute('data-src'); c._v.load(); } }
+    function play(c){
+      if(active && active!==c){ active._v.pause(); active.classList.remove('active'); }
+      active=c; c.classList.add('active'); prime(c);
+      if(c._v.readyState<3) c.classList.add('loading');
+      var p=c._v.play(); if(p&&p.catch) p.catch(function(){ c.classList.remove('loading'); });
+      var i=shown().indexOf(c); prime(shown()[i+1]); prime(shown()[i+2]);
+    }
+    function shown(){ return cards.filter(function(c){ return !c.hidden; }); }
+    function inFeed(c){ var r=c.getBoundingClientRect(), f=feed.getBoundingClientRect(); return r.left>=f.left-8 && r.right<=f.right+8; }
+    function sectionVisible(){ var r=feed.getBoundingClientRect(); return r.top<innerHeight*.85 && r.bottom>innerHeight*.15; }
+    function auto(){
+      var vis=shown().filter(inFeed);
+      vis.slice(0,4).forEach(prime);
+      if(!sectionVisible()){ if(active && !active._v.paused) active._v.pause(); return; }
+      if(reduce || userPaused) return;
+      if(active && !active.hidden && inFeed(active)){ if(active._v.paused) play(active); return; }
+      if(vis[0]) play(vis[0]);
+    }
+    var tmr; function later(){ clearTimeout(tmr); tmr=setTimeout(auto,140); }
+    feed.addEventListener('scroll',later,{passive:true}); window.addEventListener('scroll',later,{passive:true}); window.addEventListener('resize',later);
+    // arrows
+    var prev=document.querySelector('.vprev'), next=document.querySelector('.vnext');
+    function step(){ var c=shown()[0]; return c ? c.getBoundingClientRect().width+12 : 300; }
+    function arrows(){ if(!prev) return; prev.disabled=feed.scrollLeft<8; next.disabled=feed.scrollLeft+feed.clientWidth>=feed.scrollWidth-8; }
+    if(prev){ prev.addEventListener('click',function(){ feed.scrollBy({left:-step(),behavior:'smooth'}); }); next.addEventListener('click',function(){ feed.scrollBy({left:step(),behavior:'smooth'}); }); feed.addEventListener('scroll',arrows,{passive:true}); }
+    // mouse drag
+    var dragX=0, dragL=0, dragging=false, dragMoved=false;
+    feed.addEventListener('pointerdown',function(e){ if(e.pointerType!=='mouse') return; dragging=true; dragMoved=false; dragX=e.clientX; dragL=feed.scrollLeft; });
+    window.addEventListener('pointermove',function(e){ if(!dragging) return; var dx=e.clientX-dragX; if(Math.abs(dx)>5){ dragMoved=true; feed.classList.add('drag'); } if(dragMoved) feed.scrollLeft=dragL-dx; });
+    window.addEventListener('pointerup',function(){ if(!dragging) return; dragging=false; feed.classList.remove('drag'); setTimeout(function(){ dragMoved=false; },50); });
+    // filter
     var fb=[].slice.call(document.querySelectorAll('.vfilter button'));
     fb.forEach(function(b){
       var f=b.getAttribute('data-f'), n=f==='all'?cards.length:cards.filter(function(c){ return c.getAttribute('data-group')===f; }).length;
       var sm=document.createElement('small'); sm.textContent=n; b.appendChild(sm); if(!n) b.hidden=true;
       b.addEventListener('click',function(){
         fb.forEach(function(x){ x.classList.toggle('on', x===b); x.setAttribute('aria-pressed', x===b); });
-        cards.forEach(function(c){ var show=f==='all'||c.getAttribute('data-group')===f; c.hidden=!show; if(!show && c._v && !c._v.paused) c._v.pause(); });
-        var feed=document.querySelector('.vfeed'); if(feed) feed.scrollLeft=0;
-        setTimeout(function(){ window.dispatchEvent(new Event('scroll')); },60);
+        cards.forEach(function(c){ var show=f==='all'||c.getAttribute('data-group')===f; c.hidden=!show; if(!show){ c._v.pause(); c.classList.remove('active'); if(active===c) active=null; } });
+        feed.scrollLeft=0; userPaused=false; arrows(); later();
       });
     });
-    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    cards.forEach(function(c){
-      var v=c.querySelector('video'), cue=c.querySelector('.vc-cue'), list=cue.getAttribute('data-cues').split('|'), n=cue.querySelector('b'), t=cue.querySelector('span'), cur=0;
-      var dots=cue.querySelector('.vc-dots'); list.forEach(function(_,i){ var d=document.createElement('i'); if(!i) d.className='on'; dots.appendChild(d); });
-      function setDots(k){ [].forEach.call(dots.children,function(d,i){ d.classList.toggle('on', i<=k); }); }
-      c._v=v; c._user=false;
-      function load(){ if(!v.getAttribute('src')){ v.src=v.getAttribute('data-src'); } }
-      c._play=function(){ load(); var p=v.play(); if(p&&p.catch) p.catch(function(){}); };
-      v.addEventListener('timeupdate',function(){
-        if(!v.duration) return; var k=Math.min(list.length-1, Math.floor(v.currentTime/v.duration*list.length));
-        if(k!==cur){ cur=k; n.textContent=k+1; t.textContent=list[k]; setDots(k); cue.classList.remove('pop'); void cue.offsetWidth; cue.classList.add('pop'); }
-      });
-      v.addEventListener('play',function(){ c.classList.add('playing'); });
-      v.addEventListener('pause',function(){ c.classList.remove('playing'); });
-      c.querySelector('.vc-play').addEventListener('click',function(){ c._user=true; if(v.paused) c._play(); else v.pause(); });
-    });
-    if(reduce) return;
-    var busy=false;
-    function check(){
-      busy=false; var h=window.innerHeight, w=window.innerWidth;
-      cards.forEach(function(c){
-        if(c._user||c.hidden) return; var r=c.getBoundingClientRect();
-        var vis=r.top < h*.8 && r.bottom > h*.2 && r.left < w*.9 && r.right > w*.1;
-        if(vis){ if(c._v.paused) c._play(); } else if(!c._v.paused) c._v.pause();
-      });
-    }
-    function on(){ if(!busy){ busy=true; requestAnimationFrame(check); } }
-    window.addEventListener('scroll',on,{passive:true}); window.addEventListener('resize',on);
-    var f=document.querySelector('.vfeed'); if(f) f.addEventListener('scroll',on,{passive:true});
-    setTimeout(check,1800);
+    arrows(); setTimeout(auto,600);
   })();
 
   var form=document.getElementById('lead'), note=document.getElementById('form-note');
