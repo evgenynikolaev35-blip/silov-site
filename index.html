@@ -470,6 +470,24 @@ footer .wrap{display:grid;grid-template-columns:1fr auto;gap:20px 32px}
 @media (max-width:820px){.anat-body{grid-template-columns:1fr}.anat-figs svg{max-height:56dvh}}
 body.anat-open{overflow:hidden}
 
+
+/* v12: muscle multi-select */
+.anat svg path.mu{cursor:pointer}
+.anat svg path.mu:hover{opacity:.85}
+.anat svg path.sel{stroke:#fff;stroke-width:6;paint-order:stroke}
+.anat svg path.sel.mu:not(.p1):not(.p2){fill:#5ec8ff}
+.anat-hint{font:500 12px/1.5 var(--mono);color:var(--mute);margin:0}
+.anat-legend li{cursor:pointer}
+.anat-legend li.sel{border-color:#fff;background:#1d252c}
+.anat-legend li.sel b::after{content:" · выбрано";font:500 11px var(--mono);color:#5ec8ff}
+.anat-selbox{border-top:1px solid var(--line);padding-top:14px;display:grid;gap:10px}
+.anat-selbox ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.anat-selbox li{position:relative;display:grid;gap:3px;padding:10px 44px 10px 12px;border:1px solid #5ec8ff;background:rgba(94,200,255,.07)}
+.anat-selbox li b{font:600 15px var(--body)}
+.anat-selbox li span{font:500 11px var(--mono);color:var(--mute)}
+.anat-selbox li em{font-style:normal;font-size:13px;color:var(--mute)}
+.anat-selbox li button{position:absolute;right:6px;top:6px;width:32px;height:32px;border:1px solid var(--line);background:none;color:var(--milk);cursor:pointer}
+
 /* placeholders */
 .ph-chip{display:inline-flex;align-items:center;gap:6px;font:500 11px/1.2 var(--mono);letter-spacing:.04em;text-transform:none;color:var(--lime);border:1px dashed var(--lime);padding:4px 8px;vertical-align:middle;border-radius:2px;background:rgba(16,20,24,.6)}
 .ph-chip::before{content:"ЗАГЛУШКА";letter-spacing:.1em;opacity:.8}
@@ -484,7 +502,7 @@ body:not(.show-ph) .ph-chip{display:none}
 
 <div class="proto" data-block="proto">
   <div class="wrap">
-    <span>ПРОТОТИП v11 · 15.10.2026 · пунктир — данные, которые нужно прислать</span>
+    <span>ПРОТОТИП v12 · 16.10.2026 · пунктир — данные, которые нужно прислать</span>
     <label for="ph-toggle"><input type="checkbox" id="ph-toggle" checked> Показывать заглушки</label>
   </div>
 </div>
@@ -852,13 +870,13 @@ body:not(.show-ph) .ph-chip{display:none}
           <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
         </figure>
-        <figure class="vcard" data-group="legs" data-muscles="quadriceps">
-          <video muted loop playsinline preload="none" poster="video/razgibanie.jpg" data-src="video/razgibanie.mp4" aria-label="Разгибание ног сидя"></video>
+        <figure class="vcard" data-group="legs" data-muscles="hamstring adductors">
+          <video muted loop playsinline preload="none" poster="video/razgibanie.jpg" data-src="video/razgibanie.mp4" aria-label="Сгибание ног сидя"></video>
           <figcaption>
             <span class="vc-tag">Ноги</span>
-            <strong class="vc-title">Разгибание ног сидя</strong>
+            <strong class="vc-title">Сгибание ног сидя</strong>
             <span class="vc-mus"></span>
-            <span class="vc-cue" data-cues="Спина прижата к спинке|Валик на уровне щиколоток|Вверху задержка на секунду"><b>1</b><span>Спина прижата к спинке</span><i class="vc-dots"></i></span>
+            <span class="vc-cue" data-cues="Спина прижата к спинке|Тяни пятки под сиденье|Возвращай ноги медленно"><b>1</b><span>Спина прижата к спинке</span><i class="vc-dots"></i></span>
           </figcaption>
           <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
@@ -885,7 +903,7 @@ body:not(.show-ph) .ph-chip{display:none}
           <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
         </figure>
-        <figure class="vcard" data-group="back" data-muscles="upper-back deltoids biceps">
+        <figure class="vcard" data-group="back" data-muscles="upper-back rdelts biceps">
           <video muted loop playsinline preload="none" poster="video/tyaga-rychag.jpg" data-src="video/tyaga-rychag.mp4" aria-label="Рычажная тяга с упором в грудь"></video>
           <figcaption>
             <span class="vc-tag">Спина</span>
@@ -907,46 +925,46 @@ body:not(.show-ph) .ph-chip{display:none}
           <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
         </figure>
-        <figure class="vcard" data-group="back" data-muscles="upper-back biceps forearm">
-          <video muted loop playsinline preload="none" poster="video/tyaga-sverhu.jpg" data-src="video/tyaga-sverhu.mp4" aria-label="Тяга сверху в рычажном тренажёре"></video>
+        <figure class="vcard" data-group="back" data-muscles="upper-back rdelts">
+          <video muted loop playsinline preload="none" poster="video/zhim-plechi.jpg" data-src="video/zhim-plechi.mp4" aria-label="Рычажная верхняя тяга"></video>
           <figcaption>
             <span class="vc-tag">Спина</span>
-            <strong class="vc-title">Тяга сверху в рычажном тренажёре</strong>
+            <strong class="vc-title">Рычажная верхняя тяга</strong>
             <span class="vc-mus"></span>
-            <span class="vc-cue" data-cues="Бёдра зафиксированы под валиками|Тяни локти вниз к корпусу|Вверху — полное растяжение"><b>1</b><span>Бёдра зафиксированы под валиками</span><i class="vc-dots"></i></span>
+            <span class="vc-cue" data-cues="Поясница прижата, корпус ровно|Тяни локти вниз к корпусу|Вверху — растяжение широчайших"><b>1</b><span>Поясница прижата, корпус ровно</span><i class="vc-dots"></i></span>
           </figcaption>
           <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
         </figure>
-        <figure class="vcard" data-group="back" data-muscles="upper-back deltoids biceps">
-          <video muted loop playsinline preload="none" poster="video/tyaga-ganteley.jpg" data-src="video/tyaga-ganteley.mp4" aria-label="Тяга гантелей лёжа на наклонной скамье"></video>
-          <figcaption>
-            <span class="vc-tag">Спина</span>
-            <strong class="vc-title">Тяга гантелей лёжа на наклонной скамье</strong>
-            <span class="vc-mus"></span>
-            <span class="vc-cue" data-cues="Грудь плотно на скамье|Тяни гантели к поясу|Своди лопатки в верхней точке"><b>1</b><span>Грудь плотно на скамье</span><i class="vc-dots"></i></span>
-          </figcaption>
-          <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
-          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
-        </figure>
-        <figure class="vcard" data-group="back" data-muscles="upper-back biceps forearm">
-          <video muted loop playsinline preload="none" poster="video/tyaga-ganteley-sboku.jpg" data-src="video/tyaga-ganteley-sboku.mp4" aria-label="Тяга гантелей с упором: вид сбоку"></video>
-          <figcaption>
-            <span class="vc-tag">Спина</span>
-            <strong class="vc-title">Тяга гантелей с упором: вид сбоку</strong>
-            <span class="vc-mus"></span>
-            <span class="vc-cue" data-cues="Корпус наклонён, спина ровная|Локти идут вдоль корпуса|Опускай гантели под контролем"><b>1</b><span>Корпус наклонён, спина ровная</span><i class="vc-dots"></i></span>
-          </figcaption>
-          <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
-          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
-        </figure>
-        <figure class="vcard" data-group="shoulders" data-muscles="deltoids triceps trapezius">
-          <video muted loop playsinline preload="none" poster="video/zhim-plechi.jpg" data-src="video/zhim-plechi.mp4" aria-label="Жим в тренажёре сидя"></video>
+        <figure class="vcard" data-group="shoulders" data-muscles="rdelts trapezius">
+          <video muted loop playsinline preload="none" poster="video/tyaga-sverhu.jpg" data-src="video/tyaga-sverhu.mp4" aria-label="Разведение рук в тренажёре на заднюю дельту"></video>
           <figcaption>
             <span class="vc-tag">Плечи</span>
-            <strong class="vc-title">Жим в тренажёре сидя</strong>
+            <strong class="vc-title">Разведение рук в тренажёре на заднюю дельту</strong>
             <span class="vc-mus"></span>
-            <span class="vc-cue" data-cues="Поясница прижата к спинке|Локти под кистями|Не блокируй локти вверху"><b>1</b><span>Поясница прижата к спинке</span><i class="vc-dots"></i></span>
+            <span class="vc-cue" data-cues="Корпус неподвижен, грудь в упоре|Разводи руки широкой дугой|Возвращай медленно, без рывка"><b>1</b><span>Корпус неподвижен, грудь в упоре</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="shoulders" data-muscles="rdelts">
+          <video muted loop playsinline preload="none" poster="video/tyaga-ganteley.jpg" data-src="video/tyaga-ganteley.mp4" aria-label="Отведение рук в стороны с гантелями: задняя дельта"></video>
+          <figcaption>
+            <span class="vc-tag">Плечи</span>
+            <strong class="vc-title">Отведение рук в стороны с гантелями: задняя дельта</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Грудь плотно на скамье|Отводи руки в стороны, локти чуть согнуты|Внизу — растяжение задней дельты"><b>1</b><span>Грудь плотно на скамье</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="shoulders" data-muscles="rdelts">
+          <video muted loop playsinline preload="none" poster="video/tyaga-ganteley-sboku.jpg" data-src="video/tyaga-ganteley-sboku.mp4" aria-label="Отведение плеча назад в упоре грудью с гантелями"></video>
+          <figcaption>
+            <span class="vc-tag">Плечи</span>
+            <strong class="vc-title">Отведение плеча назад в упоре грудью с гантелями</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Грудь в упоре на скамье|Отводи плечо назад, локоть ведёт движение|Не помогай корпусом"><b>1</b><span>Грудь в упоре на скамье</span><i class="vc-dots"></i></span>
           </figcaption>
           <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
@@ -962,7 +980,7 @@ body:not(.show-ph) .ph-chip{display:none}
           <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
         </figure>
-        <figure class="vcard" data-group="stage" data-muscles="upper-back trapezius deltoids">
+        <figure class="vcard" data-group="stage" data-muscles="upper-back trapezius rdelts">
           <video muted loop playsinline preload="none" poster="video/pozirovanie.jpg" data-src="video/pozirovanie.mp4" aria-label="Позирование: спина"></video>
           <figcaption>
             <span class="vc-tag">Позирование</span>
@@ -1110,7 +1128,9 @@ body:not(.show-ph) .ph-chip{display:none}
     <div class="anat-body">
       <div class="anat-figs" id="anat-figs"></div>
       <div class="anat-side">
+        <p class="anat-hint">Нажмите на мышцу на схеме или в списке — она выделится. Можно выбрать несколько.</p>
         <ul class="anat-legend" id="anat-legend"></ul>
+        <div class="anat-selbox" id="anat-sel" hidden><p class="eyebrow">Выбранные мышцы · <small>0</small></p><ul></ul></div>
         <div class="anat-key"><span><i class="k1"></i>основная нагрузка</span><span><i class="k2"></i>помогают в движении</span></div>
       </div>
     </div>
@@ -1228,15 +1248,15 @@ body:not(.show-ph) .ph-chip{display:none}
   (function(){
     var feed=document.querySelector('.vfeed'); if(!feed) return;
     var cards=[].slice.call(feed.querySelectorAll('.vcard')); if(!cards.length) return;
-    var MN={chest:['Большая грудная','m. pectoralis major','Сводит руки перед собой, толкает вес от груди'],deltoids:['Дельтовидные','m. deltoideus','Поднимают руку вперёд, в стороны и назад'],biceps:['Бицепс','m. biceps brachii','Сгибает руку в локте'],triceps:['Трицепс','m. triceps brachii','Разгибает руку в локте'],forearm:['Мышцы предплечья','mm. antebrachii','Удерживают хват'],abs:['Прямая мышца живота','m. rectus abdominis','Стабилизирует корпус'],obliques:['Косые мышцы живота','m. obliquus externus abdominis','Скручивания и наклоны корпуса'],quadriceps:['Квадрицепс','m. quadriceps femoris','Разгибает ногу в колене'],adductors:['Приводящие мышцы бедра','mm. adductores','Сводят ноги, стабилизируют колени'],hamstring:['Бицепс бедра','m. biceps femoris, m. semitendinosus, m. semimembranosus','Сгибает ногу в колене, разгибает бедро'],gluteal:['Большая ягодичная','m. gluteus maximus','Разгибает бедро, помогает подняться из приседа'],calves:['Икроножные','m. gastrocnemius','Поднимают на носок, помогают сгибать колено'],tibialis:['Передняя большеберцовая','m. tibialis anterior','Тянет стопу на себя'],trapezius:['Трапециевидная','m. trapezius','Поднимает и сводит лопатки'],'upper-back':['Широчайшие и ромбовидные','m. latissimus dorsi, mm. rhomboidei','Тянут локти вниз и назад, сводят лопатки'],'lower-back':['Разгибатели спины','m. erector spinae','Держат спину ровной']};
+    var MN={chest:['Большая грудная','m. pectoralis major','Сводит руки перед собой, толкает вес от груди'],deltoids:['Дельтовидные','m. deltoideus','Поднимают руку вперёд, в стороны и назад'],biceps:['Бицепс','m. biceps brachii','Сгибает руку в локте'],triceps:['Трицепс','m. triceps brachii','Разгибает руку в локте'],forearm:['Мышцы предплечья','mm. antebrachii','Удерживают хват'],abs:['Прямая мышца живота','m. rectus abdominis','Стабилизирует корпус'],obliques:['Косые мышцы живота','m. obliquus externus abdominis','Скручивания и наклоны корпуса'],quadriceps:['Квадрицепс','m. quadriceps femoris','Разгибает ногу в колене'],adductors:['Приводящие мышцы бедра','mm. adductores','Сводят ноги, стабилизируют колени'],hamstring:['Бицепс бедра','m. biceps femoris, m. semitendinosus, m. semimembranosus','Сгибает ногу в колене, разгибает бедро'],gluteal:['Большая ягодичная','m. gluteus maximus','Разгибает бедро, помогает подняться из приседа'],calves:['Икроножные','m. gastrocnemius','Поднимают на носок, помогают сгибать колено'],tibialis:['Передняя большеберцовая','m. tibialis anterior','Тянет стопу на себя'],trapezius:['Трапециевидная','m. trapezius','Поднимает и сводит лопатки'],rdelts:['Задний пучок дельтовидной','m. deltoideus, pars spinalis','Отводит плечо назад и в сторону'],neck:['Мышцы шеи','m. sternocleidomastoideus','Поворачивают и наклоняют голову'],'upper-back':['Широчайшие и ромбовидные','m. latissimus dorsi, mm. rhomboidei','Тянут локти вниз и назад, сводят лопатки'],'lower-back':['Разгибатели спины','m. erector spinae','Держат спину ровной']};
     var NM={head:1,hair:1,hands:1,feet:1,knees:1,ankles:1};
     var A=window.ANATOMY||{f:{},b:{}};
     function figSvg(side, ms, big, pre){
       var d=A[side]||{}, vb=side==='f'?'0 0 724 1448':'724 0 724 1448', out='';
       Object.keys(d).forEach(function(slug){
-        var k=ms.indexOf(slug), cls=NM[slug]?'nm':'mu'+(k===0?' p1':k>0?' p2':'');
+        var k=ms.indexOf(slug); if(slug==='deltoids' && k<0 && side==='b') k=ms.indexOf('rdelts'); var key=(slug==='deltoids'&&side==='b'&&ms.indexOf('deltoids')<0)?'rdelts':slug; var cls=NM[slug]?'nm':'mu'+(k===0?' p1':k>0?' p2':'');
         d[slug].forEach(function(p){
-          out+='<path class="'+cls+'" data-s="'+slug+'" d="'+p+'"'+(big&&!NM[slug]?' fill="url(#'+pre+(k===0?'hi':k>0?'mid':'mu')+')"':'')+'/>';
+          out+='<path class="'+cls+'" data-s="'+(slug==='deltoids'&&side==='b'?'rdelts':slug)+'" data-k="'+key+'" d="'+p+'"'+(big&&!NM[slug]?' fill="url(#'+pre+(k===0?'hi':k>0?'mid':'mu')+')"':'')+'/>';
           if(big&&!NM[slug]) out+='<path class="fib" fill="url(#'+pre+'fib)" d="'+p+'"/>';
         });
       });
@@ -1258,18 +1278,29 @@ body:not(.show-ph) .ph-chip{display:none}
       var f=figSvg('f',ms,true,'af'), b=figSvg('b',ms,true,'ab');
       figs.innerHTML='<figure><svg class="afw" viewBox="'+f.vb+'" role="img" aria-label="Мышцы спереди">'+defs('af')+f.body+'</svg><figcaption>СПЕРЕДИ</figcaption></figure>'+
         '<figure><svg class="abw" viewBox="'+b.vb+'" role="img" aria-label="Мышцы сзади">'+defs('ab')+b.body+'</svg><figcaption>СЗАДИ</figcaption></figure>';
-      legend.innerHTML='';
+      legend.innerHTML=''; selected={}; renderSel();
       ms.forEach(function(m,i){
         var info=MN[m]||[m,'',''], li=document.createElement('li');
+        li.setAttribute('data-s',m); li.tabIndex=0; li.setAttribute('role','button');
         li.innerHTML='<i class="'+(i===0?'k1':'k2')+'"></i><b></b><span></span><em></em>';
         li.querySelector('b').textContent=info[0]; li.querySelector('span').textContent=info[1]; li.querySelector('em').textContent=(i===0?'Основная нагрузка. ':'Помогает. ')+info[2];
-        li.addEventListener('mouseenter',function(){ [].forEach.call(figs.querySelectorAll('[data-s="'+m+'"]'),function(p){ p.classList.add('flash'); }); });
-        li.addEventListener('mouseleave',function(){ [].forEach.call(figs.querySelectorAll('.flash'),function(p){ p.classList.remove('flash'); }); });
+        li.addEventListener('click',function(){ toggle(m); });
+        li.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(m); } });
         legend.appendChild(li);
       });
       lastFocus=document.activeElement; modal.hidden=false; document.body.classList.add('anat-open'); modal.querySelector('.anat-x').focus();
     }
-    function closeAnat(){ modal.hidden=true; document.body.classList.remove('anat-open'); if(lastFocus) lastFocus.focus(); }
+    var selected={}, selBox=document.getElementById('anat-sel');
+    function toggle(m){ if(selected[m]) delete selected[m]; else selected[m]=1; renderSel(); }
+    function renderSel(){
+      [].forEach.call(figs.querySelectorAll('path[data-s]'),function(p){ p.classList.toggle('sel', !!selected[p.getAttribute('data-s')]); });
+      [].forEach.call(legend.querySelectorAll('li'),function(li){ li.classList.toggle('sel', !!selected[li.getAttribute('data-s')]); });
+      var keys=Object.keys(selected); selBox.hidden=!keys.length; var ul=selBox.querySelector('ul'); ul.innerHTML='';
+      keys.forEach(function(m){ var info=MN[m]||[m,'',''], li=document.createElement('li'); li.innerHTML='<b></b><span></span><em></em><button type="button" aria-label="Снять выбор">✕</button>'; li.querySelector('b').textContent=info[0]; li.querySelector('span').textContent=info[1]; li.querySelector('em').textContent=info[2]; li.querySelector('button').addEventListener('click',function(){ toggle(m); }); ul.appendChild(li); });
+      selBox.querySelector('small').textContent=keys.length;
+    }
+    figs.addEventListener('click',function(e){ var p=e.target.closest&&e.target.closest('path.mu'); if(p) toggle(p.getAttribute('data-s')); });
+    function closeAnat(){ selected={}; modal.hidden=true; document.body.classList.remove('anat-open'); if(lastFocus) lastFocus.focus(); }
     modal.querySelector('.anat-x').addEventListener('click',closeAnat);
     modal.addEventListener('click',function(e){ if(e.target===modal) closeAnat(); });
     document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !modal.hidden) closeAnat(); });
