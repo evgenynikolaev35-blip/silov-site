@@ -423,5 +423,27 @@
         "abs"
       ]
     }
+  ],
+  "videoGroups": [
+    {
+      "id": "legs",
+      "name": "Ноги"
+    },
+    {
+      "id": "back",
+      "name": "Спина"
+    },
+    {
+      "id": "shoulders",
+      "name": "Плечи"
+    },
+    {
+      "id": "arms",
+      "name": "Руки"
+    },
+    {
+      "id": "stage",
+      "name": "Позирование"
+    }
   ]
 }

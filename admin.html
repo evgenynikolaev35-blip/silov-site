@@ -125,6 +125,15 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
 .v-mlist li button{grid-row:1/span 2;grid-column:2;width:30px;height:30px;border:1px solid var(--line);background:none;color:var(--milk);cursor:pointer}
 .v-mlist li.empty{display:block;color:var(--mute);font-size:13px}
 .ved-acts{display:flex;gap:10px;flex-wrap:wrap}
+.vgroups{display:grid;gap:8px;margin-bottom:18px;border:1px solid var(--line);padding:14px}
+.vgroups .lbl{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--lime);margin:0}
+.vg-list{display:flex;flex-wrap:wrap;gap:8px}
+.vg-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--ink-2);padding:4px 4px 4px 12px;font-size:14px}
+.vg-chip small{font:500 11px var(--mono);color:var(--mute)}
+.vg-chip button{width:30px;height:30px;border:1px solid var(--line);background:none;color:var(--milk);cursor:pointer;font-size:13px}
+.vg-chip button:hover{border-color:var(--lime);color:var(--lime)}
+.vg-add{display:flex;gap:8px;flex-wrap:wrap}
+.vg-add input{flex:1 1 220px;background:var(--ink-2);border:1px solid var(--line);color:var(--milk);font:400 16px var(--body);padding:10px 12px;border-radius:2px}
 </style>
 </head>
 <body>
@@ -184,6 +193,11 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
     <p class="eyebrow">Шаг 5</p>
     <h2>Видео упражнений · <span id="v-count">0</span></h2>
     <p class="sub">Ролики в блоке «Разборы техники». Порядок здесь — порядок в ленте. Новое видео: выберите файл, обрежьте до 3–15 секунд, напишите название и подсказки, отметьте мышцы на схеме.</p>
+    <div class="vgroups">
+      <p class="lbl">Группы фильтра на сайте</p>
+      <div class="vg-list" id="vg-list"></div>
+      <div class="vg-add"><input type="text" id="vg-name" placeholder="Новая группа, например: Грудь" aria-label="Название новой группы"><button class="btn small" id="vg-btn" type="button">+ Добавить группу</button></div>
+    </div>
     <div class="vlist" id="vlist"></div>
     <button class="btn" id="v-new" type="button">+ Добавить видео</button>
 
@@ -475,14 +489,37 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
   }
 
   // ---------- Видео упражнений ----------
-  var VG=[['legs','Ноги'],['back','Спина'],['shoulders','Плечи'],['arms','Руки'],['stage','Позирование']];
-  var VGN={}; VG.forEach(function(g){ VGN[g[0]]=g[1]; });
+  var VG_DEF=[{id:'legs',name:'Ноги'},{id:'back',name:'Спина'},{id:'shoulders',name:'Плечи'},{id:'arms',name:'Руки'},{id:'stage',name:'Позирование'}];
+  var VGN={};
+  function groups(){ if(!cfg.videoGroups||!cfg.videoGroups.length) cfg.videoGroups=JSON.parse(JSON.stringify(VG_DEF)); return cfg.videoGroups; }
+  function renderGroups(){
+    VGN={}; groups().forEach(function(g){ VGN[g.id]=g.name; });
+    var box=$('vg-list'); if(!box) return; box.innerHTML='';
+    groups().forEach(function(g,i){
+      var n=(cfg.videos||[]).filter(function(v){ return v.group===g.id; }).length;
+      var c=document.createElement('span'); c.className='vg-chip';
+      var t=document.createElement('span'); t.textContent=g.name; var sm=document.createElement('small'); sm.textContent=n;
+      c.appendChild(t); c.appendChild(sm);
+      [['←','Левее',function(){ var L=groups(); if(i>0){ var x=L[i-1]; L[i-1]=L[i]; L[i]=x; setDirty(); renderGroups(); } }],
+       ['✎','Переименовать',function(){ var nm=prompt('Новое название группы',g.name); if(nm&&nm.trim()){ g.name=nm.trim(); setDirty(); renderGroups(); renderVideos(); } }],
+       ['✕','Удалить',function(){ if(n){ alert('В группе «'+g.name+'» есть ролики ('+n+'). Сначала перенесите их в другую группу.'); return; } if(confirm('Удалить группу «'+g.name+'»?')){ groups().splice(i,1); setDirty(); renderGroups(); } }]
+      ].forEach(function(a){ var b=document.createElement('button'); b.type='button'; b.textContent=a[0]; b.title=a[1]; b.addEventListener('click',a[2]); c.appendChild(b); });
+      box.appendChild(c);
+    });
+    var sel=$('v-group'); if(sel){ var cur=sel.value; sel.innerHTML=''; groups().forEach(function(g){ var o=document.createElement('option'); o.value=g.id; o.textContent=g.name; sel.appendChild(o); }); var o2=document.createElement('option'); o2.value='__new'; o2.textContent='+ Новая группа…'; sel.appendChild(o2); if(VGN[cur]) sel.value=cur; }
+  }
+  function addGroup(name){
+    name=(name||'').trim(); if(!name) return null;
+    var ex=groups().filter(function(g){ return g.name.toLowerCase()===name.toLowerCase(); })[0]; if(ex) return ex.id;
+    var id='g'+Date.now().toString(36); groups().push({id:id,name:name}); setDirty(); renderGroups(); return id;
+  }
   var MRU={chest:'Большая грудная',fdelts:'Передняя дельта',rdelts:'Задняя дельта',deltoids:'Дельты целиком',biceps:'Бицепс',triceps:'Трицепс',forearm:'Предплечья',abs:'Пресс',obliques:'Косые мышцы',quadriceps:'Квадрицепс',adductors:'Приводящие',hamstring:'Бицепс бедра',gluteal:'Ягодичные',calves:'Икроножные',tibialis:'Передняя большеберцовая',trapezius:'Трапеция','upper-back':'Широчайшие и ромбовидные','lower-back':'Разгибатели спины',neck:'Шея'};
   var NMV={head:1,hair:1,hands:1,feet:1,knees:1,ankles:1};
   var media={}, previews={}, ed=null;
   function vStatus(t,cls){ var e=$('v-st'); e.textContent=t||''; e.className='state'+(cls?' '+cls:''); }
 
   function renderVideos(){
+    renderGroups();
     var box=$('vlist'); if(!box) return; box.innerHTML='';
     var list=cfg.videos||[];
     $('v-count').textContent=list.length;
@@ -509,7 +546,7 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
     ed={idx:idx,data:v,blob:null,poster:null,ext:null};
     $('ved').hidden=false; $('v-new').hidden=true;
     $('ved-h').textContent=idx>=0?'Изменить ролик':'Новый ролик';
-    $('v-title').value=v.title||''; $('v-group').value=v.group||'legs';
+    renderGroups(); $('v-title').value=v.title||''; $('v-group').value=VGN[v.group]?v.group:groups()[0].id;
     for(var k=0;k<3;k++) $('v-c'+(k+1)).value=(v.cues||[])[k]||'';
     $('v-file').value=''; $('v-prev').removeAttribute('src'); $('v-prev').hidden=true; $('v-trim').hidden=true;
     var out=$('v-out');
@@ -595,7 +632,7 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
 
   function saveClip(){
     var d=ed.data;
-    d.title=$('v-title').value.trim(); d.group=$('v-group').value;
+    d.title=$('v-title').value.trim(); d.group=$('v-group').value; if(d.group==='__new'){ vStatus('Выберите группу.','err'); return; }
     d.cues=[1,2,3].map(function(k){ return $('v-c'+k).value.trim(); }).filter(Boolean);
     if(!d.title){ vStatus('Напишите название упражнения.','err'); $('v-title').focus(); return; }
     if(!d.cues.length){ vStatus('Добавьте хотя бы одну подсказку по технике.','err'); $('v-c1').focus(); return; }
@@ -625,7 +662,11 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
   }
 
   function initVideoAdmin(){
-    var sel=$('v-group'); VG.forEach(function(g){ var o=document.createElement('option'); o.value=g[0]; o.textContent=g[1]; sel.appendChild(o); });
+    var sel=$('v-group'); var prevG='legs';
+    sel.addEventListener('focus',function(){ prevG=sel.value; });
+    sel.addEventListener('change',function(){ if(sel.value!=='__new'){ prevG=sel.value; return; } var nm=prompt('Название новой группы (кнопка фильтра на сайте)'); var id=addGroup(nm); sel.value=id||prevG; });
+    $('vg-btn').addEventListener('click',function(){ var id=addGroup($('vg-name').value); if(id){ $('vg-name').value=''; msg('Группа добавлена. Нажмите «Сохранить и опубликовать».'); } });
+    $('vg-name').addEventListener('keydown',function(e){ if(e.key==='Enter') $('vg-btn').click(); });
     $('v-new').addEventListener('click',function(){ openEditor(-1); });
     $('v-cancel').addEventListener('click',closeEditor);
     $('v-ok').addEventListener('click',saveClip);
