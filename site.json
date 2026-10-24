@@ -47,5 +47,381 @@
     "contact.phone": "Телефон: +7 921 534-03-50",
     "place.how1": "ТЦ «Оазис», ул. Мира, 82",
     "place.how2": "Поднимитесь на 5 этаж — вход в фитнес-клуб CardioZone"
-  }
+  },
+  "videos": [
+    {
+      "id": "prised",
+      "src": "video/prised.mp4",
+      "poster": "video/prised.jpg",
+      "group": "legs",
+      "title": "Присед в тренажёре",
+      "cues": [
+        "Спина прижата к опоре",
+        "Колени смотрят по носкам",
+        "Вниз плавно, вверх мощно"
+      ],
+      "muscles": [
+        "quadriceps"
+      ],
+      "assist": [
+        "gluteal",
+        "adductors"
+      ]
+    },
+    {
+      "id": "prised-sboku",
+      "src": "video/prised-sboku.mp4",
+      "poster": "video/prised-sboku.jpg",
+      "group": "legs",
+      "title": "Присед в тренажёре: вид сбоку",
+      "cues": [
+        "Пятки на подставке — присед глубже",
+        "Спина ровная, корпус в напряжении",
+        "Колени не сводить внутрь"
+      ],
+      "muscles": [
+        "quadriceps"
+      ],
+      "assist": [
+        "gluteal",
+        "adductors"
+      ]
+    },
+    {
+      "id": "zhim-nogami",
+      "src": "video/zhim-nogami.mp4",
+      "poster": "video/zhim-nogami.jpg",
+      "group": "legs",
+      "title": "Жим ногами сидя",
+      "cues": [
+        "Поясница прижата к спинке",
+        "Стопы на ширине плеч",
+        "Не выпрямляй колени до упора"
+      ],
+      "muscles": [
+        "quadriceps"
+      ],
+      "assist": [
+        "gluteal",
+        "hamstring"
+      ]
+    },
+    {
+      "id": "razgibanie",
+      "src": "video/razgibanie.mp4",
+      "poster": "video/razgibanie.jpg",
+      "group": "legs",
+      "title": "Сгибание ног сидя",
+      "cues": [
+        "Спина прижата к спинке",
+        "Тяни пятки под сиденье",
+        "Возвращай ноги медленно"
+      ],
+      "muscles": [
+        "hamstring"
+      ],
+      "assist": [
+        "adductors"
+      ]
+    },
+    {
+      "id": "sgibanie-lezha",
+      "src": "video/sgibanie-lezha.mp4",
+      "poster": "video/sgibanie-lezha.jpg",
+      "group": "legs",
+      "title": "Сгибание ног лёжа",
+      "cues": [
+        "Таз прижат к скамье",
+        "Сгибай до конца, пауза вверху",
+        "Не бросай вес вниз"
+      ],
+      "muscles": [
+        "hamstring"
+      ],
+      "assist": [
+        "calves"
+      ]
+    },
+    {
+      "id": "sgibanie-krossover",
+      "src": "video/sgibanie-krossover.mp4",
+      "poster": "video/sgibanie-krossover.jpg",
+      "group": "legs",
+      "title": "Сгибание ноги в кроссовере стоя",
+      "cues": [
+        "Корпус неподвижен, держись за стойку",
+        "Тяни пятку к ягодице",
+        "Возвращай ногу медленно"
+      ],
+      "muscles": [
+        "hamstring"
+      ],
+      "assist": [
+        "gluteal"
+      ]
+    },
+    {
+      "id": "tyaga-rychag",
+      "src": "video/tyaga-rychag.mp4",
+      "poster": "video/tyaga-rychag.jpg",
+      "group": "back",
+      "title": "Рычажная тяга с упором в грудь",
+      "cues": [
+        "Грудь плотно на опоре",
+        "Тяни локтем, а не кистью",
+        "В конце своди лопатки"
+      ],
+      "muscles": [
+        "upper-back"
+      ],
+      "assist": [
+        "rdelts",
+        "biceps"
+      ]
+    },
+    {
+      "id": "tyaga-sidya",
+      "src": "video/tyaga-sidya.mp4",
+      "poster": "video/tyaga-sidya.jpg",
+      "group": "back",
+      "title": "Тяга сидя в тренажёре",
+      "cues": [
+        "Корпус неподвижен, без рывков",
+        "Локти идут вдоль корпуса",
+        "Возвращай вес под контролем"
+      ],
+      "muscles": [
+        "upper-back"
+      ],
+      "assist": [
+        "biceps",
+        "forearm"
+      ]
+    },
+    {
+      "id": "zhim-plechi",
+      "src": "video/zhim-plechi.mp4",
+      "poster": "video/zhim-plechi.jpg",
+      "group": "back",
+      "title": "Рычажная верхняя тяга",
+      "cues": [
+        "Поясница прижата, корпус ровно",
+        "Тяни локти вниз к корпусу",
+        "Вверху — растяжение широчайших"
+      ],
+      "muscles": [
+        "upper-back"
+      ],
+      "assist": [
+        "rdelts"
+      ]
+    },
+    {
+      "id": "tyaga-sverhu",
+      "src": "video/tyaga-sverhu.mp4",
+      "poster": "video/tyaga-sverhu.jpg",
+      "group": "shoulders",
+      "title": "Разведение рук в тренажёре на заднюю дельту",
+      "cues": [
+        "Корпус неподвижен, грудь в упоре",
+        "Разводи руки широкой дугой",
+        "Возвращай медленно, без рывка"
+      ],
+      "muscles": [
+        "rdelts"
+      ],
+      "assist": [
+        "trapezius"
+      ]
+    },
+    {
+      "id": "tyaga-ganteley",
+      "src": "video/tyaga-ganteley.mp4",
+      "poster": "video/tyaga-ganteley.jpg",
+      "group": "shoulders",
+      "title": "Отведение рук в стороны с гантелями: задняя дельта",
+      "cues": [
+        "Грудь плотно на скамье",
+        "Отводи руки в стороны, локти чуть согнуты",
+        "Внизу — растяжение задней дельты"
+      ],
+      "muscles": [
+        "rdelts"
+      ],
+      "assist": []
+    },
+    {
+      "id": "tyaga-ganteley-sboku",
+      "src": "video/tyaga-ganteley-sboku.mp4",
+      "poster": "video/tyaga-ganteley-sboku.jpg",
+      "group": "shoulders",
+      "title": "Отведение плеча назад в упоре грудью с гантелями",
+      "cues": [
+        "Грудь в упоре на скамье",
+        "Отводи плечо назад, локоть ведёт движение",
+        "Не помогай корпусом"
+      ],
+      "muscles": [
+        "rdelts"
+      ],
+      "assist": []
+    },
+    {
+      "id": "biceps",
+      "src": "video/biceps.mp4",
+      "poster": "video/biceps.jpg",
+      "group": "arms",
+      "title": "Сгибание рук с гантелями",
+      "cues": [
+        "Локти прижаты к корпусу",
+        "Поднимай без раскачки",
+        "Опускай медленно, до конца"
+      ],
+      "muscles": [
+        "biceps"
+      ],
+      "assist": [
+        "forearm"
+      ]
+    },
+    {
+      "id": "sgibanie-sidya-naklon",
+      "src": "video/sgibanie-sidya-naklon.mp4",
+      "poster": "video/sgibanie-sidya-naklon.jpg",
+      "group": "arms",
+      "title": "Сгибание рук с гантелями сидя на наклонной скамье",
+      "cues": [
+        "Спина прижата к спинке скамьи",
+        "Локти неподвижны",
+        "Поднимай поочерёдно, без рывков"
+      ],
+      "muscles": [
+        "biceps"
+      ],
+      "assist": [
+        "forearm"
+      ]
+    },
+    {
+      "id": "koncentr-sgibanie",
+      "src": "video/koncentr-sgibanie.mp4",
+      "poster": "video/koncentr-sgibanie.jpg",
+      "group": "arms",
+      "title": "Концентрированное сгибание с гантелью",
+      "cues": [
+        "Плечо в упоре о спинку скамьи",
+        "Сгибай руку до пика сокращения",
+        "Опускай медленно, до полного разгибания"
+      ],
+      "muscles": [
+        "biceps"
+      ],
+      "assist": [
+        "forearm"
+      ]
+    },
+    {
+      "id": "franc-zhim-ganteli",
+      "src": "video/franc-zhim-ganteli.mp4",
+      "poster": "video/franc-zhim-ganteli.jpg",
+      "group": "arms",
+      "title": "Французский жим с гантелями лёжа",
+      "cues": [
+        "Локти смотрят вверх и не расходятся",
+        "Опускай гантели за голову плавно",
+        "Разгибай руки только в локтях"
+      ],
+      "muscles": [
+        "triceps"
+      ],
+      "assist": []
+    },
+    {
+      "id": "razgib-krossover-sidya",
+      "src": "video/razgib-krossover-sidya.mp4",
+      "poster": "video/razgib-krossover-sidya.jpg",
+      "group": "arms",
+      "title": "Разгибание руки на трицепс в кроссовере сидя",
+      "cues": [
+        "Корпус неподвижен",
+        "Разгибай руку до конца",
+        "Возвращай медленно, держи напряжение"
+      ],
+      "muscles": [
+        "triceps"
+      ],
+      "assist": []
+    },
+    {
+      "id": "franc-zhim-blin",
+      "src": "video/franc-zhim-blin.mp4",
+      "poster": "video/franc-zhim-blin.jpg",
+      "group": "arms",
+      "title": "Французский жим с блином лёжа",
+      "cues": [
+        "Локти узко и неподвижно",
+        "Опускай блин за голову под контролем",
+        "Выжимай за счёт трицепса"
+      ],
+      "muscles": [
+        "triceps"
+      ],
+      "assist": []
+    },
+    {
+      "id": "razgib-blin-iz-za-golovy",
+      "src": "video/razgib-blin-iz-za-golovy.mp4",
+      "poster": "video/razgib-blin-iz-za-golovy.jpg",
+      "group": "arms",
+      "title": "Разгибание рук из-за головы с блином сидя",
+      "cues": [
+        "Спина прижата к спинке",
+        "Локти смотрят вверх",
+        "Разгибай руки полностью, без рывка"
+      ],
+      "muscles": [
+        "triceps"
+      ],
+      "assist": []
+    },
+    {
+      "id": "pozirovanie",
+      "src": "video/pozirovanie.mp4",
+      "poster": "video/pozirovanie.jpg",
+      "group": "stage",
+      "title": "Позирование: спина",
+      "cues": [
+        "Лопатки разводи в стороны",
+        "Плечи вниз, локти вперёд",
+        "Держи позу 5–10 секунд"
+      ],
+      "muscles": [
+        "upper-back"
+      ],
+      "assist": [
+        "trapezius",
+        "rdelts"
+      ]
+    },
+    {
+      "id": "poza-speredi",
+      "src": "video/poza-speredi.mp4",
+      "poster": "video/poza-speredi.jpg",
+      "group": "stage",
+      "title": "Позирование: широчайшие спереди",
+      "cues": [
+        "Широчайшие развёрнуты в стороны",
+        "Ноги напряжены всю позу",
+        "Держи позу 5–10 секунд"
+      ],
+      "muscles": [
+        "upper-back"
+      ],
+      "assist": [
+        "chest",
+        "quadriceps",
+        "abs"
+      ]
+    }
+  ]
 }

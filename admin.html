@@ -83,6 +83,48 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
 .bar .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .bar .msg{font:500 13px/1.4 var(--mono);color:var(--mute);flex:1 1 220px}
 .bar .msg.ok{color:var(--lime)} .bar .msg.err{color:var(--red)}
+
+.vlist{display:grid;gap:8px;margin-bottom:16px}
+.vrow{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);background:var(--ink-2);padding:8px}
+.vrow img{width:54px;height:96px;object-fit:cover;background:#000}
+.vmeta{display:grid;gap:3px;min-width:0}
+.vmeta b{font-weight:600}
+.vmeta span{font-size:13px;color:var(--mute)}
+.vmeta em{font:500 11px var(--mono);color:var(--ink);background:var(--lime);padding:2px 6px;justify-self:start;font-style:normal}
+.vacts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.vacts .btn{min-height:36px;padding:0 10px}
+@media (max-width:640px){.vrow{grid-template-columns:54px 1fr}.vacts{grid-column:1/-1;justify-content:flex-start}}
+.ved{margin-top:20px;border:1px solid var(--lime);padding:18px;display:grid;gap:16px}
+.ved h3{font:800 26px/1 var(--display);text-transform:uppercase;margin:0}
+.ved-grid{display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:18px}
+@media (max-width:900px){.ved-grid{grid-template-columns:1fr}}
+.ved-col{display:grid;gap:8px;align-content:start}
+.ved .lbl{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--lime);margin:6px 0 0}
+.ved .fl{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.ved input[type=text],.ved input[type=number],.ved select{width:100%;background:var(--ink-2);border:1px solid var(--line);color:var(--milk);font:400 16px var(--body);padding:11px 12px;border-radius:2px}
+.ved video{width:100%;max-width:260px;aspect-ratio:9/16;background:#000;object-fit:cover}
+.vh{position:absolute;width:1px;height:1px;opacity:0}
+.v-trim{display:grid;gap:6px}
+.v-trim label{font-size:13px;color:var(--mute)}
+.v-trim input[type=range]{width:100%;accent-color:var(--lime)}
+.ved .hint{font-size:13px;color:var(--mute);margin:0}
+.ved .hint .c1{color:var(--lime)} .ved .hint .c2{color:#e8a33a}
+.v-anat{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#0d1013;border:1px solid var(--line);padding:8px}
+.v-anat figure{margin:0;display:grid;justify-items:center;gap:4px}
+.v-anat svg{width:100%;height:auto;max-height:420px}
+.v-anat figcaption{font:500 10px var(--mono);letter-spacing:.12em;color:var(--mute)}
+.v-anat .nm{fill:#5a5f5a}
+.v-anat .mu{fill:#5b2a28;stroke:#1a0a0a;stroke-width:1.4;cursor:pointer}
+.v-anat .mu:hover{fill:#7a3a36}
+.v-anat .mu.l1{fill:#d0ff32}
+.v-anat .mu.l2{fill:#e8a33a}
+.v-mlist{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.v-mlist li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;border:1px solid var(--line);padding:8px 10px}
+.v-mlist li.l1{border-color:#d0ff32} .v-mlist li.l2{border-color:#e8a33a}
+.v-mlist li span{grid-column:1;font:500 11px var(--mono);color:var(--mute)}
+.v-mlist li button{grid-row:1/span 2;grid-column:2;width:30px;height:30px;border:1px solid var(--line);background:none;color:var(--milk);cursor:pointer}
+.v-mlist li.empty{display:block;color:var(--mute);font-size:13px}
+.ved-acts{display:flex;gap:10px;flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -137,6 +179,56 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
     <p class="sub">Выберите файл с телефона или компьютера — фото автоматически уменьшится до 1600 px и сожмётся. Подойдут JPG, PNG, HEIC (с iPhone).</p>
     <div class="photos" id="photos"></div>
   </section>
+
+  <section id="videos">
+    <p class="eyebrow">Шаг 5</p>
+    <h2>Видео упражнений · <span id="v-count">0</span></h2>
+    <p class="sub">Ролики в блоке «Разборы техники». Порядок здесь — порядок в ленте. Новое видео: выберите файл, обрежьте до 3–15 секунд, напишите название и подсказки, отметьте мышцы на схеме.</p>
+    <div class="vlist" id="vlist"></div>
+    <button class="btn" id="v-new" type="button">+ Добавить видео</button>
+
+    <div class="ved" id="ved" hidden>
+      <h3 id="ved-h">Новый ролик</h3>
+      <div class="ved-grid">
+        <div class="ved-col">
+          <p class="lbl">1. Видео</p>
+          <label class="btn ghost small" for="v-file">Выбрать файл</label>
+          <input type="file" id="v-file" accept="video/*" class="vh">
+          <video id="v-prev" controls playsinline muted hidden></video>
+          <div id="v-trim" class="v-trim" hidden>
+            <label for="v-start">Начало фрагмента: <b id="v-start-l">0.0 с</b></label>
+            <input type="range" id="v-start" min="0" max="10" step="0.1" value="0">
+            <label for="v-dur">Длина, секунд (3–15)</label>
+            <input type="number" id="v-dur" min="3" max="15" step="1" value="12">
+            <button class="btn small" id="v-make" type="button">Подготовить ролик</button>
+          </div>
+          <p class="state" id="v-st"></p>
+          <p class="lbl">Как будет на сайте</p>
+          <video id="v-out" controls playsinline muted loop hidden></video>
+        </div>
+        <div class="ved-col">
+          <p class="lbl">2. Описание</p>
+          <label class="fl" for="v-title">Название упражнения</label>
+          <input type="text" id="v-title" placeholder="Например: Жим гантелей лёжа">
+          <label class="fl" for="v-group">Группа мышц (фильтр)</label>
+          <select id="v-group"></select>
+          <label class="fl" for="v-c1">Подсказка 1</label><input type="text" id="v-c1" placeholder="Лопатки сведены">
+          <label class="fl" for="v-c2">Подсказка 2</label><input type="text" id="v-c2" placeholder="Локти под углом 45°">
+          <label class="fl" for="v-c3">Подсказка 3</label><input type="text" id="v-c3" placeholder="Опускай медленно">
+        </div>
+        <div class="ved-col">
+          <p class="lbl">3. Мышцы</p>
+          <p class="hint">Нажмите на мышцу: 1 раз — <b class="c1">основная</b>, 2 раза — <b class="c2">помогает</b>, 3 раза — снять.</p>
+          <div class="v-anat" id="v-anat"></div>
+          <ul class="v-mlist" id="v-mlist"></ul>
+        </div>
+      </div>
+      <div class="ved-acts">
+        <button class="btn" id="v-ok" type="button">Сохранить ролик</button>
+        <button class="btn ghost" id="v-cancel" type="button">Отмена</button>
+      </div>
+    </div>
+  </section>
 </main>
 
 <div class="bar">
@@ -146,6 +238,7 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
   </div>
 </div>
 
+<script src="anatomy.js"></script>
 <script>
 (function(){
   var GH={owner:'evgenynikolaev35-blip',repo:'silov-site',branch:'main'};
@@ -269,6 +362,7 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
   }
 
   function render(){
+    renderVideos();
     var box=$('blocks'); box.innerHTML='';
     BLOCKS.forEach(function(g){
       var h=document.createElement('p'); h.className='group'; h.textContent=g[0]; box.appendChild(h);
@@ -339,7 +433,7 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
     var p = token
       ? gh('site.json?ref='+GH.branch+'&t='+Date.now()).then(function(j){ sha=j.sha; return JSON.parse(unb64(j.content)); })
       : fetch('site.json?t='+Date.now()).then(function(r){ return r.json(); });
-    return p.then(function(c){ cfg={blocks:c.blocks||{},photos:c.photos||{},content:c.content||{}}; pending={}; dirty=false; render(); });
+    return p.then(function(c){ cfg=c||{}; cfg.blocks=cfg.blocks||{}; cfg.photos=cfg.photos||{}; cfg.content=cfg.content||{}; cfg.videos=cfg.videos||[]; pending={}; media={}; dirty=false; render(); });
   }
 
   function login(){
@@ -361,7 +455,7 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
 
   function save(){
     var btn=$('btn-save'); btn.disabled=true;
-    var ids=Object.keys(pending), stamp=Date.now(), chain=Promise.resolve();
+    var ids=Object.keys(pending), stamp=Date.now(), chain=uploadMedia();
     ids.forEach(function(id,i){
       chain=chain.then(function(){
         msg('Загружаю фото '+(i+1)+' из '+ids.length+'…');
@@ -380,12 +474,179 @@ details.fg summary small{font:500 12px var(--mono);color:var(--mute);margin-left
     });
   }
 
+  // ---------- Видео упражнений ----------
+  var VG=[['legs','Ноги'],['back','Спина'],['shoulders','Плечи'],['arms','Руки'],['stage','Позирование']];
+  var VGN={}; VG.forEach(function(g){ VGN[g[0]]=g[1]; });
+  var MRU={chest:'Большая грудная',fdelts:'Передняя дельта',rdelts:'Задняя дельта',deltoids:'Дельты целиком',biceps:'Бицепс',triceps:'Трицепс',forearm:'Предплечья',abs:'Пресс',obliques:'Косые мышцы',quadriceps:'Квадрицепс',adductors:'Приводящие',hamstring:'Бицепс бедра',gluteal:'Ягодичные',calves:'Икроножные',tibialis:'Передняя большеберцовая',trapezius:'Трапеция','upper-back':'Широчайшие и ромбовидные','lower-back':'Разгибатели спины',neck:'Шея'};
+  var NMV={head:1,hair:1,hands:1,feet:1,knees:1,ankles:1};
+  var media={}, previews={}, ed=null;
+  function vStatus(t,cls){ var e=$('v-st'); e.textContent=t||''; e.className='state'+(cls?' '+cls:''); }
+
+  function renderVideos(){
+    var box=$('vlist'); if(!box) return; box.innerHTML='';
+    var list=cfg.videos||[];
+    $('v-count').textContent=list.length;
+    list.forEach(function(v,i){
+      var row=document.createElement('div'); row.className='vrow';
+      var img=document.createElement('img'); img.alt=''; img.src=previews[v.poster]||v.poster; img.loading='lazy';
+      var meta=document.createElement('div'); meta.className='vmeta';
+      var b=document.createElement('b'); b.textContent=v.title||'Без названия';
+      var sp=document.createElement('span'); sp.textContent=(VGN[v.group]||v.group)+' · '+((v.muscles||[]).concat(v.assist||[])).map(function(m){ return MRU[m]||m; }).join(', ');
+      if(media[v.src]){ var nw=document.createElement('em'); nw.textContent='новое — сохраните'; meta.appendChild(nw); }
+      meta.insertBefore(sp,meta.firstChild); meta.insertBefore(b,meta.firstChild);
+      var acts=document.createElement('div'); acts.className='vacts';
+      [['↑','Выше',function(){ if(i>0){ var t=list[i-1]; list[i-1]=list[i]; list[i]=t; setDirty(); renderVideos(); } }],
+       ['↓','Ниже',function(){ if(i<list.length-1){ var t=list[i+1]; list[i+1]=list[i]; list[i]=t; setDirty(); renderVideos(); } }],
+       ['Изменить','Изменить',function(){ openEditor(i); }],
+       ['Удалить','Удалить',function(){ if(confirm('Удалить ролик «'+(v.title||'')+'» с сайта?')){ list.splice(i,1); setDirty(); renderVideos(); } }]
+      ].forEach(function(a){ var bt=document.createElement('button'); bt.type='button'; bt.className='btn ghost small'; bt.textContent=a[0]; bt.title=a[1]; bt.addEventListener('click',a[2]); acts.appendChild(bt); });
+      row.appendChild(img); row.appendChild(meta); row.appendChild(acts); box.appendChild(row);
+    });
+  }
+
+  function openEditor(idx){
+    var v=idx>=0?JSON.parse(JSON.stringify(cfg.videos[idx])):{group:'legs',title:'',cues:['','',''],muscles:[],assist:[]};
+    ed={idx:idx,data:v,blob:null,poster:null,ext:null};
+    $('ved').hidden=false; $('v-new').hidden=true;
+    $('ved-h').textContent=idx>=0?'Изменить ролик':'Новый ролик';
+    $('v-title').value=v.title||''; $('v-group').value=v.group||'legs';
+    for(var k=0;k<3;k++) $('v-c'+(k+1)).value=(v.cues||[])[k]||'';
+    $('v-file').value=''; $('v-prev').removeAttribute('src'); $('v-prev').hidden=true; $('v-trim').hidden=true;
+    var out=$('v-out');
+    if(idx>=0){ out.src=previews[v.src]||v.src; out.poster=previews[v.poster]||v.poster; out.hidden=false; } else { out.removeAttribute('src'); out.hidden=true; }
+    vStatus(idx>=0?'Чтобы заменить видео, выберите новый файл. Иначе оставьте как есть.':'Выберите файл видео с телефона или компьютера.');
+    drawAnat(); $('ved').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function closeEditor(){ ed=null; $('ved').hidden=true; $('v-new').hidden=false; }
+
+  function lvl(m){ if(!ed) return 0; if((ed.data.muscles||[]).indexOf(m)>=0) return 1; if((ed.data.assist||[]).indexOf(m)>=0) return 2; return 0; }
+  function setLvl(m,l){
+    var d=ed.data; d.muscles=(d.muscles||[]).filter(function(x){ return x!==m; }); d.assist=(d.assist||[]).filter(function(x){ return x!==m; });
+    if(l===1) d.muscles.push(m); if(l===2) d.assist.push(m);
+  }
+  function drawAnat(){
+    var A=window.ANATOMY; var box=$('v-anat'); if(!A){ box.textContent='Схема мышц не загрузилась.'; return; }
+    function fig(side){
+      var d=A[side], vb=side==='f'?'0 0 724 1448':'724 0 724 1448', out='';
+      Object.keys(d).forEach(function(slug){
+        var nm=NMV[slug], key=slug==='deltoids'?(side==='f'?'fdelts':'rdelts'):slug;
+        var l=nm?0:lvl(key)||(slug==='deltoids'?lvl('deltoids'):0);
+        d[slug].forEach(function(p){ out+='<path class="'+(nm?'nm':'mu l'+l)+'"'+(nm?'':' data-s="'+key+'"')+' d="'+p+'"/>'; });
+      });
+      return '<figure><svg viewBox="'+vb+'">'+out+'</svg><figcaption>'+(side==='f'?'СПЕРЕДИ':'СЗАДИ')+'</figcaption></figure>';
+    }
+    box.innerHTML=fig('f')+fig('b');
+    var ul=$('v-mlist'); ul.innerHTML='';
+    var all=(ed.data.muscles||[]).map(function(m){ return [m,1]; }).concat((ed.data.assist||[]).map(function(m){ return [m,2]; }));
+    if(!all.length){ var li=document.createElement('li'); li.className='empty'; li.textContent='Мышцы не выбраны. Нажмите на мышцу на схеме.'; ul.appendChild(li); }
+    all.forEach(function(x){
+      var li=document.createElement('li'); li.className='l'+x[1];
+      var b=document.createElement('b'); b.textContent=MRU[x[0]]||x[0];
+      var sp=document.createElement('span'); sp.textContent=x[1]===1?'основная нагрузка':'помогает';
+      var bt=document.createElement('button'); bt.type='button'; bt.textContent='✕'; bt.title='Убрать';
+      bt.addEventListener('click',function(){ setLvl(x[0],0); drawAnat(); });
+      li.appendChild(b); li.appendChild(sp); li.appendChild(bt); ul.appendChild(li);
+    });
+  }
+
+  function pickMime(){
+    var c=['video/mp4;codecs=avc1.42E01E','video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'];
+    for(var i=0;i<c.length;i++){ if(window.MediaRecorder && MediaRecorder.isTypeSupported(c[i])) return c[i]; }
+    return '';
+  }
+  function makeClip(){
+    var srcV=$('v-prev'); if(!srcV.src){ vStatus('Сначала выберите файл.','err'); return; }
+    var start=parseFloat($('v-start').value)||0, dur=Math.min(15,Math.max(3,parseFloat($('v-dur').value)||12));
+    var mime=pickMime(); if(!mime){ vStatus('Этот браузер не умеет обрабатывать видео. Откройте админку в Chrome или Safari на компьютере.','err'); return; }
+    var W=540,H=960, cv=document.createElement('canvas'); cv.width=W; cv.height=H; var ctx=cv.getContext('2d');
+    var v=document.createElement('video'); v.muted=true; v.playsInline=true; v.src=srcV.src; v.preload='auto';
+    var chunks=[], posterDone=false, posterT=start+Math.min(1.5,dur/2), btn=$('v-make'); btn.disabled=true;
+    vStatus('Подготовка… 0%');
+    function draw(){
+      var vw=v.videoWidth, vh=v.videoHeight; if(!vw) return;
+      var s=Math.max(W/vw,H/vh), dw=vw*s, dh=vh*s; ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H); ctx.drawImage(v,(W-dw)/2,(H-dh)/2,dw,dh);
+      if(!posterDone && v.currentTime>=posterT){ posterDone=true; cv.toBlob(function(b){ ed.poster=b; },'image/jpeg',.82); }
+    }
+    v.addEventListener('loadedmetadata',function(){
+      if(start>=v.duration) start=0;
+      v.currentTime=start;
+      v.addEventListener('seeked',function go(){
+        v.removeEventListener('seeked',go);
+        var stream=cv.captureStream(30), rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:1800000});
+        rec.ondataavailable=function(e){ if(e.data&&e.data.size) chunks.push(e.data); };
+        rec.onstop=function(){
+          var type=mime.split(';')[0], blob=new Blob(chunks,{type:type});
+          ed.blob=blob; ed.ext=type==='video/mp4'?'mp4':'webm';
+          if(!ed.poster){ cv.toBlob(function(b){ ed.poster=b; },'image/jpeg',.82); }
+          var out=$('v-out'); out.src=URL.createObjectURL(blob); out.hidden=false; out.play().catch(function(){});
+          btn.disabled=false; vStatus('Готово: '+(blob.size/1048576).toFixed(1)+' МБ, '+dur+' с. Проверьте результат и нажмите «Сохранить ролик».','ok');
+        };
+        draw(); rec.start(250); v.play().catch(function(){});
+        (function loop(){
+          draw();
+          var p=Math.min(100,Math.round((v.currentTime-start)/dur*100)); vStatus('Подготовка… '+p+'%');
+          if(v.currentTime>=start+dur || v.ended){ v.pause(); setTimeout(function(){ rec.stop(); },120); return; }
+          if(v.requestVideoFrameCallback) v.requestVideoFrameCallback(loop); else requestAnimationFrame(loop);
+        })();
+      });
+    });
+    v.addEventListener('error',function(){ btn.disabled=false; vStatus('Не удалось открыть видео. Если это HEVC с iPhone — откройте админку в Safari или Chrome на Mac.','err'); });
+  }
+
+  function saveClip(){
+    var d=ed.data;
+    d.title=$('v-title').value.trim(); d.group=$('v-group').value;
+    d.cues=[1,2,3].map(function(k){ return $('v-c'+k).value.trim(); }).filter(Boolean);
+    if(!d.title){ vStatus('Напишите название упражнения.','err'); $('v-title').focus(); return; }
+    if(!d.cues.length){ vStatus('Добавьте хотя бы одну подсказку по технике.','err'); $('v-c1').focus(); return; }
+    if(!(d.muscles||[]).length){ vStatus('Отметьте на схеме хотя бы одну основную мышцу.','err'); return; }
+    if(ed.blob){
+      if(!ed.poster){ vStatus('Обложка ещё готовится, нажмите ещё раз через секунду.','err'); return; }
+      var id='u'+Date.now(); d.id=id; d.src='video/'+id+'.'+ed.ext; d.poster='video/'+id+'.jpg';
+      media[d.src]=ed.blob; media[d.poster]=ed.poster;
+      previews[d.src]=URL.createObjectURL(ed.blob); previews[d.poster]=URL.createObjectURL(ed.poster);
+    } else if(ed.idx<0){ vStatus('Выберите файл и нажмите «Подготовить ролик».','err'); return; }
+    cfg.videos=cfg.videos||[];
+    if(ed.idx>=0) cfg.videos[ed.idx]=d; else cfg.videos.push(d);
+    closeEditor(); setDirty(); renderVideos();
+    msg(canWrite?'Ролик добавлен в список. Нажмите «Сохранить и опубликовать».':'Войдите, чтобы сохранить изменения.');
+  }
+
+  function blobB64(b){ return new Promise(function(res,rej){ var r=new FileReader(); r.onload=function(){ res(String(r.result).split(',')[1]); }; r.onerror=rej; r.readAsDataURL(b); }); }
+  function uploadMedia(){
+    var paths=Object.keys(media), chain=Promise.resolve();
+    paths.forEach(function(p,i){
+      chain=chain.then(function(){
+        msg('Загружаю видео-файлы '+(i+1)+' из '+paths.length+'…');
+        return blobB64(media[p]).then(function(c){ return gh(p,{method:'PUT',body:JSON.stringify({message:'Админка: '+p,content:c,branch:GH.branch})}); }).then(function(){ delete media[p]; });
+      });
+    });
+    return chain;
+  }
+
+  function initVideoAdmin(){
+    var sel=$('v-group'); VG.forEach(function(g){ var o=document.createElement('option'); o.value=g[0]; o.textContent=g[1]; sel.appendChild(o); });
+    $('v-new').addEventListener('click',function(){ openEditor(-1); });
+    $('v-cancel').addEventListener('click',closeEditor);
+    $('v-ok').addEventListener('click',saveClip);
+    $('v-make').addEventListener('click',makeClip);
+    $('v-file').addEventListener('change',function(){
+      var f=this.files[0]; if(!f) return; var p=$('v-prev'); p.src=URL.createObjectURL(f); p.hidden=false; $('v-trim').hidden=false;
+      p.onloadedmetadata=function(){ var d=p.duration||0; $('v-start').max=Math.max(0,d-1).toFixed(1); $('v-start').value=0; $('v-start-l').textContent='0.0 с'; $('v-dur').value=Math.min(12,Math.floor(d)||12); vStatus('Длительность файла: '+d.toFixed(1)+' с. Выберите начало и длину фрагмента, затем «Подготовить ролик».'); };
+    });
+    $('v-start').addEventListener('input',function(){ var t=parseFloat(this.value)||0; $('v-start-l').textContent=t.toFixed(1)+' с'; var p=$('v-prev'); if(p.src){ p.currentTime=t; } });
+    $('v-anat').addEventListener('click',function(e){
+      var p=e.target.closest&&e.target.closest('path.mu'); if(!p||!ed) return;
+      var m=p.getAttribute('data-s'); setLvl(m,(lvl(m)+1)%3); drawAnat();
+    });
+  }
+
   $('btn-login').addEventListener('click',function(){ var v=$('token').value.trim(); if(!v){ $('token').focus(); return; } token=v; login(); });
   $('token').addEventListener('keydown',function(e){ if(e.key==='Enter') $('btn-login').click(); });
   $('btn-logout').addEventListener('click',function(){ token=''; canWrite=false; try{ localStorage.removeItem('silov-admin-token'); }catch(e){} $('token').placeholder='Ключ доступа (github_pat_…)'; $('btn-save').disabled=true; login(); });
   $('btn-save').addEventListener('click',save);
   window.addEventListener('beforeunload',function(e){ if(dirty&&canWrite){ e.preventDefault(); e.returnValue=''; } });
-  render(); login();
+  initVideoAdmin(); render(); login();
 })();
 </script>
 </body>
