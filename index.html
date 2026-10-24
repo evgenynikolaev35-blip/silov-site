@@ -480,6 +480,8 @@ body.anat-open{overflow:hidden}
 .anat-hint{font:500 12px/1.5 var(--mono);color:var(--mute);margin:0}
 .anat-legend li{cursor:pointer}
 .anat-legend li.sel{border-color:#fff;background:#1d252c}
+  .k3{width:12px;height:12px;border-radius:50%;background:#5ec8ff;display:inline-block}
+.anat-legend li.extra{border-color:#5ec8ff}
 .anat-legend li.sel b::after{content:" · выбрано";font:500 11px var(--mono);color:#5ec8ff}
 .anat-selbox{border-top:1px solid var(--line);padding-top:14px;display:grid;gap:10px}
 .anat-selbox ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
@@ -503,7 +505,7 @@ body:not(.show-ph) .ph-chip{display:none}
 
 <div class="proto" data-block="proto">
   <div class="wrap">
-    <span>ПРОТОТИП v13 · 24.10.2026 · пунктир — данные, которые нужно прислать</span>
+    <span>ПРОТОТИП v14 · 24.10.2026 · пунктир — данные, которые нужно прислать</span>
     <label for="ph-toggle"><input type="checkbox" id="ph-toggle" checked> Показывать заглушки</label>
   </div>
 </div>
@@ -1197,8 +1199,6 @@ body:not(.show-ph) .ph-chip{display:none}
       <div class="anat-side">
         <p class="anat-hint">Нажмите на мышцу на схеме или в списке — она выделится. Можно выбрать несколько.</p>
         <ul class="anat-legend" id="anat-legend"></ul>
-        <div class="anat-selbox" id="anat-sel" hidden><p class="eyebrow">Выбранные мышцы · <small>0</small></p><ul></ul></div>
-        <div class="anat-key"><span><i class="k1"></i>основная нагрузка</span><span><i class="k2"></i>помогают в движении</span></div>
       </div>
     </div>
   </div>
@@ -1345,7 +1345,7 @@ body:not(.show-ph) .ph-chip{display:none}
       var f=figSvg('f',ms,true,'af'), b=figSvg('b',ms,true,'ab');
       figs.innerHTML='<figure><svg class="afw" viewBox="'+f.vb+'" role="img" aria-label="Мышцы спереди">'+defs('af')+f.body+'</svg><figcaption>СПЕРЕДИ</figcaption></figure>'+
         '<figure><svg class="abw" viewBox="'+b.vb+'" role="img" aria-label="Мышцы сзади">'+defs('ab')+b.body+'</svg><figcaption>СЗАДИ</figcaption></figure>';
-      legend.innerHTML=''; selected={}; renderSel();
+      legend.innerHTML=''; selected={}; curMs=ms; renderSel();
       ms.forEach(function(m,i){
         var info=MN[m]||[m,'',''], li=document.createElement('li');
         li.setAttribute('data-s',m); li.tabIndex=0; li.setAttribute('role','button');
@@ -1357,14 +1357,22 @@ body:not(.show-ph) .ph-chip{display:none}
       });
       lastFocus=document.activeElement; modal.hidden=false; document.body.classList.add('anat-open'); modal.querySelector('.anat-x').focus();
     }
-    var selected={}, selBox=document.getElementById('anat-sel');
+    var selected={}, curMs=[];
     function toggle(m){ if(selected[m]) delete selected[m]; else selected[m]=1; renderSel(); }
     function renderSel(){
       [].forEach.call(figs.querySelectorAll('path[data-s]'),function(p){ p.classList.toggle('sel', !!selected[p.getAttribute('data-s')]); });
+      [].forEach.call(legend.querySelectorAll('li.extra'),function(li){ if(!selected[li.getAttribute('data-s')]) li.remove(); });
+      Object.keys(selected).forEach(function(m){
+        if(curMs.indexOf(m)>=0 || legend.querySelector('li.extra[data-s="'+m+'"]')) return;
+        var info=MN[m]||[m,'',''], li=document.createElement('li');
+        li.className='extra'; li.setAttribute('data-s',m); li.tabIndex=0; li.setAttribute('role','button');
+        li.innerHTML='<i class="k3"></i><b></b><span></span><em></em>';
+        li.querySelector('b').textContent=info[0]; li.querySelector('span').textContent=info[1]; li.querySelector('em').textContent='Не участвует в этом упражнении. '+info[2];
+        li.addEventListener('click',function(){ toggle(m); });
+        li.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(m); } });
+        legend.appendChild(li);
+      });
       [].forEach.call(legend.querySelectorAll('li'),function(li){ li.classList.toggle('sel', !!selected[li.getAttribute('data-s')]); });
-      var keys=Object.keys(selected); selBox.hidden=!keys.length; var ul=selBox.querySelector('ul'); ul.innerHTML='';
-      keys.forEach(function(m){ var info=MN[m]||[m,'',''], li=document.createElement('li'); li.innerHTML='<b></b><span></span><em></em><button type="button" aria-label="Снять выбор">✕</button>'; li.querySelector('b').textContent=info[0]; li.querySelector('span').textContent=info[1]; li.querySelector('em').textContent=info[2]; li.querySelector('button').addEventListener('click',function(){ toggle(m); }); ul.appendChild(li); });
-      selBox.querySelector('small').textContent=keys.length;
     }
     figs.addEventListener('click',function(e){ var p=e.target.closest&&e.target.closest('path.mu'); if(p) toggle(p.getAttribute('data-s')); });
     function closeAnat(){ selected={}; modal.hidden=true; document.body.classList.remove('anat-open'); if(lastFocus) lastFocus.focus(); }
