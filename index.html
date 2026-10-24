@@ -384,6 +384,7 @@ footer .wrap{display:grid;grid-template-columns:1fr auto;gap:20px 32px}
 .vc-play:focus-visible{outline:2px solid var(--lime);outline-offset:-4px}
 .vnote{margin-top:12px}
 .vc-cue span{overflow-wrap:break-word}
+.vc-title{hyphens:auto;-webkit-hyphens:auto}
 @media (max-width:1100px){.vfeed{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:40%;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);scroll-padding-inline:var(--gut);-webkit-overflow-scrolling:touch;padding-bottom:8px}.vcard{scroll-snap-align:start}}
 @media (max-width:700px){.vfeed{grid-auto-columns:76%}}
 
@@ -502,7 +503,7 @@ body:not(.show-ph) .ph-chip{display:none}
 
 <div class="proto" data-block="proto">
   <div class="wrap">
-    <span>ПРОТОТИП v12 · 16.10.2026 · пунктир — данные, которые нужно прислать</span>
+    <span>ПРОТОТИП v13 · 24.10.2026 · пунктир — данные, которые нужно прислать</span>
     <label for="ph-toggle"><input type="checkbox" id="ph-toggle" checked> Показывать заглушки</label>
   </div>
 </div>
@@ -976,6 +977,72 @@ body:not(.show-ph) .ph-chip{display:none}
             <strong class="vc-title">Сгибание рук с гантелями</strong>
             <span class="vc-mus"></span>
             <span class="vc-cue" data-cues="Локти прижаты к корпусу|Поднимай без раскачки|Опускай медленно, до конца"><b>1</b><span>Локти прижаты к корпусу</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="arms" data-muscles="biceps forearm">
+          <video muted loop playsinline preload="none" poster="video/sgibanie-sidya-naklon.jpg" data-src="video/sgibanie-sidya-naklon.mp4" aria-label="Сгибание рук с гантелями сидя на наклонной скамье"></video>
+          <figcaption>
+            <span class="vc-tag">Руки</span>
+            <strong class="vc-title">Сгибание рук с гантелями сидя на наклонной скамье</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Спина прижата к спинке скамьи|Локти неподвижны|Поднимай поочерёдно, без рывков"><b>1</b><span>Спина прижата к спинке скамьи</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="arms" data-muscles="biceps forearm">
+          <video muted loop playsinline preload="none" poster="video/koncentr-sgibanie.jpg" data-src="video/koncentr-sgibanie.mp4" aria-label="Концентрированное сгибание с гантелью"></video>
+          <figcaption>
+            <span class="vc-tag">Руки</span>
+            <strong class="vc-title">Концентрированное сгибание с гантелью</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Плечо в упоре о спинку скамьи|Сгибай руку до пика сокращения|Опускай медленно, до полного разгибания"><b>1</b><span>Плечо в упоре о спинку скамьи</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="arms" data-muscles="triceps">
+          <video muted loop playsinline preload="none" poster="video/franc-zhim-ganteli.jpg" data-src="video/franc-zhim-ganteli.mp4" aria-label="Французский жим с гантелями лёжа"></video>
+          <figcaption>
+            <span class="vc-tag">Руки</span>
+            <strong class="vc-title">Французский жим с гантелями лёжа</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Локти смотрят вверх и не расходятся|Опускай гантели за голову плавно|Разгибай руки только в локтях"><b>1</b><span>Локти смотрят вверх и не расходятся</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="arms" data-muscles="triceps">
+          <video muted loop playsinline preload="none" poster="video/razgib-krossover-sidya.jpg" data-src="video/razgib-krossover-sidya.mp4" aria-label="Разгибание руки на трицепс в кроссовере сидя"></video>
+          <figcaption>
+            <span class="vc-tag">Руки</span>
+            <strong class="vc-title">Разгибание руки на трицепс в кроссовере сидя</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Корпус неподвижен|Разгибай руку до конца|Возвращай медленно, держи напряжение"><b>1</b><span>Корпус неподвижен</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="arms" data-muscles="triceps">
+          <video muted loop playsinline preload="none" poster="video/franc-zhim-blin.jpg" data-src="video/franc-zhim-blin.mp4" aria-label="Французский жим с блином лёжа"></video>
+          <figcaption>
+            <span class="vc-tag">Руки</span>
+            <strong class="vc-title">Французский жим с блином лёжа</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Локти узко и неподвижно|Опускай блин за голову под контролем|Выжимай за счёт трицепса"><b>1</b><span>Локти узко и неподвижно</span><i class="vc-dots"></i></span>
+          </figcaption>
+          <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
+          <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
+        </figure>
+        <figure class="vcard" data-group="arms" data-muscles="triceps">
+          <video muted loop playsinline preload="none" poster="video/razgib-blin-iz-za-golovy.jpg" data-src="video/razgib-blin-iz-za-golovy.mp4" aria-label="Разгибание рук из-за головы с блином сидя"></video>
+          <figcaption>
+            <span class="vc-tag">Руки</span>
+            <strong class="vc-title">Разгибание рук из-за головы с блином сидя</strong>
+            <span class="vc-mus"></span>
+            <span class="vc-cue" data-cues="Спина прижата к спинке|Локти смотрят вверх|Разгибай руки полностью, без рывка"><b>1</b><span>Спина прижата к спинке</span><i class="vc-dots"></i></span>
           </figcaption>
           <button class="vc-map" type="button" aria-label="Показать работающие мышцы крупно"></button>
           <button class="vc-play" type="button" aria-label="Пауза или воспроизведение"></button>
